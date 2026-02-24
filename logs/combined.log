@@ -1,0 +1,2296 @@
+[2026-02-25 00:53:14] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 00:53:14] INFO: 📊 Environment : development
+[2026-02-25 00:53:14] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 00:53:14] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 00:53:15] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 00:53:17] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 00:53:17] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 00:53:18] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 00:53:19] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 00:53:19] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 00:53:19] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 00:53:19] INFO: Processing 100 unique markets...
+[2026-02-25 00:53:20] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2551ms
+[2026-02-25 00:53:20] INFO: ✅ Initial sync done: 100 markets in 2551ms
+[2026-02-25 00:55:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 00:55:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 00:55:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 00:55:00] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 00:55:00] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 00:55:00] INFO: Processing 100 unique markets...
+[2026-02-25 00:55:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1008ms
+[2026-02-25 00:55:01] INFO: ✅ Scheduled sync done: 100 markets in 1008ms
+[2026-02-25 00:57:27] DEBUG: GET /api/markets → 200 [34ms]
+[2026-02-25 00:58:05] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 00:58:05] DEBUG: GET /api/markets?category=Crypto&limit=10 → 200 [668ms]
+[2026-02-25 00:59:45] DEBUG: GET /api/markets → 200 [135ms]
+[2026-02-25 01:00:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:00:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:00:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:00:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:00:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:00:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:00:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1924ms
+[2026-02-25 01:00:01] INFO: ✅ Scheduled sync done: 100 markets in 1924ms
+[2026-02-25 01:01:23] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:01:23] DEBUG: GET /api/markets?search=Democratic%20Presidential%20Nominee%202028 → 200 [482ms]
+[2026-02-25 01:01:48] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:01:48] DEBUG: GET /api/markets?search=%22Democratic%20Presidential%20Nominee%202028%22 → 200 [425ms]
+[2026-02-25 01:03:07] DEBUG: GET /api/markets?category=New&limit=20 → 200 [13ms]
+[2026-02-25 01:04:08] DEBUG: GET /api/markets?limit=10&offset=20 → 200 [14ms]
+[2026-02-25 01:05:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:05:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:05:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:05:02] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:05:02] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:05:02] INFO: Processing 100 unique markets...
+[2026-02-25 01:05:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2655ms
+[2026-02-25 01:05:02] INFO: ✅ Scheduled sync done: 100 markets in 2655ms
+[2026-02-25 01:05:46] DEBUG: GET /api/markets → 200 [24ms]
+[2026-02-25 01:06:52] DEBUG: GET /api/markets/553850 → 200 [12ms]
+[2026-02-25 01:09:16] DEBUG: GET /api/markets?search=bitcoin → 200 [12ms]
+[2026-02-25 01:09:22] DEBUG: GET /api/markets?search=bitcoin → 200 [1ms]
+[2026-02-25 01:09:43] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:09:43] DEBUG: GET /api/markets?search=%22Bitcoin%20Up%20or%20Down%20-%205%20Minutes%22 → 200 [447ms]
+[2026-02-25 01:10:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:10:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:10:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:10:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:10:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:10:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:10:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1756ms
+[2026-02-25 01:10:01] INFO: ✅ Scheduled sync done: 100 markets in 1756ms
+[2026-02-25 01:10:46] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:10:46] DEBUG: GET /api/markets?search=%22https://polymarket.com/event/us-strikes-iran-by%22 → 200 [208ms]
+[2026-02-25 01:11:14] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:11:15] DEBUG: GET /api/markets?search=%22Who%20will%20Trump%20nominate%20as%20Fed%20Chair?%22 → 200 [124ms]
+[2026-02-25 01:11:20] DEBUG: GET /api/markets?search=%22Who%20will%20Trump%20nominate%20as%20Fed%20Chair?%22 → 200 [3ms]
+[2026-02-25 01:11:56] DEBUG: GET /api/markets?search=bitcoin → 200 [8ms]
+[2026-02-25 01:12:27] DEBUG: GET /health → 200 [1ms]
+[2026-02-25 01:13:16] DEBUG: POST /api/auth/google → 200 [27ms]
+[2026-02-25 01:13:38] DEBUG: GET /api/auth/me → 200 [17ms]
+[2026-02-25 01:13:51] DEBUG: PUT /api/auth/wallet → 200 [30ms]
+[2026-02-25 01:14:21] DEBUG: GET /api/user/portfolio → 200 [483ms]
+[2026-02-25 01:14:31] DEBUG: GET /api/user/activity → 200 [11ms]
+[2026-02-25 01:14:39] DEBUG: GET /api/user/activity?type=DEPOSIT&limit=10 → 200 [12ms]
+[2026-02-25 01:14:46] DEBUG: POST /api/user/deposit → 200 [22ms]
+[2026-02-25 01:14:57] DEBUG: POST /api/user/deposit → 200 [14ms]
+[2026-02-25 01:15:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:15:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:15:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:15:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:15:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:15:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:15:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2250ms
+[2026-02-25 01:15:02] INFO: ✅ Scheduled sync done: 100 markets in 2250ms
+[2026-02-25 01:15:05] DEBUG: POST /api/user/deposit → 200 [29ms]
+[2026-02-25 01:15:13] DEBUG: POST /api/user/withdraw → 200 [32ms]
+[2026-02-25 01:15:18] DEBUG: GET /api/user/watchlist → 200 [12ms]
+[2026-02-25 01:15:24] DEBUG: POST /api/user/watchlist/553850 → 200 [34ms]
+[2026-02-25 01:17:59] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:18:00] DEBUG: GET /api/markets?category=Crypto&limit=20&offset=0&search=bitcoin → 200 [625ms]
+[2026-02-25 01:20:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:20:01] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:20:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:20:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:20:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:20:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:20:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2324ms
+[2026-02-25 01:20:02] INFO: ✅ Scheduled sync done: 100 markets in 2324ms
+[2026-02-25 01:21:10] DEBUG: GET /api/markets?category=New&limit=20&offset=0&search=bitcoin → 200 [19ms]
+[2026-02-25 01:21:35] DEBUG: GET /api/markets?category=New&limit=20&offset=0 → 200 [14ms]
+[2026-02-25 01:22:16] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:22:16] DEBUG: GET /api/markets?category=New&limit=20&offset=0&search=Iran → 200 [584ms]
+[2026-02-25 01:22:32] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:22:32] DEBUG: GET /api/markets?category=New&limit=1&offset=0&search=Iran → 200 [296ms]
+[2026-02-25 01:23:42] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:23:42] DEBUG: GET /api/markets?category=New&limit=10&offset=0&search=Will%20Meta%20launch%20a%20USD%20stablecoin%20in%202026%3F → 200 [349ms]
+[2026-02-25 01:24:33] INFO: Market 0x1234abcd... tidak ada di DB, fetch dari Polymarket...
+[2026-02-25 01:24:34] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/markets/0x1234abcd...","status":422}
+[2026-02-25 01:24:34] WARN: GET /api/orderbook/0x1234abcd... → 422 [1347ms]
+[2026-02-25 01:24:58] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:24:58] DEBUG: GET /api/markets?limit=10&offset=0&search=Will%20Meta%20launch%20a%20USD%20stablecoin%20in%202026%3F → 200 [157ms]
+[2026-02-25 01:25:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:25:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:25:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:25:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:25:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:25:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:25:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1721ms
+[2026-02-25 01:25:01] INFO: ✅ Scheduled sync done: 100 markets in 1721ms
+[2026-02-25 01:25:12] DEBUG: GET /api/markets?category=Trending&limit=10&offset=0 → 200 [16ms]
+[2026-02-25 01:26:07] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:26:07] DEBUG: GET /api/markets?category=Trending&limit=10&offset=0&search=sports → 200 [145ms]
+[2026-02-25 01:27:12] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:27:12] DEBUG: GET /api/markets?category=Trending&limit=10&offset=0&search=sport → 200 [373ms]
+[2026-02-25 01:27:39] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:27:40] DEBUG: GET /api/markets?category=Trending&limit=10&offset=0&search=football → 200 [160ms]
+[2026-02-25 01:27:50] DEBUG: GET /api/markets?category=Trending&limit=10&offset=0 → 304 [8ms]
+[2026-02-25 01:30:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:30:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:30:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:30:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:30:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:30:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:30:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2599ms
+[2026-02-25 01:30:02] INFO: ✅ Scheduled sync done: 100 markets in 2599ms
+[2026-02-25 01:34:05] DEBUG: GET /api/markets?category=Trending&limit=10&offset=0&search=all → 200 [19ms]
+[2026-02-25 01:34:15] DEBUG: GET /api/markets?category=Trending&limit=10&offset=0&search=all → 304 [1ms]
+[2026-02-25 01:34:17] DEBUG: GET /api/markets?category=Trending&limit=10&offset=0&search=all → 304 [1ms]
+[2026-02-25 01:34:43] DEBUG: GET /api/markets?category=Trending&limit=100&offset=0&search=all → 200 [7ms]
+[2026-02-25 01:35:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:35:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:35:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:35:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:35:02] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:35:02] INFO: Processing 100 unique markets...
+[2026-02-25 01:35:03] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 3234ms
+[2026-02-25 01:35:03] INFO: ✅ Scheduled sync done: 100 markets in 3234ms
+[2026-02-25 01:37:21] DEBUG: GET /api/markets?category=Trending&limit=100&offset=0 → 200 [46ms]
+[2026-02-25 01:37:55] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:37:55] DEBUG: GET /api/markets?category=Sports&limit=100&offset=0 → 200 [140ms]
+[2026-02-25 01:39:07] DEBUG: GET /api/markets → 200 [13ms]
+[2026-02-25 01:39:13] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 01:39:13] DEBUG: GET /api/markets?category=Sports&limit=10 → 200 [336ms]
+[2026-02-25 01:39:23] DEBUG: GET /api/markets → 200 [2ms]
+[2026-02-25 01:40:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:40:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:40:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:40:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:40:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:40:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:40:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1846ms
+[2026-02-25 01:40:01] INFO: ✅ Scheduled sync done: 100 markets in 1846ms
+[2026-02-25 01:40:05] DEBUG: GET /api/markets → 200 [120ms]
+[2026-02-25 01:42:46] DEBUG: GET /api/markets → 200 [29ms]
+[2026-02-25 01:44:08] DEBUG: GET /api/markets?category=Trending&limit=100&offset=0 → 200 [33ms]
+[2026-02-25 01:45:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:45:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:45:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:45:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:45:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:45:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:45:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2383ms
+[2026-02-25 01:45:02] INFO: ✅ Scheduled sync done: 100 markets in 2383ms
+[2026-02-25 01:45:06] DEBUG: GET /api/markets → 200 [17ms]
+[2026-02-25 01:45:10] DEBUG: GET /api/markets → 200 [2ms]
+[2026-02-25 01:50:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:50:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:50:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:50:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:50:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:50:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:50:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2107ms
+[2026-02-25 01:50:02] INFO: ✅ Scheduled sync done: 100 markets in 2107ms
+[2026-02-25 01:55:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:55:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:55:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:55:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:55:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:55:01] INFO: Processing 100 unique markets...
+[2026-02-25 01:55:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2631ms
+[2026-02-25 01:55:02] INFO: ✅ Scheduled sync done: 100 markets in 2631ms
+[2026-02-25 01:56:36] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 01:56:36] INFO: 📊 Environment : development
+[2026-02-25 01:56:36] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 01:56:36] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 01:56:36] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 01:56:39] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 01:56:39] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:56:39] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:56:39] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:56:39] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:56:40] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:56:40] INFO: Processing 100 unique markets...
+[2026-02-25 01:56:40] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 939ms
+[2026-02-25 01:56:40] INFO: ✅ Initial sync done: 100 markets in 939ms
+[2026-02-25 01:56:43] DEBUG: GET /api/markets → 200 [32ms]
+[2026-02-25 01:59:41] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 01:59:41] INFO: 📊 Environment : development
+[2026-02-25 01:59:41] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 01:59:41] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 01:59:42] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 01:59:44] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 01:59:44] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 01:59:45] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 01:59:46] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 01:59:46] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 01:59:46] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 01:59:46] INFO: Processing 100 unique markets...
+[2026-02-25 01:59:47] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2790ms
+[2026-02-25 01:59:47] INFO: ✅ Initial sync done: 100 markets in 2790ms
+[2026-02-25 02:00:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:00:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:00:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:00:00] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:00:00] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:00:00] INFO: Processing 100 unique markets...
+[2026-02-25 02:00:00] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 647ms
+[2026-02-25 02:00:00] INFO: ✅ Scheduled sync done: 100 markets in 647ms
+[2026-02-25 02:00:23] DEBUG: GET /api/markets → 200 [32ms]
+[2026-02-25 02:02:18] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 02:02:18] INFO: 📊 Environment : development
+[2026-02-25 02:02:18] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 02:02:18] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 02:02:18] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 02:02:21] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 02:02:21] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:02:22] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:02:22] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:02:22] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:02:22] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:02:22] INFO: Processing 100 unique markets...
+[2026-02-25 02:02:22] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 964ms
+[2026-02-25 02:02:22] INFO: ✅ Initial sync done: 100 markets in 964ms
+[2026-02-25 02:03:32] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 02:03:32] INFO: 📊 Environment : development
+[2026-02-25 02:03:32] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 02:03:32] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 02:03:33] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 02:03:35] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 02:03:35] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:03:36] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:03:37] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:03:38] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:03:38] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:03:38] INFO: Processing 100 unique markets...
+[2026-02-25 02:03:38] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 3056ms
+[2026-02-25 02:03:38] INFO: ✅ Initial sync done: 100 markets in 3056ms
+[2026-02-25 02:03:42] DEBUG: GET /api/markets → 200 [26ms]
+[2026-02-25 02:04:01] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 02:04:01] INFO: 📊 Environment : development
+[2026-02-25 02:04:01] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 02:04:01] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 02:04:01] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 02:04:04] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 02:04:04] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:04:04] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:04:04] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:04:04] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:04:04] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:04:04] INFO: Processing 100 unique markets...
+[2026-02-25 02:04:05] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1018ms
+[2026-02-25 02:04:05] INFO: ✅ Initial sync done: 100 markets in 1018ms
+[2026-02-25 02:04:06] DEBUG: GET /api/markets → 200 [26ms]
+[2026-02-25 02:04:07] DEBUG: GET /api/markets → 200 [5ms]
+[2026-02-25 02:04:07] DEBUG: GET /api/markets → 200 [3ms]
+[2026-02-25 02:04:33] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 02:04:33] INFO: 📊 Environment : development
+[2026-02-25 02:04:33] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 02:04:33] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 02:04:33] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 02:04:36] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 02:04:36] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:04:36] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:04:36] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:04:36] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:04:36] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:04:36] INFO: Processing 100 unique markets...
+[2026-02-25 02:04:37] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 958ms
+[2026-02-25 02:04:37] INFO: ✅ Initial sync done: 100 markets in 958ms
+[2026-02-25 02:04:37] DEBUG: GET /api/markets → 200 [27ms]
+[2026-02-25 02:04:54] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 02:04:54] INFO: 📊 Environment : development
+[2026-02-25 02:04:54] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 02:04:54] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 02:04:55] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 02:04:58] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 02:04:58] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:04:58] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:04:58] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:04:58] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:04:58] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:04:58] INFO: Processing 100 unique markets...
+[2026-02-25 02:04:58] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 898ms
+[2026-02-25 02:04:58] INFO: ✅ Initial sync done: 100 markets in 898ms
+[2026-02-25 02:05:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:05:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:05:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:05:00] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:05:00] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:05:00] INFO: Processing 100 unique markets...
+[2026-02-25 02:05:00] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 514ms
+[2026-02-25 02:05:00] INFO: ✅ Scheduled sync done: 100 markets in 514ms
+[2026-02-25 02:05:34] WARN: GET /api/orderbook/553850 → 404 [30ms]
+[2026-02-25 02:05:47] DEBUG: GET /api/markets → 200 [19ms]
+[2026-02-25 02:06:09] DEBUG: GET /api/markets/553850 → 200 [4ms]
+[2026-02-25 02:07:47] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 02:07:47] INFO: 📊 Environment : development
+[2026-02-25 02:07:47] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 02:07:47] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 02:07:48] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 02:07:50] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 02:07:50] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:07:51] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:07:52] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:07:52] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:07:52] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:07:52] INFO: Processing 100 unique markets...
+[2026-02-25 02:07:52] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1978ms
+[2026-02-25 02:07:52] INFO: ✅ Initial sync done: 100 markets in 1978ms
+[2026-02-25 02:08:05] DEBUG: GET /api/markets?category=New&limit=20 → 200 [39ms]
+[2026-02-25 02:08:37] DEBUG: GET /api/markets?limit=10&offset=20 → 200 [11ms]
+[2026-02-25 02:08:44] DEBUG: GET /api/markets → 200 [12ms]
+[2026-02-25 02:09:06] DEBUG: GET /api/auth/me → 200 [25ms]
+[2026-02-25 02:10:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:10:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:10:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:10:00] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:10:00] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:10:00] INFO: Processing 100 unique markets...
+[2026-02-25 02:10:00] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 674ms
+[2026-02-25 02:10:00] INFO: ✅ Scheduled sync done: 100 markets in 674ms
+[2026-02-25 02:11:30] DEBUG: GET /api/markets → 200 [22ms]
+[2026-02-25 02:15:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:15:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:15:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:15:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:15:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:15:01] INFO: Processing 100 unique markets...
+[2026-02-25 02:15:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1971ms
+[2026-02-25 02:15:02] INFO: ✅ Scheduled sync done: 100 markets in 1971ms
+[2026-02-25 02:20:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:20:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:20:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:20:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:20:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:20:01] INFO: Processing 100 unique markets...
+[2026-02-25 02:20:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2628ms
+[2026-02-25 02:20:02] INFO: ✅ Scheduled sync done: 100 markets in 2628ms
+[2026-02-25 02:25:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:25:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:25:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:25:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:25:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:25:01] INFO: Processing 100 unique markets...
+[2026-02-25 02:25:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2237ms
+[2026-02-25 02:25:02] INFO: ✅ Scheduled sync done: 100 markets in 2237ms
+[2026-02-25 02:30:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:30:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:30:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:30:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:30:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:30:01] INFO: Processing 100 unique markets...
+[2026-02-25 02:30:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2074ms
+[2026-02-25 02:30:02] INFO: ✅ Scheduled sync done: 100 markets in 2074ms
+[2026-02-25 02:35:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:35:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:35:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:35:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:35:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:35:01] INFO: Processing 100 unique markets...
+[2026-02-25 02:35:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1755ms
+[2026-02-25 02:35:01] INFO: ✅ Scheduled sync done: 100 markets in 1755ms
+[2026-02-25 02:40:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:40:01] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:40:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:40:02] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:40:02] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:40:02] INFO: Processing 100 unique markets...
+[2026-02-25 02:40:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2823ms
+[2026-02-25 02:40:02] INFO: ✅ Scheduled sync done: 100 markets in 2823ms
+[2026-02-25 02:45:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:45:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:45:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:45:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:45:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:45:01] INFO: Processing 100 unique markets...
+[2026-02-25 02:45:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1838ms
+[2026-02-25 02:45:01] INFO: ✅ Scheduled sync done: 100 markets in 1838ms
+[2026-02-25 02:50:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:50:01] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:50:02] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:50:02] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:50:02] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:50:02] INFO: Processing 100 unique markets...
+[2026-02-25 02:50:03] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 3727ms
+[2026-02-25 02:50:03] INFO: ✅ Scheduled sync done: 100 markets in 3727ms
+[2026-02-25 02:55:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 02:55:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 02:55:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 02:55:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 02:55:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 02:55:01] INFO: Processing 100 unique markets...
+[2026-02-25 02:55:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2352ms
+[2026-02-25 02:55:02] INFO: ✅ Scheduled sync done: 100 markets in 2352ms
+[2026-02-25 03:00:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:00:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:00:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:00:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:00:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:00:01] INFO: Processing 100 unique markets...
+[2026-02-25 03:00:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2074ms
+[2026-02-25 03:00:02] INFO: ✅ Scheduled sync done: 100 markets in 2074ms
+[2026-02-25 03:05:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:05:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:05:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:05:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:05:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:05:01] INFO: Processing 100 unique markets...
+[2026-02-25 03:05:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1826ms
+[2026-02-25 03:05:01] INFO: ✅ Scheduled sync done: 100 markets in 1826ms
+[2026-02-25 03:10:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:10:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:10:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:10:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:10:02] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:10:02] INFO: Processing 100 unique markets...
+[2026-02-25 03:10:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2686ms
+[2026-02-25 03:10:02] INFO: ✅ Scheduled sync done: 100 markets in 2686ms
+[2026-02-25 03:15:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:15:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:15:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:15:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:15:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:15:01] INFO: Processing 100 unique markets...
+[2026-02-25 03:15:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1812ms
+[2026-02-25 03:15:01] INFO: ✅ Scheduled sync done: 100 markets in 1812ms
+[2026-02-25 03:20:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:20:01] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:20:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:20:02] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:20:02] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:20:02] INFO: Processing 100 unique markets...
+[2026-02-25 03:20:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2782ms
+[2026-02-25 03:20:02] INFO: ✅ Scheduled sync done: 100 markets in 2782ms
+[2026-02-25 03:23:50] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 03:23:50] INFO: 📊 Environment : development
+[2026-02-25 03:23:50] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 03:23:50] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 03:23:50] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 03:23:53] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 03:23:53] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:23:54] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:23:55] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:23:55] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:23:55] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:23:55] INFO: Processing 100 unique markets...
+[2026-02-25 03:23:56] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 3036ms
+[2026-02-25 03:23:56] INFO: ✅ Initial sync done: 100 markets in 3036ms
+[2026-02-25 03:24:04] DEBUG: GET /api/markets → 200 [31ms]
+[2026-02-25 03:25:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:25:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:25:00] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:25:00] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:25:00] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:25:00] INFO: Processing 100 unique markets...
+[2026-02-25 03:25:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1215ms
+[2026-02-25 03:25:01] INFO: ✅ Scheduled sync done: 100 markets in 1215ms
+[2026-02-25 03:30:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:30:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:30:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:30:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:30:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:30:01] INFO: Processing 100 unique markets...
+[2026-02-25 03:30:02] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2448ms
+[2026-02-25 03:30:02] INFO: ✅ Scheduled sync done: 100 markets in 2448ms
+[2026-02-25 03:31:17] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 03:31:17] INFO: 📊 Environment : development
+[2026-02-25 03:31:17] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 03:31:17] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 03:31:18] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 03:31:20] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 03:31:20] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:31:21] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:31:21] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:31:22] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:31:22] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:31:22] INFO: Processing 100 unique markets...
+[2026-02-25 03:31:25] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 4977ms
+[2026-02-25 03:31:25] INFO: ✅ Initial sync done: 100 markets in 4977ms
+[2026-02-25 03:35:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:35:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:35:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:35:01] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:35:01] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:35:01] INFO: Processing 100 unique markets...
+[2026-02-25 03:35:01] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1907ms
+[2026-02-25 03:35:01] INFO: ✅ Scheduled sync done: 100 markets in 1907ms
+[2026-02-25 03:40:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:40:00] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:40:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:40:02] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:40:02] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:40:02] INFO: Processing 100 unique markets...
+[2026-02-25 03:40:03] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 2982ms
+[2026-02-25 03:40:03] INFO: ✅ Scheduled sync done: 100 markets in 2982ms
+[2026-02-25 03:41:14] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 03:41:14] INFO: 📊 Environment : development
+[2026-02-25 03:41:14] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 03:41:14] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 03:41:15] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 03:41:17] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 03:41:17] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:41:18] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:41:19] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:41:20] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:41:21] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:41:21] INFO: Processing 102 unique markets...
+[2026-02-25 03:41:21] INFO: ✅ Sync complete: 102 markets saved | 0 failed | 3884ms
+[2026-02-25 03:41:21] INFO: ✅ Initial sync done: 102 markets in 3884ms
+[2026-02-25 03:43:19] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 03:43:19] INFO: 📊 Environment : development
+[2026-02-25 03:43:19] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 03:43:19] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 03:43:19] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 03:43:22] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 03:43:22] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:43:22] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:43:22] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:43:22] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:43:22] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:43:22] INFO: Processing 100 unique markets...
+[2026-02-25 03:43:23] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 1149ms
+[2026-02-25 03:43:23] INFO: ✅ Initial sync done: 100 markets in 1149ms
+[2026-02-25 03:45:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:45:01] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:45:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:45:02] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:45:02] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:45:02] INFO: Processing 100 unique markets...
+[2026-02-25 03:45:03] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 3321ms
+[2026-02-25 03:45:03] INFO: ✅ Scheduled sync done: 100 markets in 3321ms
+[2026-02-25 03:46:31] DEBUG: GET /api/markets → 200 [65ms]
+[2026-02-25 03:50:31] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 03:50:31] INFO: 📊 Environment : development
+[2026-02-25 03:50:31] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 03:50:31] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 03:50:32] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 03:50:34] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 03:50:34] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:50:36] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:50:36] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:50:37] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:50:37] DEBUG: Fetched 100 markets for category: "all"
+[2026-02-25 03:50:37] INFO: Processing 100 unique markets...
+[2026-02-25 03:50:38] INFO: ✅ Sync complete: 100 markets saved | 0 failed | 3710ms
+[2026-02-25 03:50:38] INFO: ✅ Initial sync done: 100 markets in 3710ms
+[2026-02-25 03:50:45] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 03:50:45] INFO: 📊 Environment : development
+[2026-02-25 03:50:45] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 03:50:45] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 03:50:46] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 03:50:48] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 03:50:48] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:50:49] DEBUG: Fetched 50 featured markets
+[2026-02-25 03:50:50] DEBUG: Fetched 200 top-volume markets
+[2026-02-25 03:50:50] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:50:50] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:50:50] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:50:50] INFO: Processing 200 unique markets...
+[2026-02-25 03:50:54] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 03:50:54] INFO: 📊 Environment : development
+[2026-02-25 03:50:54] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 03:50:54] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 03:50:54] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 03:50:57] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 03:50:57] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:50:57] DEBUG: Fetched 50 featured markets
+[2026-02-25 03:50:58] DEBUG: Fetched 200 top-volume markets
+[2026-02-25 03:50:58] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:50:58] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:50:58] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:50:58] INFO: Processing 200 unique markets...
+[2026-02-25 03:51:02] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 03:51:02] INFO: 📊 Environment : development
+[2026-02-25 03:51:02] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 03:51:02] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 03:51:03] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 03:51:05] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 03:51:05] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:51:06] DEBUG: Fetched 50 featured markets
+[2026-02-25 03:51:07] DEBUG: Fetched 200 top-volume markets
+[2026-02-25 03:51:07] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:51:09] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:51:10] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:51:10] INFO: Processing 200 unique markets...
+[2026-02-25 03:51:10] INFO: ✅ Sync complete: 200 markets saved | 0 failed | 5210ms
+[2026-02-25 03:51:10] INFO: ✅ Initial sync done: 200 markets in 5210ms
+[2026-02-25 03:51:13] DEBUG: GET /api/markets → 200 [56ms]
+[2026-02-25 03:52:35] INFO: DB kosong — fetching live dari Polymarket Gamma API...
+[2026-02-25 03:52:35] DEBUG: GET /api/markets?category=New&limit=20 → 200 [345ms]
+[2026-02-25 03:55:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 03:55:00] DEBUG: Fetched 50 featured markets
+[2026-02-25 03:55:00] DEBUG: Fetched 200 top-volume markets
+[2026-02-25 03:55:01] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 03:55:01] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 03:55:02] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 03:55:02] INFO: Processing 200 unique markets...
+[2026-02-25 03:55:03] INFO: ✅ Sync complete: 200 markets saved | 0 failed | 3822ms
+[2026-02-25 03:55:03] INFO: ✅ Scheduled sync done: 200 markets in 3822ms
+[2026-02-25 03:56:50] DEBUG: GET /api/markets → 200 [146ms]
+[2026-02-25 04:00:00] INFO: ⏳ Starting market sync from Polymarket...
+[2026-02-25 04:00:00] DEBUG: Fetched 50 featured markets
+[2026-02-25 04:00:01] DEBUG: Fetched 200 top-volume markets
+[2026-02-25 04:00:02] DEBUG: Fetched 100 markets for category: "crypto"
+[2026-02-25 04:00:03] DEBUG: Fetched 100 markets for category: "politics"
+[2026-02-25 04:00:04] DEBUG: Fetched 100 markets for category: "sports"
+[2026-02-25 04:00:04] INFO: Processing 200 unique markets...
+[2026-02-25 04:00:06] INFO: ✅ Sync complete: 200 markets saved | 0 failed | 6081ms
+[2026-02-25 04:00:06] INFO: ✅ Scheduled sync done: 200 markets in 6081ms
+[2026-02-25 04:00:33] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:00:33] INFO: 📊 Environment : development
+[2026-02-25 04:00:33] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:00:33] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:00:34] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:00:37] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:00:37] INFO: ⏳ Syncing markets to DB (for user positions & watchlist)...
+[2026-02-25 04:00:37] DEBUG: Fetched 200 top-volume markets
+[2026-02-25 04:00:38] DEBUG: Fetched 100 markets for tag: "crypto"
+[2026-02-25 04:00:39] DEBUG: Fetched 100 markets for tag: "politics"
+[2026-02-25 04:00:40] DEBUG: Fetched 100 markets for tag: "sports"
+[2026-02-25 04:00:40] INFO: Processing 200 unique markets...
+[2026-02-25 04:00:40] ERROR: ❌ Sync failed: (0 , polymarket_service_1.extractTagLabels) is not a function
+[2026-02-25 04:00:40] WARN: Initial sync failed (non-fatal): (0 , polymarket_service_1.extractTagLabels) is not a function
+[2026-02-25 04:01:03] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:01:03] INFO: 📊 Environment : development
+[2026-02-25 04:01:03] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:01:03] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:01:06] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:01:06] INFO: 📊 Environment : development
+[2026-02-25 04:01:06] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:01:06] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:01:06] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:01:09] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:01:09] INFO: ⏳ Syncing markets to DB (for user positions & watchlist)...
+[2026-02-25 04:01:09] DEBUG: Fetched 200 top-volume markets
+[2026-02-25 04:01:10] DEBUG: Fetched 100 markets for tag: "crypto"
+[2026-02-25 04:01:10] DEBUG: Fetched 100 markets for tag: "politics"
+[2026-02-25 04:01:11] DEBUG: Fetched 100 markets for tag: "sports"
+[2026-02-25 04:01:11] INFO: Processing 200 unique markets...
+[2026-02-25 04:01:12] INFO: ✅ Sync done: 200 saved | 0 failed | 3040ms
+[2026-02-25 04:01:12] INFO: ✅ Initial sync done: 200 markets in 3040ms
+[2026-02-25 04:01:13] DEBUG: GET /api/markets → 200 [352ms]
+[2026-02-25 04:01:26] DEBUG: GET /api/markets → 200 [4ms]
+[2026-02-25 04:01:41] DEBUG: GET /api/markets?category=Crypto&limit=10 → 200 [1055ms]
+[2026-02-25 04:01:51] DEBUG: GET /api/markets?category=Politics&limit=10 → 200 [1011ms]
+[2026-02-25 04:01:55] DEBUG: GET /api/markets?category=Politics&limit=10 → 200 [2ms]
+[2026-02-25 04:02:01] DEBUG: GET /api/markets?category=New&limit=20 → 200 [697ms]
+[2026-02-25 04:05:00] INFO: ⏳ Syncing markets to DB (for user positions & watchlist)...
+[2026-02-25 04:05:04] DEBUG: Fetched 200 top-volume markets
+[2026-02-25 04:05:04] DEBUG: Fetched 100 markets for tag: "crypto"
+[2026-02-25 04:05:05] DEBUG: Fetched 100 markets for tag: "politics"
+[2026-02-25 04:05:05] DEBUG: Fetched 100 markets for tag: "sports"
+[2026-02-25 04:05:05] INFO: Processing 200 unique markets...
+[2026-02-25 04:05:06] INFO: ✅ Sync done: 200 saved | 0 failed | 6176ms
+[2026-02-25 04:05:06] INFO: ✅ Scheduled sync done: 200 markets in 6176ms
+[2026-02-25 04:10:21] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:10:21] INFO: 📊 Environment : development
+[2026-02-25 04:10:21] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:10:21] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:10:22] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:10:25] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:10:25] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:10:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:10:26] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 04:10:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:10:26] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 04:10:27] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:10:27] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 04:10:27] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:10:27] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 04:10:27] INFO: Processing 0 unique markets...
+[2026-02-25 04:10:27] INFO: ✅ Sync done: 0 saved | 0 failed | 2760ms
+[2026-02-25 04:10:27] INFO: ✅ Initial sync done: 0 markets in 2760ms
+[2026-02-25 04:11:12] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:11:12] WARN: GET /api/markets → 422 [423ms]
+[2026-02-25 04:12:58] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:12:58] INFO: 📊 Environment : development
+[2026-02-25 04:12:58] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:12:58] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:12:58] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:13:01] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:13:01] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:13:13] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:13:13] INFO: 📊 Environment : development
+[2026-02-25 04:13:13] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:13:13] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:13:14] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:13:17] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:13:17] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:13:18] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:13:18] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 04:13:19] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:13:19] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 04:13:20] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:13:20] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 04:13:21] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:13:21] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 04:13:21] INFO: Processing 0 unique markets...
+[2026-02-25 04:13:21] INFO: ✅ Sync done: 0 saved | 0 failed | 4558ms
+[2026-02-25 04:13:21] INFO: ✅ Initial sync done: 0 markets in 4558ms
+[2026-02-25 04:13:22] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:13:22] WARN: GET /api/markets → 422 [2036ms]
+[2026-02-25 04:13:22] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:13:22] WARN: GET /api/markets → 422 [1015ms]
+[2026-02-25 04:13:56] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:13:56] WARN: GET /api/markets?category=Crypto&limit=10 → 422 [3257ms]
+[2026-02-25 04:14:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:14:03] WARN: GET /api/markets?category=Crypto&limit=10 → 422 [8028ms]
+[2026-02-25 04:15:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:15:00] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:15:00] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 04:15:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:15:01] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 04:15:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:15:01] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 04:15:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:15:02] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 04:15:02] INFO: Processing 0 unique markets...
+[2026-02-25 04:15:02] INFO: ✅ Sync done: 0 saved | 0 failed | 1985ms
+[2026-02-25 04:15:02] INFO: ✅ Scheduled sync done: 0 markets in 1985ms
+[2026-02-25 04:15:35] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:15:35] INFO: 📊 Environment : development
+[2026-02-25 04:15:35] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:15:35] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:15:36] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:15:38] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:15:38] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:15:40] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:15:40] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 04:15:41] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:15:41] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 04:15:42] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:15:42] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 04:15:43] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 04:15:43] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 04:15:43] INFO: Processing 0 unique markets...
+[2026-02-25 04:15:43] INFO: ✅ Sync done: 0 saved | 0 failed | 4120ms
+[2026-02-25 04:15:43] INFO: ✅ Initial sync done: 0 markets in 4120ms
+[2026-02-25 04:15:47] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:15:47] INFO: 📊 Environment : development
+[2026-02-25 04:15:47] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:15:47] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:15:48] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:15:50] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:15:50] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:15:51] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:15:53] DEBUG: Fetched 100 trending events
+[2026-02-25 04:15:55] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:15:56] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:15:57] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:15:57] INFO: Processing 1841 unique markets...
+[2026-02-25 04:15:59] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:15:59] DEBUG: GET /api/markets → 200 [9368ms]
+[2026-02-25 04:19:32] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:19:32] INFO: 📊 Environment : development
+[2026-02-25 04:19:32] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:19:32] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:19:32] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:19:35] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:19:35] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:19:36] DEBUG: Fetched 100 trending events
+[2026-02-25 04:19:37] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:19:38] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:19:39] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:19:39] INFO: Processing 1841 unique markets...
+[2026-02-25 04:19:40] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:19:50] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:19:50] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:19:50] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:19:50] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:19:50] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:19:50] INFO: ✅ Sync done: 1654 saved | 187 failed | 14882ms
+[2026-02-25 04:19:50] INFO: ✅ Initial sync done: 1654 markets in 14882ms
+[2026-02-25 04:19:50] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:19:52] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:19:58] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:19:58] DEBUG: GET /api/markets → 200 [15370ms]
+[2026-02-25 04:20:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:20:00] WARN: WS error: WebSocket was closed before the connection was established
+[2026-02-25 04:20:00] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:20:00] DEBUG: GET /api/markets → 200 [10982ms]
+[2026-02-25 04:20:08] DEBUG: GET /api/markets → 200 [4ms]
+[2026-02-25 04:20:09] DEBUG: Fetched 100 trending events
+[2026-02-25 04:20:12] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:20:13] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:20:14] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:20:14] INFO: Processing 1841 unique markets...
+[2026-02-25 04:20:14] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:20:20] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:20:20] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:20:20] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:20:20] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:20:20] WARN: Upsert failed: 
+Invalid `prisma.market.upsert()` invocation in
+D:\Javascripts\Project1\claria_project\aurora-backend\src\services\market.service.ts:550:23
+
+  547 // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+  548 const results = await Promise.allSettled(
+  549   allMarkets.map((d) =>
+→ 550     prisma.market.upsert(
+Unique constraint failed on the fields: (`polymarketId`)
+[2026-02-25 04:20:20] INFO: ✅ Sync done: 1654 saved | 187 failed | 20708ms
+[2026-02-25 04:20:21] INFO: ✅ Scheduled sync done: 1654 markets in 20708ms
+[2026-02-25 04:21:15] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:21:23] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:21:23] DEBUG: GET /api/markets?category=Crypto&limit=10 → 200 [10052ms]
+[2026-02-25 04:21:34] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:21:42] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:21:42] DEBUG: GET /api/markets?category=Sports&limit=10 → 200 [13334ms]
+[2026-02-25 04:24:39] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:24:39] INFO: 📊 Environment : development
+[2026-02-25 04:24:39] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:24:39] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:24:39] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:24:42] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:24:42] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:24:43] DEBUG: Fetched 100 trending events
+[2026-02-25 04:24:44] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:24:44] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:24:45] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:24:45] INFO: Processing 1841 unique markets...
+[2026-02-25 04:24:46] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:24:49] INFO: ✅ Sync done: 1841 saved | 0 failed | 6895ms
+[2026-02-25 04:24:49] INFO: ✅ Initial sync done: 1841 markets in 6895ms
+[2026-02-25 04:25:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:25:00] DEBUG: Fetched 100 trending events
+[2026-02-25 04:25:00] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:25:00] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:25:01] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:25:01] INFO: Processing 1841 unique markets...
+[2026-02-25 04:25:01] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:25:06] INFO: ✅ Sync done: 1841 saved | 0 failed | 6181ms
+[2026-02-25 04:25:06] INFO: ✅ Scheduled sync done: 1841 markets in 6181ms
+[2026-02-25 04:25:06] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:25:14] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:25:14] DEBUG: GET /api/markets → 200 [8399ms]
+[2026-02-25 04:25:30] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:25:38] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:25:38] DEBUG: GET /api/markets?category=Crypto&limit=10 → 200 [8629ms]
+[2026-02-25 04:25:52] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:26:00] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:26:00] DEBUG: GET /api/markets?category=Sports&limit=10 → 200 [8646ms]
+[2026-02-25 04:27:04] DEBUG: Enriching 200 tokens via CLOB WebSocket...
+[2026-02-25 04:27:12] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:27:12] DEBUG: GET /api/markets?category=Sports&limit=100 → 200 [10663ms]
+[2026-02-25 04:27:34] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:27:42] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:27:42] DEBUG: GET /api/markets?category=New&limit=20 → 200 [8388ms]
+[2026-02-25 04:29:12] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:29:12] INFO: 📊 Environment : development
+[2026-02-25 04:29:12] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:29:12] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:29:12] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:29:15] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:29:15] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:29:18] DEBUG: Fetched 100 trending events
+[2026-02-25 04:29:19] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:29:20] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:29:21] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:29:21] INFO: Processing 1839 unique markets...
+[2026-02-25 04:29:22] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:29:25] INFO: ✅ Sync done: 1839 saved | 0 failed | 10264ms
+[2026-02-25 04:29:25] INFO: ✅ Initial sync done: 1839 markets in 10264ms
+[2026-02-25 04:29:25] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:29:33] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:29:33] DEBUG: GET /api/markets → 200 [8415ms]
+[2026-02-25 04:30:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:30:00] DEBUG: Fetched 100 trending events
+[2026-02-25 04:30:01] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:30:01] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:30:01] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:30:01] INFO: Processing 1839 unique markets...
+[2026-02-25 04:30:02] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:30:06] INFO: ✅ Sync done: 1839 saved | 0 failed | 6269ms
+[2026-02-25 04:30:06] INFO: ✅ Scheduled sync done: 1839 markets in 6269ms
+[2026-02-25 04:30:42] DEBUG: Enriching 200 tokens via CLOB WebSocket...
+[2026-02-25 04:30:50] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:30:50] DEBUG: GET /api/markets?category=Sports&limit=100 → 200 [10529ms]
+[2026-02-25 04:32:22] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:32:30] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:32:30] DEBUG: GET /api/markets?category=Crypto&limit=10 → 200 [8393ms]
+[2026-02-25 04:32:53] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:33:01] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:33:01] DEBUG: GET /api/markets?limit=10&offset=20 → 200 [8654ms]
+[2026-02-25 04:35:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:35:05] DEBUG: Fetched 100 trending events
+[2026-02-25 04:35:07] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:35:08] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:35:09] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:35:09] INFO: Processing 1839 unique markets...
+[2026-02-25 04:35:10] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:35:14] INFO: ✅ Sync done: 1839 saved | 0 failed | 14190ms
+[2026-02-25 04:35:14] INFO: ✅ Scheduled sync done: 1839 markets in 14190ms
+[2026-02-25 04:47:12] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:47:12] INFO: 📊 Environment : development
+[2026-02-25 04:47:12] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:47:12] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:47:12] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:47:15] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:47:15] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:47:15] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:47:15] DEBUG: Fetched 100 trending events
+[2026-02-25 04:47:17] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:47:17] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:47:18] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:47:18] INFO: Processing 1839 unique markets...
+[2026-02-25 04:47:19] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:47:22] INFO: ✅ Sync done: 1839 saved | 0 failed | 6786ms
+[2026-02-25 04:47:22] INFO: ✅ Initial sync done: 1839 markets in 6786ms
+[2026-02-25 04:47:23] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:47:23] DEBUG: GET /api/markets → 200 [8581ms]
+[2026-02-25 04:47:43] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:47:51] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:47:51] DEBUG: GET /api/markets?category=Crypto&limit=10 → 200 [8399ms]
+[2026-02-25 04:48:17] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:48:25] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:48:25] DEBUG: GET /api/markets?category=Politics&limit=10 → 200 [8792ms]
+[2026-02-25 04:49:10] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:49:18] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:49:18] DEBUG: GET /api/markets?category=New&limit=20 → 200 [8483ms]
+[2026-02-25 04:50:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:50:00] DEBUG: Fetched 100 trending events
+[2026-02-25 04:50:02] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:50:02] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:50:03] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:50:03] INFO: Processing 1839 unique markets...
+[2026-02-25 04:50:03] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:50:06] INFO: ✅ Sync done: 1839 saved | 0 failed | 6877ms
+[2026-02-25 04:50:06] INFO: ✅ Scheduled sync done: 1839 markets in 6877ms
+[2026-02-25 04:50:15] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:50:23] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:50:23] DEBUG: GET /api/markets?category=New&limit=20 → 200 [8121ms]
+[2026-02-25 04:50:53] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:51:01] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:51:01] DEBUG: GET /api/markets?category=Sports&limit=10 → 200 [9303ms]
+[2026-02-25 04:55:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:55:00] DEBUG: Fetched 100 trending events
+[2026-02-25 04:55:01] DEBUG: Fetched 50 events for Politics
+[2026-02-25 04:55:02] DEBUG: Fetched 50 events for Crypto
+[2026-02-25 04:55:03] DEBUG: Fetched 50 events for Sports
+[2026-02-25 04:55:03] INFO: Processing 1839 unique markets...
+[2026-02-25 04:55:04] DEBUG: Upserted 189 events to DB
+[2026-02-25 04:55:07] INFO: ✅ Sync done: 1839 saved | 0 failed | 7010ms
+[2026-02-25 04:55:07] INFO: ✅ Scheduled sync done: 1839 markets in 7010ms
+[2026-02-25 04:55:15] DEBUG: Enriching 4 tokens via CLOB WebSocket...
+[2026-02-25 04:55:23] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:55:23] DEBUG: GET /api/markets?category=Trending&limit=20&offset=0&search=sports → 200 [8645ms]
+[2026-02-25 04:56:06] DEBUG: Enriching 30 tokens via CLOB WebSocket...
+[2026-02-25 04:56:14] DEBUG: WS enriched prices for 2 tokens
+[2026-02-25 04:56:14] DEBUG: GET /api/markets?category=Trending&limit=20&offset=0&search=bitcoin → 200 [8403ms]
+[2026-02-25 04:57:44] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:57:44] INFO: 📊 Environment : development
+[2026-02-25 04:57:44] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:57:44] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:57:44] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:57:47] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 04:57:47] INFO: 📊 Environment : development
+[2026-02-25 04:57:47] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 04:57:47] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 04:57:47] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 04:57:50] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 04:57:50] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 04:57:51] DEBUG: Fetched 100 trending events
+[2026-02-25 04:57:52] DEBUG: Fetched events for Politics
+[2026-02-25 04:57:52] DEBUG: Fetched events for Crypto
+[2026-02-25 04:57:53] DEBUG: Fetched events for Sports
+[2026-02-25 04:57:53] INFO: Processing 1672 unique markets...
+[2026-02-25 04:57:54] DEBUG: Upserted 184 events to DB
+[2026-02-25 04:57:57] INFO: ✅ Sync done: 1672 saved | 0 failed | 7231ms
+[2026-02-25 04:57:57] INFO: ✅ Initial sync done: 1672 markets in 7231ms
+[2026-02-25 04:57:57] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 04:58:05] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:58:05] DEBUG: GET /api/markets → 200 [10162ms]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-dep-gra-2026-03-08-total-1pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-dep-gra-2026-03-08-total-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-dep-gra-2026-03-08-total-3pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-dep-gra-2026-03-08-total-4pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-rrc-cor-2026-03-08-total-1pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-rrc-cor-2026-03-08-total-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-rrc-cor-2026-03-08-total-3pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-rrc-cor-2026-03-08-total-4pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-leg-eib-2026-03-08-total-1pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-leg-eib-2026-03-08-total-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-leg-eib-2026-03-08-total-3pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-leg-eib-2026-03-08-total-4pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-and-spo-2026-03-08-total-1pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-and-spo-2026-03-08-total-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-and-spo-2026-03-08-total-3pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-and-spo-2026-03-08-total-4pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-lpm-ceu-2026-03-08-total-1pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-lpm-ceu-2026-03-08-total-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-lpm-ceu-2026-03-08-total-3pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-lpm-ceu-2026-03-08-total-4pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-alm-leo-2026-03-09-total-3pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-alm-leo-2026-03-09-total-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-alm-leo-2026-03-09-total-1pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: es2-alm-leo-2026-03-09-total-4pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: wta-erjavec-gormaz-2026-02-26-match-total-21pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-mrva-mmoh-2026-02-25-first-set-total-8pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-mrva-mmoh-2026-02-25-match-total-22pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-mrva-mmoh-2026-02-25-match-total-23pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-mrva-mmoh-2026-02-25-first-set-total-10pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-marcond-torres-2026-02-25-first-set-total-10pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-marcond-torres-2026-02-25-match-total-22pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-marcond-torres-2026-02-25-match-total-23pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-izquier-acosta-2026-02-25-match-total-21pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-izquier-acosta-2026-02-25-match-total-22pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-izquier-acosta-2026-02-25-match-total-23pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-izquier-acosta-2026-02-25-first-set-total-8pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-izquier-acosta-2026-02-25-first-set-total-10pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-ofner-blancan-2026-02-25-first-set-total-9pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-gakhov-piros-2026-02-25-match-total-21pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-gakhov-piros-2026-02-25-match-total-22pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-gakhov-piros-2026-02-25-first-set-total-8pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-gakhov-piros-2026-02-25-first-set-total-9pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-gakhov-piros-2026-02-25-set-totals-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-rinderk-draper-2026-02-25-match-total-21pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-rinderk-draper-2026-02-25-first-set-total-8pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-rinderk-draper-2026-02-25-first-set-total-9pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-busta-lehecka-2026-02-25-first-set-total-9pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-dodig-skatov-2026-02-25-first-set-total-9pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-damas-jover-2026-02-25-match-total-22pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-damas-jover-2026-02-25-match-total-23pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-damas-jover-2026-02-25-first-set-total-8pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-damas-jover-2026-02-25-first-set-total-10pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-martin-rodiono-2026-02-25-first-set-total-8pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-medvede-wawrink-2026-02-25-first-set-total-9pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-cadenas-silva-2026-02-25-match-total-22pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-cadenas-silva-2026-02-25-match-total-23pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-cadenas-silva-2026-02-25-first-set-total-8pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-cadenas-silva-2026-02-25-first-set-total-10pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: atp-kjaer-nestero-2026-02-25-first-set-total-9pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-harste-zoun-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-harste-bunny-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-trigge-zoun-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-harste-shin-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-trigge-bunny-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-shin-trigge-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-shin-zoun-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-bunny-zoun-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-trigge-harste-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Filtered low-quality: sc2-shin-bunny-2026-02-25-total-games-2pt5 [Sports]
+[2026-02-25 04:58:18] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-25 04:58:26] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:58:26] DEBUG: GET /api/markets?category=Sports&limit=10 → 200 [8982ms]
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772056200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772055900
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-15m-1772055900
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-15m-1772055900
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772055900
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-15m-1772055900
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772055900
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772055900
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-15m-1772055900
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772055600
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772055600
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772055600
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772055600
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772055300
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772055300
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772055300
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772055300
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-15m-1772055000
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-15m-1772055000
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772055000
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-15m-1772055000
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-15m-1772055000
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772055000
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772055000
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772055000
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772054700
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772054700
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772054700
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772054700
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772054400
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772054400
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772054400
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772054400
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-15m-1772054100
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-15m-1772054100
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-15m-1772054100
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-15m-1772054100
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772054100
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772054100
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772054100
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772054100
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772053800
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772053800
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772053800
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772053800
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772053500
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772053500
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772053500
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-5m-1772053500
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-15m-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-15m-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-15m-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-5m-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-5m-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-15m-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: eth-updown-4h-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: sol-updown-4h-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-5m-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: btc-updown-4h-1772053200
+[2026-02-25 04:59:16] DEBUG: Filtered recurring: xrp-updown-4h-1772053200
+[2026-02-25 04:59:16] DEBUG: No valid token IDs for WS enrichment
+[2026-02-25 04:59:16] DEBUG: GET /api/markets?category=New&limit=20 → 200 [458ms]
+[2026-02-25 04:59:23] DEBUG: GET /api/markets?category=New&limit=20 → 200 [1ms]
+[2026-02-25 04:59:27] DEBUG: GET /api/markets?category=New&limit=20 → 200 [3ms]
+[2026-02-25 04:59:40] DEBUG: Enriching 30 tokens via CLOB WebSocket...
+[2026-02-25 04:59:48] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 04:59:48] DEBUG: GET /api/markets?search=bitcoin → 200 [8699ms]
+[2026-02-25 04:59:59] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 05:00:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 05:00:02] DEBUG: Fetched 100 trending events
+[2026-02-25 05:00:04] DEBUG: Fetched events for Politics
+[2026-02-25 05:00:05] DEBUG: Fetched events for Crypto
+[2026-02-25 05:00:06] DEBUG: Fetched events for Sports
+[2026-02-25 05:00:06] INFO: Processing 1672 unique markets...
+[2026-02-25 05:00:06] DEBUG: Upserted 184 events to DB
+[2026-02-25 05:00:08] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 05:00:08] DEBUG: GET /api/markets → 200 [10730ms]
+[2026-02-25 05:00:11] INFO: ✅ Sync done: 1672 saved | 0 failed | 11551ms
+[2026-02-25 05:00:11] INFO: ✅ Scheduled sync done: 1672 markets in 11551ms
+[2026-02-25 05:05:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 05:05:00] DEBUG: Fetched 100 trending events
+[2026-02-25 05:05:01] DEBUG: Fetched events for Politics
+[2026-02-25 05:05:02] DEBUG: Fetched events for Crypto
+[2026-02-25 05:05:03] DEBUG: Fetched events for Sports
+[2026-02-25 05:05:03] INFO: Processing 1672 unique markets...
+[2026-02-25 05:05:03] DEBUG: Upserted 184 events to DB
+[2026-02-25 05:05:06] INFO: ✅ Sync done: 1672 saved | 0 failed | 6904ms
+[2026-02-25 05:05:06] INFO: ✅ Scheduled sync done: 1672 markets in 6904ms
+[2026-02-25 05:10:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 05:10:00] DEBUG: Fetched 100 trending events
+[2026-02-25 05:10:01] DEBUG: Fetched events for Politics
+[2026-02-25 05:10:02] DEBUG: Fetched events for Crypto
+[2026-02-25 05:10:03] DEBUG: Fetched events for Sports
+[2026-02-25 05:10:03] INFO: Processing 1672 unique markets...
+[2026-02-25 05:10:03] DEBUG: Upserted 184 events to DB
+[2026-02-25 05:10:07] INFO: ✅ Sync done: 1672 saved | 0 failed | 7212ms
+[2026-02-25 05:10:07] INFO: ✅ Scheduled sync done: 1672 markets in 7212ms
+[2026-02-25 05:15:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 05:15:08] DEBUG: Fetched 100 trending events
+[2026-02-25 05:15:11] DEBUG: Fetched events for Politics
+[2026-02-25 05:15:13] DEBUG: Fetched events for Crypto
+[2026-02-25 05:15:14] DEBUG: Fetched events for Sports
+[2026-02-25 05:15:14] INFO: Processing 1672 unique markets...
+[2026-02-25 05:15:15] DEBUG: Upserted 184 events to DB
+[2026-02-25 05:15:18] INFO: ✅ Sync done: 1672 saved | 0 failed | 18702ms
+[2026-02-25 05:15:18] INFO: ✅ Scheduled sync done: 1672 markets in 18702ms
+[2026-02-25 05:19:52] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:19:52] INFO: 📊 Environment : development
+[2026-02-25 05:19:52] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:19:52] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:19:52] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:19:55] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:19:55] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:20:00] WARN: Sync job still running — skipping this tick
+[2026-02-25 05:20:00] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:00] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:20:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:03] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:20:04] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:04] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:20:05] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:05] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:20:05] INFO: Processing 0 unique markets...
+[2026-02-25 05:20:05] INFO: Sync done: 0 saved | 0 failed | 9902ms
+[2026-02-25 05:20:05] INFO: ✅ Initial sync done: 0 markets in 9902ms
+[2026-02-25 05:20:12] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:20:12] INFO: 📊 Environment : development
+[2026-02-25 05:20:12] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:20:12] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:20:12] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:20:15] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:20:15] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:20:17] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:17] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:20:17] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:17] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:20:17] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:17] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:20:20] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:20:20] INFO: 📊 Environment : development
+[2026-02-25 05:20:20] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:20:20] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:20:21] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:20:23] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:20:23] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:20:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:26] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:20:28] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:28] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:20:29] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:29] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:20:30] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:20:30] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:20:30] INFO: Processing 0 unique markets...
+[2026-02-25 05:20:30] INFO: Sync done: 0 saved | 0 failed | 6540ms
+[2026-02-25 05:20:30] INFO: ✅ Initial sync done: 0 markets in 6540ms
+[2026-02-25 05:22:25] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:22:25] INFO: 📊 Environment : development
+[2026-02-25 05:22:25] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:22:25] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:22:26] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:22:28] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:22:28] INFO: 📊 Environment : development
+[2026-02-25 05:22:28] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:22:28] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:22:29] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:22:31] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:22:31] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:22:32] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:22:33] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:22:33] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:22:33] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:22:34] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:22:34] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:22:34] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:22:34] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:22:34] INFO: Processing 0 unique markets...
+[2026-02-25 05:22:34] INFO: Sync done: 0 saved | 0 failed | 2537ms
+[2026-02-25 05:22:34] INFO: ✅ Initial sync done: 0 markets in 2537ms
+[2026-02-25 05:25:00] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:25:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:25:02] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:25:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:25:03] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:25:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:25:03] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:25:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:25:03] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:25:03] INFO: Processing 0 unique markets...
+[2026-02-25 05:25:03] INFO: Sync done: 0 saved | 0 failed | 3833ms
+[2026-02-25 05:25:03] INFO: ✅ Scheduled sync done: 0 markets in 3833ms
+[2026-02-25 05:27:52] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:27:53] INFO: 📊 Environment : development
+[2026-02-25 05:27:53] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:27:53] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:27:53] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:27:58] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:27:58] INFO: 📊 Environment : development
+[2026-02-25 05:27:58] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:27:58] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:27:58] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:28:01] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:28:01] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:28:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:28:02] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:28:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:28:02] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:28:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:28:03] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:28:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:28:03] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:28:03] INFO: Processing 0 unique markets...
+[2026-02-25 05:28:03] INFO: Sync done: 0 saved | 0 failed | 2494ms
+[2026-02-25 05:28:03] INFO: ✅ Initial sync done: 0 markets in 2494ms
+[2026-02-25 05:29:34] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:29:34] INFO: 📊 Environment : development
+[2026-02-25 05:29:34] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:29:34] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:29:34] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:29:38] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:29:38] INFO: 📊 Environment : development
+[2026-02-25 05:29:38] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:29:38] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:29:38] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:29:41] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:29:41] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:29:42] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:29:42] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:29:42] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:29:42] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:29:43] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:29:43] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:29:43] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:29:43] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:29:43] INFO: Processing 0 unique markets...
+[2026-02-25 05:29:43] INFO: Sync done: 0 saved | 0 failed | 2401ms
+[2026-02-25 05:29:43] INFO: ✅ Initial sync done: 0 markets in 2401ms
+[2026-02-25 05:30:00] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:30:00] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:00] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:30:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:01] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:30:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:02] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:30:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:02] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:30:02] INFO: Processing 0 unique markets...
+[2026-02-25 05:30:02] INFO: Sync done: 0 saved | 0 failed | 2199ms
+[2026-02-25 05:30:02] INFO: ✅ Scheduled sync done: 0 markets in 2199ms
+[2026-02-25 05:30:28] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:30:28] INFO: 📊 Environment : development
+[2026-02-25 05:30:28] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:30:28] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:30:28] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:30:31] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:30:31] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:30:32] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:32] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:30:32] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:32] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:30:33] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:33] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:30:33] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:33] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:30:33] INFO: Processing 0 unique markets...
+[2026-02-25 05:30:33] INFO: Sync done: 0 saved | 0 failed | 2358ms
+[2026-02-25 05:30:33] INFO: ✅ Initial sync done: 0 markets in 2358ms
+[2026-02-25 05:30:37] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:30:37] INFO: 📊 Environment : development
+[2026-02-25 05:30:37] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:30:37] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:30:37] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:30:40] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:30:40] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:30:41] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:41] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:30:42] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:42] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:30:43] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:43] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:30:43] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:30:43] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:30:43] INFO: Processing 0 unique markets...
+[2026-02-25 05:30:43] INFO: Sync done: 0 saved | 0 failed | 3336ms
+[2026-02-25 05:30:43] INFO: ✅ Initial sync done: 0 markets in 3336ms
+[2026-02-25 05:32:35] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:32:35] INFO: 📊 Environment : development
+[2026-02-25 05:32:35] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:32:35] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:32:35] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:32:38] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:32:38] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:32:39] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:32:39] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:32:42] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:32:42] INFO: 📊 Environment : development
+[2026-02-25 05:32:42] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:32:42] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:32:42] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:32:45] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:32:45] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:32:46] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:32:46] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:32:46] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:32:46] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:32:47] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:32:47] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:32:47] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:32:47] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:32:47] INFO: Processing 0 unique markets...
+[2026-02-25 05:32:47] INFO: Sync done: 0 saved | 0 failed | 2422ms
+[2026-02-25 05:32:47] INFO: ✅ Initial sync done: 0 markets in 2422ms
+[2026-02-25 05:33:28] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:33:28] INFO: 📊 Environment : development
+[2026-02-25 05:33:28] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:33:28] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:33:29] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:33:31] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:33:31] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:33:33] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:33:33] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:33:34] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:33:34] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:33:34] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:33:34] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:33:35] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:33:35] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:33:35] INFO: Processing 0 unique markets...
+[2026-02-25 05:33:35] INFO: Sync done: 0 saved | 0 failed | 3350ms
+[2026-02-25 05:33:35] INFO: ✅ Initial sync done: 0 markets in 3350ms
+[2026-02-25 05:33:39] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:33:39] INFO: 📊 Environment : development
+[2026-02-25 05:33:39] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:33:39] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:33:39] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:33:42] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:33:42] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:33:43] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:33:43] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:33:44] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:33:44] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:33:44] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:33:44] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:33:44] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:33:44] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:33:44] INFO: Processing 0 unique markets...
+[2026-02-25 05:33:44] INFO: Sync done: 0 saved | 0 failed | 2696ms
+[2026-02-25 05:33:44] INFO: ✅ Initial sync done: 0 markets in 2696ms
+[2026-02-25 05:34:12] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:34:12] INFO: 📊 Environment : development
+[2026-02-25 05:34:12] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:34:12] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:34:13] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:34:15] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:34:15] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:34:19] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:34:19] INFO: 📊 Environment : development
+[2026-02-25 05:34:19] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:34:19] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:34:19] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:34:22] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:34:22] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:34:24] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:34:24] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:34:25] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:34:25] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:34:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:34:26] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:34:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:34:26] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:34:26] INFO: Processing 0 unique markets...
+[2026-02-25 05:34:26] INFO: Sync done: 0 saved | 0 failed | 3902ms
+[2026-02-25 05:34:26] INFO: ✅ Initial sync done: 0 markets in 3902ms
+[2026-02-25 05:35:00] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:35:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:01] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:35:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:02] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:35:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:02] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:35:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:03] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:35:03] INFO: Processing 0 unique markets...
+[2026-02-25 05:35:03] INFO: Sync done: 0 saved | 0 failed | 2963ms
+[2026-02-25 05:35:03] INFO: ✅ Scheduled sync done: 0 markets in 2963ms
+[2026-02-25 05:35:36] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:35:36] INFO: 📊 Environment : development
+[2026-02-25 05:35:36] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:35:36] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:35:36] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:35:39] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:35:39] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:35:40] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:40] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:35:41] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:41] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:35:41] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:41] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:35:42] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:42] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:35:42] INFO: Processing 0 unique markets...
+[2026-02-25 05:35:42] INFO: Sync done: 0 saved | 0 failed | 3134ms
+[2026-02-25 05:35:42] INFO: ✅ Initial sync done: 0 markets in 3134ms
+[2026-02-25 05:35:49] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:35:49] INFO: 📊 Environment : development
+[2026-02-25 05:35:49] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:35:49] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:35:49] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:35:52] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:35:52] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:35:53] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:53] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:35:53] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:53] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:35:54] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:54] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:35:54] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:35:54] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:35:54] INFO: Processing 0 unique markets...
+[2026-02-25 05:35:54] INFO: Sync done: 0 saved | 0 failed | 2204ms
+[2026-02-25 05:35:54] INFO: ✅ Initial sync done: 0 markets in 2204ms
+[2026-02-25 05:36:07] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:36:07] INFO: 📊 Environment : development
+[2026-02-25 05:36:07] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:36:07] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:36:08] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:36:10] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:36:10] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:36:12] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:36:12] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:36:14] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:36:14] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:36:15] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:36:15] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:36:16] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:36:16] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:36:16] INFO: Processing 0 unique markets...
+[2026-02-25 05:36:16] INFO: Sync done: 0 saved | 0 failed | 5112ms
+[2026-02-25 05:36:16] INFO: ✅ Initial sync done: 0 markets in 5112ms
+[2026-02-25 05:38:03] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:38:03] INFO: 📊 Environment : development
+[2026-02-25 05:38:03] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:38:03] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:38:03] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:38:06] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:38:06] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:38:08] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:38:08] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:38:09] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:38:09] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:38:09] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:38:09] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:38:09] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:38:09] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:38:09] INFO: Processing 0 unique markets...
+[2026-02-25 05:38:09] INFO: Sync done: 0 saved | 0 failed | 3193ms
+[2026-02-25 05:38:09] INFO: ✅ Initial sync done: 0 markets in 3193ms
+[2026-02-25 05:39:08] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:39:08] INFO: 📊 Environment : development
+[2026-02-25 05:39:08] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:39:08] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:39:09] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:39:11] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:39:11] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:39:15] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:39:15] INFO: 📊 Environment : development
+[2026-02-25 05:39:15] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:39:15] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:39:16] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:39:19] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:39:19] INFO: 📊 Environment : development
+[2026-02-25 05:39:19] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:39:19] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:39:20] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:39:22] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:39:22] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:39:23] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:23] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:39:24] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:24] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:39:25] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:25] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:39:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:26] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:39:26] INFO: Processing 0 unique markets...
+[2026-02-25 05:39:26] INFO: Sync done: 0 saved | 0 failed | 3740ms
+[2026-02-25 05:39:26] INFO: ✅ Initial sync done: 0 markets in 3740ms
+[2026-02-25 05:39:29] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:39:29] INFO: 📊 Environment : development
+[2026-02-25 05:39:29] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:39:29] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:39:29] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:39:32] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:39:32] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:39:33] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:33] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:39:33] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:33] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:39:34] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:34] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:39:34] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:34] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:39:34] INFO: Processing 0 unique markets...
+[2026-02-25 05:39:34] INFO: Sync done: 0 saved | 0 failed | 2170ms
+[2026-02-25 05:39:34] INFO: ✅ Initial sync done: 0 markets in 2170ms
+[2026-02-25 05:39:45] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:39:45] INFO: 📊 Environment : development
+[2026-02-25 05:39:45] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:39:45] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:39:46] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:39:48] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:39:48] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:39:49] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:50] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:39:50] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:50] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:39:50] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:50] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:39:51] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:39:51] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:39:51] INFO: Processing 0 unique markets...
+[2026-02-25 05:39:51] INFO: Sync done: 0 saved | 0 failed | 2412ms
+[2026-02-25 05:39:51] INFO: ✅ Initial sync done: 0 markets in 2412ms
+[2026-02-25 05:40:00] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:40:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:40:01] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:40:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:40:01] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:40:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:40:02] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:40:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:40:02] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:40:02] INFO: Processing 0 unique markets...
+[2026-02-25 05:40:02] INFO: Sync done: 0 saved | 0 failed | 2687ms
+[2026-02-25 05:40:02] INFO: ✅ Scheduled sync done: 0 markets in 2687ms
+[2026-02-25 05:40:30] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:40:30] INFO: 📊 Environment : development
+[2026-02-25 05:40:30] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:40:30] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:40:30] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:40:33] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:40:33] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:40:39] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:40:39] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:40:39] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:40:39] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:40:40] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:40:40] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:40:40] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:40:40] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:40:40] INFO: Processing 0 unique markets...
+[2026-02-25 05:40:40] INFO: Sync done: 0 saved | 0 failed | 7492ms
+[2026-02-25 05:40:40] INFO: ✅ Initial sync done: 0 markets in 7492ms
+[2026-02-25 05:41:06] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:41:06] INFO: 📊 Environment : development
+[2026-02-25 05:41:06] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:41:06] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:41:07] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:41:09] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:41:09] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:41:13] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:41:13] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:41:14] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:41:14] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:41:15] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:41:15] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:41:15] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:41:15] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:41:15] INFO: Processing 0 unique markets...
+[2026-02-25 05:41:15] INFO: Sync done: 0 saved | 0 failed | 5801ms
+[2026-02-25 05:41:15] INFO: ✅ Initial sync done: 0 markets in 5801ms
+[2026-02-25 05:41:21] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:41:21] INFO: 📊 Environment : development
+[2026-02-25 05:41:21] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:41:21] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:41:21] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:41:24] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:41:24] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:41:25] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:41:25] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:41:25] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:41:25] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:41:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:41:26] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:41:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:41:26] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:41:26] INFO: Processing 0 unique markets...
+[2026-02-25 05:41:26] INFO: Sync done: 0 saved | 0 failed | 2533ms
+[2026-02-25 05:41:26] INFO: ✅ Initial sync done: 0 markets in 2533ms
+[2026-02-25 05:43:03] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:43:03] INFO: 📊 Environment : development
+[2026-02-25 05:43:03] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:43:03] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:43:03] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:43:08] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:43:08] INFO: 📊 Environment : development
+[2026-02-25 05:43:08] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:43:08] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:43:08] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:43:11] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:43:11] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:43:13] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:43:13] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:43:14] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:43:14] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:43:14] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:43:14] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:43:15] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:43:15] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:43:15] INFO: Processing 0 unique markets...
+[2026-02-25 05:43:15] INFO: Sync done: 0 saved | 0 failed | 4048ms
+[2026-02-25 05:43:15] INFO: ✅ Initial sync done: 0 markets in 4048ms
+[2026-02-25 05:43:41] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:43:41] INFO: 📊 Environment : development
+[2026-02-25 05:43:41] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:43:41] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:43:42] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:43:45] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:43:45] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:43:45] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:43:46] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:43:46] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:43:46] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:43:47] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:43:47] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:43:47] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:43:47] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:43:47] INFO: Processing 0 unique markets...
+[2026-02-25 05:43:47] INFO: Sync done: 0 saved | 0 failed | 2892ms
+[2026-02-25 05:43:47] INFO: ✅ Initial sync done: 0 markets in 2892ms
+[2026-02-25 05:44:03] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:44:03] INFO: 📊 Environment : development
+[2026-02-25 05:44:03] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:44:03] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:44:04] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:44:07] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:44:07] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:44:07] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:44:07] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:44:09] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:44:09] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:44:09] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:44:09] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:44:10] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:44:10] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:44:10] INFO: Processing 0 unique markets...
+[2026-02-25 05:44:10] INFO: Sync done: 0 saved | 0 failed | 3037ms
+[2026-02-25 05:44:10] INFO: ✅ Initial sync done: 0 markets in 3037ms
+[2026-02-25 05:44:38] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:44:38] INFO: 📊 Environment : development
+[2026-02-25 05:44:38] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:44:38] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:44:39] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:44:41] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:44:41] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:44:43] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:44:43] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:44:43] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:44:43] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:44:44] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:44:44] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:44:44] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:44:44] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:44:44] INFO: Processing 0 unique markets...
+[2026-02-25 05:44:44] INFO: Sync done: 0 saved | 0 failed | 2889ms
+[2026-02-25 05:44:44] INFO: ✅ Initial sync done: 0 markets in 2889ms
+[2026-02-25 05:45:00] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:45:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:02] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:45:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:02] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:45:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:03] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:45:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:03] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:45:03] INFO: Processing 0 unique markets...
+[2026-02-25 05:45:03] INFO: Sync done: 0 saved | 0 failed | 3519ms
+[2026-02-25 05:45:03] INFO: ✅ Scheduled sync done: 0 markets in 3519ms
+[2026-02-25 05:45:32] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:45:32] INFO: 📊 Environment : development
+[2026-02-25 05:45:32] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:45:32] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:45:33] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:45:36] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:45:36] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:45:36] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:36] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:45:37] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:37] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:45:37] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:37] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:45:38] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:38] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:45:38] INFO: Processing 0 unique markets...
+[2026-02-25 05:45:38] INFO: Sync done: 0 saved | 0 failed | 2112ms
+[2026-02-25 05:45:38] INFO: ✅ Initial sync done: 0 markets in 2112ms
+[2026-02-25 05:45:40] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:45:40] INFO: 📊 Environment : development
+[2026-02-25 05:45:40] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:45:40] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:45:41] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:45:43] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:45:43] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:45:46] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:45:46] INFO: 📊 Environment : development
+[2026-02-25 05:45:46] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:45:46] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:45:46] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:45:49] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:49] WARN: GET /api/markets → 422 [612ms]
+[2026-02-25 05:45:49] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:45:49] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:45:50] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:50] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:45:50] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:50] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:45:51] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:51] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:45:51] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:51] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:45:51] INFO: Processing 0 unique markets...
+[2026-02-25 05:45:51] INFO: Sync done: 0 saved | 0 failed | 1861ms
+[2026-02-25 05:45:51] INFO: ✅ Initial sync done: 0 markets in 1861ms
+[2026-02-25 05:45:53] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:53] WARN: GET /api/markets → 422 [212ms]
+[2026-02-25 05:45:54] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:54] WARN: GET /api/markets → 422 [522ms]
+[2026-02-25 05:45:55] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:45:55] WARN: GET /api/markets → 422 [205ms]
+[2026-02-25 05:46:21] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:46:21] INFO: 📊 Environment : development
+[2026-02-25 05:46:21] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:46:21] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:46:21] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:46:24] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:46:24] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:46:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:46:26] WARN: GET /api/markets → 422 [1859ms]
+[2026-02-25 05:46:27] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:46:27] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:46:27] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:46:27] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:46:29] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:46:29] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:46:29] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:46:29] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:46:29] INFO: Processing 0 unique markets...
+[2026-02-25 05:46:29] INFO: Sync done: 0 saved | 0 failed | 5154ms
+[2026-02-25 05:46:29] INFO: ✅ Initial sync done: 0 markets in 5154ms
+[2026-02-25 05:46:33] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:46:33] WARN: GET /api/markets?category=Sports&limit=10 → 422 [1583ms]
+[2026-02-25 05:46:38] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:46:38] WARN: GET /api/markets?category=Sports&limit=10 → 422 [5284ms]
+[2026-02-25 05:50:00] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:50:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:50:01] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:50:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:50:01] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:50:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:50:02] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:50:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:50:03] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:50:03] INFO: Processing 0 unique markets...
+[2026-02-25 05:50:03] INFO: Sync done: 0 saved | 0 failed | 3378ms
+[2026-02-25 05:50:03] INFO: ✅ Scheduled sync done: 0 markets in 3378ms
+[2026-02-25 05:53:44] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:53:44] INFO: 📊 Environment : development
+[2026-02-25 05:53:44] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:53:44] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:53:45] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:53:47] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:53:47] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:53:50] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:53:50] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:53:53] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:53:53] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:53:55] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:53:55] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:53:58] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:53:58] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:53:58] INFO: Processing 0 unique markets...
+[2026-02-25 05:53:58] INFO: Sync done: 0 saved | 0 failed | 10469ms
+[2026-02-25 05:53:58] INFO: ✅ Initial sync done: 0 markets in 10469ms
+[2026-02-25 05:54:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:54:03] WARN: GET /api/markets → 422 [4519ms]
+[2026-02-25 05:55:00] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:55:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:55:01] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:55:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:55:02] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:55:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:55:02] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:55:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:55:03] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:55:03] INFO: Processing 0 unique markets...
+[2026-02-25 05:55:03] INFO: Sync done: 0 saved | 0 failed | 3554ms
+[2026-02-25 05:55:03] INFO: ✅ Scheduled sync done: 0 markets in 3554ms
+[2026-02-25 05:56:05] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:56:05] INFO: 📊 Environment : development
+[2026-02-25 05:56:05] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:56:05] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:56:05] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:56:08] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:56:08] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:56:11] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:56:11] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:56:11] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:56:11] WARN: GET /api/markets → 422 [3426ms]
+[2026-02-25 05:56:12] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:56:12] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:56:13] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:56:13] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:56:14] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events","status":422}
+[2026-02-25 05:56:14] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:56:14] INFO: Processing 0 unique markets...
+[2026-02-25 05:56:14] INFO: Sync done: 0 saved | 0 failed | 5911ms
+[2026-02-25 05:56:14] INFO: ✅ Initial sync done: 0 markets in 5911ms
+[2026-02-25 05:57:13] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:57:13] INFO: 📊 Environment : development
+[2026-02-25 05:57:13] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:57:13] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:57:13] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:57:16] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:57:16] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:57:16] DEBUG: fetchGammaEvents params: {"limit":100,"active":true,"closed":false,"order":"volume_24hr"}
+[2026-02-25 05:57:16] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=100&active=true&closed=false&order=volume_24hr
+[2026-02-25 05:57:18] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=100&active=true&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:18] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:57:18] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 05:57:18] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2
+[2026-02-25 05:57:19] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:19] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:57:19] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 05:57:19] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21
+[2026-02-25 05:57:20] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:20] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:57:20] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":100639}
+[2026-02-25 05:57:20] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639
+[2026-02-25 05:57:20] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:20] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:57:20] INFO: Processing 0 unique markets...
+[2026-02-25 05:57:20] INFO: Sync done: 0 saved | 0 failed | 4642ms
+[2026-02-25 05:57:21] INFO: ✅ Initial sync done: 0 markets in 4642ms
+[2026-02-25 05:57:26] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:57:26] INFO: 📊 Environment : development
+[2026-02-25 05:57:26] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:57:26] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:57:26] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:57:29] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:57:29] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:57:29] ERROR: DIAGNOSTIC FAILED: GET /events?limit=1 → gammaClient is not defined | baseURL="https://gamma-api.polymarket.com" | response body: {}
+[2026-02-25 05:57:29] DEBUG: fetchGammaEvents params: {"limit":100,"active":true,"closed":false,"order":"volume_24hr"}
+[2026-02-25 05:57:29] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=100&active=true&closed=false&order=volume_24hr
+[2026-02-25 05:57:38] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=100&active=true&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:38] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:57:38] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 05:57:38] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2
+[2026-02-25 05:57:39] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:39] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:57:39] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 05:57:39] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21
+[2026-02-25 05:57:40] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:40] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:57:40] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":100639}
+[2026-02-25 05:57:40] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639
+[2026-02-25 05:57:41] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:41] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:57:41] INFO: Processing 0 unique markets...
+[2026-02-25 05:57:41] INFO: Sync done: 0 saved | 0 failed | 11607ms
+[2026-02-25 05:57:41] INFO: ✅ Initial sync done: 0 markets in 11607ms
+[2026-02-25 05:57:47] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 05:57:47] INFO: 📊 Environment : development
+[2026-02-25 05:57:47] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 05:57:47] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 05:57:47] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 05:57:50] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 05:57:50] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 05:57:50] ERROR: DIAGNOSTIC FAILED: GET /events?limit=1 → gammaClient is not defined | baseURL="https://gamma-api.polymarket.com" | response body: {}
+[2026-02-25 05:57:50] DEBUG: fetchGammaEvents params: {"limit":100,"active":true,"closed":false,"order":"volume_24hr"}
+[2026-02-25 05:57:50] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=100&active=true&closed=false&order=volume_24hr
+[2026-02-25 05:57:56] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=100&active=true&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:57] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 05:57:57] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 05:57:57] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2
+[2026-02-25 05:57:59] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:57:59] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 05:57:59] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 05:57:59] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21
+[2026-02-25 05:58:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:58:02] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 05:58:02] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":100639}
+[2026-02-25 05:58:02] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639
+[2026-02-25 05:58:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 05:58:03] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 05:58:03] INFO: Processing 0 unique markets...
+[2026-02-25 05:58:03] INFO: Sync done: 0 saved | 0 failed | 13255ms
+[2026-02-25 05:58:03] INFO: ✅ Initial sync done: 0 markets in 13255ms
+[2026-02-25 06:00:00] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 06:00:00] ERROR: DIAGNOSTIC FAILED: GET /events?limit=1 → gammaClient is not defined | baseURL="https://gamma-api.polymarket.com" | response body: {}
+[2026-02-25 06:00:00] DEBUG: fetchGammaEvents params: {"limit":100,"active":true,"closed":false,"order":"volume_24hr"}
+[2026-02-25 06:00:00] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=100&active=true&closed=false&order=volume_24hr
+[2026-02-25 06:00:04] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=100&active=true&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:04] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 06:00:04] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 06:00:04] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2
+[2026-02-25 06:00:05] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:05] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 06:00:05] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 06:00:05] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21
+[2026-02-25 06:00:05] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:05] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 06:00:05] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":100639}
+[2026-02-25 06:00:05] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639
+[2026-02-25 06:00:05] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:05] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 06:00:05] INFO: Processing 0 unique markets...
+[2026-02-25 06:00:05] INFO: Sync done: 0 saved | 0 failed | 5872ms
+[2026-02-25 06:00:05] INFO: ✅ Scheduled sync done: 0 markets in 5872ms
+[2026-02-25 06:00:23] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 06:00:24] INFO: 📊 Environment : development
+[2026-02-25 06:00:24] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 06:00:24] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 06:00:25] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 06:00:27] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 06:00:27] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 06:00:27] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=1
+[2026-02-25 06:00:28] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=1
+[2026-02-25 06:00:30] DEBUG: Diagnostic minimal fetch OK
+[2026-02-25 06:00:30] DEBUG: fetchGammaEvents params: {"limit":40,"active":true,"closed":false,"order":"volume_24hr"}
+[2026-02-25 06:00:30] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=40&active=true&closed=false&order=volume_24hr
+[2026-02-25 06:00:30] INFO: DIAGNOSTIC: GET /events?limit=1 → 200, got 1 results
+[2026-02-25 06:00:30] DEBUG: fetchGammaEvents params: {"limit":100,"active":true,"closed":false,"order":"volume_24hr"}
+[2026-02-25 06:00:30] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=100&active=true&closed=false&order=volume_24hr
+[2026-02-25 06:00:30] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=40&active=true&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:31] WARN: GET /api/markets → 422 [2785ms]
+[2026-02-25 06:00:31] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=100&active=true&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:31] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 06:00:31] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 06:00:31] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2
+[2026-02-25 06:00:31] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:31] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 06:00:31] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 06:00:31] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21
+[2026-02-25 06:00:32] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=21","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:32] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 06:00:32] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"volume_24hr","tag_id":100639}
+[2026-02-25 06:00:32] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639
+[2026-02-25 06:00:33] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=volume_24hr&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:33] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 06:00:33] INFO: Processing 0 unique markets...
+[2026-02-25 06:00:33] INFO: Sync done: 0 saved | 0 failed | 5502ms
+[2026-02-25 06:00:33] INFO: ✅ Initial sync done: 0 markets in 5502ms
+[2026-02-25 06:00:40] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=1
+[2026-02-25 06:00:40] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=1
+[2026-02-25 06:00:44] DEBUG: Diagnostic minimal fetch OK
+[2026-02-25 06:00:44] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"start_date","tag_id":100639}
+[2026-02-25 06:00:44] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=start_date&tag_id=100639
+[2026-02-25 06:00:46] DEBUG: Diagnostic minimal fetch OK
+[2026-02-25 06:00:46] DEBUG: fetchGammaEvents params: {"limit":50,"active":true,"closed":false,"order":"start_date","tag_id":100639}
+[2026-02-25 06:00:46] DEBUG: Gamma API request: https://gamma-api.polymarket.com/events?limit=50&active=true&closed=false&order=start_date&tag_id=100639
+[2026-02-25 06:00:46] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=start_date&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:46] WARN: GET /api/markets?category=Sports&limit=10 → 422 [6676ms]
+[2026-02-25 06:00:48] ERROR: Polymarket API error: Request failed with status code 422 {"url":"/events?limit=50&active=true&closed=false&order=start_date&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:00:48] WARN: GET /api/markets?category=Sports&limit=10 → 422 [7860ms]
+[2026-02-25 06:02:25] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 06:02:25] INFO: 📊 Environment : development
+[2026-02-25 06:02:25] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 06:02:25] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 06:02:25] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 06:02:28] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 06:02:28] INFO: Syncing markets to DB via /events endpoint...
+[2026-02-25 06:02:30] INFO: DIAGNOSTIC: GET /events?limit=1 → 200, got 1 results
+[2026-02-25 06:02:30] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false,"order":"volume_24hr"}
+[2026-02-25 06:02:31] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=100&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:02:31] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 06:02:31] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 06:02:32] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:02:32] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 06:02:32] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 06:02:35] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 06:02:35] INFO: 📊 Environment : development
+[2026-02-25 06:02:35] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 06:02:35] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 06:02:35] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 06:02:38] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 06:02:38] INFO: Syncing markets from Polymarket...
+[2026-02-25 06:02:38] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false,"order":"volume_24hr"}
+[2026-02-25 06:02:38] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false,"order":"volume_24hr"}
+[2026-02-25 06:02:42] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=40&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:02:42] WARN: GET /api/markets → 422 [3779ms]
+[2026-02-25 06:02:42] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=100&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:02:42] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 06:02:42] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 06:02:43] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:02:43] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 06:02:43] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 06:02:44] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=21","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:02:44] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 06:02:44] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":100639}
+[2026-02-25 06:02:45] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:02:45] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 06:02:45] INFO: Processing 0 unique markets...
+[2026-02-25 06:02:45] INFO: Sync done: 0 saved | 0 failed | 7582ms
+[2026-02-25 06:02:45] INFO: ✅ Initial sync done: 0 markets in 7582ms
+[2026-02-25 06:05:00] INFO: Syncing markets from Polymarket...
+[2026-02-25 06:05:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false,"order":"volume_24hr"}
+[2026-02-25 06:05:03] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=100&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:05:03] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 06:05:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 06:05:04] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:05:04] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 06:05:04] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 06:05:05] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=21","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:05:05] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 06:05:05] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":100639}
+[2026-02-25 06:05:05] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:05:05] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 06:05:06] INFO: Processing 0 unique markets...
+[2026-02-25 06:05:06] INFO: Sync done: 0 saved | 0 failed | 6047ms
+[2026-02-25 06:05:06] INFO: ✅ Scheduled sync done: 0 markets in 6047ms
+[2026-02-25 06:10:00] INFO: Syncing markets from Polymarket...
+[2026-02-25 06:10:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false,"order":"volume_24hr"}
+[2026-02-25 06:10:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=100&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:10:01] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 06:10:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 06:10:01] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:10:01] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 06:10:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 06:10:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=21","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:10:02] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 06:10:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":100639}
+[2026-02-25 06:10:02] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:10:02] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 06:10:02] INFO: Processing 0 unique markets...
+[2026-02-25 06:10:02] INFO: Sync done: 0 saved | 0 failed | 2739ms
+[2026-02-25 06:10:02] INFO: ✅ Scheduled sync done: 0 markets in 2739ms
+[2026-02-25 06:11:14] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 06:11:14] INFO: 📊 Environment : development
+[2026-02-25 06:11:14] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 06:11:14] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 06:11:15] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 06:11:17] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 06:11:17] INFO: Syncing markets from Polymarket...
+[2026-02-25 06:11:17] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false,"order":"volume_24hr"}
+[2026-02-25 06:11:25] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=100&closed=false&order=volume_24hr","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:11:25] WARN: Failed trending fetch: Request failed with status code 422
+[2026-02-25 06:11:25] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":2}
+[2026-02-25 06:11:25] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=2","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:11:25] WARN: Failed Politics fetch: Request failed with status code 422
+[2026-02-25 06:11:25] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":21}
+[2026-02-25 06:11:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=21","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:11:26] WARN: Failed Crypto fetch: Request failed with status code 422
+[2026-02-25 06:11:26] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"order":"volume_24hr","tag_id":100639}
+[2026-02-25 06:11:26] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/events?limit=50&closed=false&order=volume_24hr&tag_id=100639","status":422,"body":"{\"type\":\"validation error\",\"error\":\"order fields are not valid\"}"}
+[2026-02-25 06:11:26] WARN: Failed Sports fetch: Request failed with status code 422
+[2026-02-25 06:11:26] INFO: Processing 0 unique markets...
+[2026-02-25 06:11:26] INFO: Sync done: 0 saved | 0 failed | 8577ms
+[2026-02-25 06:11:26] INFO: ✅ Initial sync done: 0 markets in 8577ms
+[2026-02-25 06:11:33] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 06:11:33] INFO: 📊 Environment : development
+[2026-02-25 06:11:33] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 06:11:33] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 06:11:33] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 06:11:36] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 06:11:36] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 06:11:36] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-25 06:11:44] DEBUG: Trending fetch done
+[2026-02-25 06:11:44] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-25 06:11:50] DEBUG: Politics fetch done
+[2026-02-25 06:11:50] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-25 06:11:51] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-25 06:11:53] DEBUG: Crypto fetch done
+[2026-02-25 06:11:53] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-25 06:11:56] DEBUG: Sports fetch done
+[2026-02-25 06:11:56] INFO: Processing 877 unique markets...
+[2026-02-25 06:11:57] DEBUG: Upserted 184 events to DB
+[2026-02-25 06:11:59] INFO: ✅ Sync done: 877 saved | 0 failed | 23294ms
+[2026-02-25 06:11:59] INFO: ✅ Initial sync done: 877 markets in 23294ms
+[2026-02-25 06:12:05] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 06:12:13] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:12:13] DEBUG: GET /api/markets → 200 [21571ms]
+[2026-02-25 06:12:22] DEBUG: fetchGammaEvents params: {"limit":70,"closed":false,"order":"startDate","tag_id":100639}
+[2026-02-25 06:12:24] DEBUG: Enriching 8 tokens via CLOB WebSocket...
+[2026-02-25 06:12:32] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:12:32] DEBUG: GET /api/markets?category=Sports&limit=10 → 200 [9716ms]
+[2026-02-25 06:13:16] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-25 06:13:21] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 06:13:29] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:13:29] DEBUG: GET /api/markets?category=New&limit=20 → 200 [12890ms]
+[2026-02-25 06:15:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 06:15:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-25 06:15:03] DEBUG: Trending fetch done
+[2026-02-25 06:15:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-25 06:15:06] DEBUG: Politics fetch done
+[2026-02-25 06:15:06] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-25 06:15:07] DEBUG: Crypto fetch done
+[2026-02-25 06:15:07] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-25 06:15:12] DEBUG: Sports fetch done
+[2026-02-25 06:15:12] INFO: Processing 877 unique markets...
+[2026-02-25 06:15:12] DEBUG: Upserted 184 events to DB
+[2026-02-25 06:15:14] INFO: ✅ Sync done: 877 saved | 0 failed | 14673ms
+[2026-02-25 06:15:14] INFO: ✅ Scheduled sync done: 877 markets in 14673ms
+[2026-02-25 06:15:32] DEBUG: GET /health → 200 [7ms]
+[2026-02-25 06:15:36] DEBUG: GET /health → 200 [2ms]
+[2026-02-25 06:15:57] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-25 06:15:58] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 06:16:06] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:16:06] DEBUG: GET /api/markets?category=Trending&limit=20&offset=0 → 200 [8947ms]
+[2026-02-25 06:20:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 06:20:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-25 06:20:03] DEBUG: Trending fetch done
+[2026-02-25 06:20:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-25 06:20:06] DEBUG: Politics fetch done
+[2026-02-25 06:20:06] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-25 06:20:06] DEBUG: Crypto fetch done
+[2026-02-25 06:20:06] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-25 06:20:07] DEBUG: Sports fetch done
+[2026-02-25 06:20:07] INFO: Processing 877 unique markets...
+[2026-02-25 06:20:08] DEBUG: Upserted 184 events to DB
+[2026-02-25 06:20:10] INFO: ✅ Sync done: 877 saved | 0 failed | 10112ms
+[2026-02-25 06:20:10] INFO: ✅ Scheduled sync done: 877 markets in 10112ms
+[2026-02-25 06:20:34] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 06:20:42] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:20:42] DEBUG: GET /api/markets?category=Trending&limit=20&offset=0&search=sports → 200 [11102ms]
+[2026-02-25 06:21:24] DEBUG: fetchGammaEvents params: {"limit":80,"closed":false,"order":"startDate","tag_id":100639}
+[2026-02-25 06:21:30] DEBUG: Enriching 8 tokens via CLOB WebSocket...
+[2026-02-25 06:21:38] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:21:38] DEBUG: GET /api/markets?category=Sports&limit=20&offset=0 → 200 [13947ms]
+[2026-02-25 06:24:14] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false,"order":"startDate","tag_id":100639}
+[2026-02-25 06:24:16] DEBUG: Enriching 158 tokens via CLOB WebSocket...
+[2026-02-25 06:24:24] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:24:24] DEBUG: GET /api/markets?category=Sports&limit=100&offset=0 → 200 [10181ms]
+[2026-02-25 06:25:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 06:25:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-25 06:25:07] DEBUG: Trending fetch done
+[2026-02-25 06:25:07] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-25 06:25:09] DEBUG: Politics fetch done
+[2026-02-25 06:25:09] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-25 06:25:10] DEBUG: Crypto fetch done
+[2026-02-25 06:25:10] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-25 06:25:10] DEBUG: Sports fetch done
+[2026-02-25 06:25:10] INFO: Processing 877 unique markets...
+[2026-02-25 06:25:11] DEBUG: Upserted 184 events to DB
+[2026-02-25 06:25:13] INFO: ✅ Sync done: 877 saved | 0 failed | 13694ms
+[2026-02-25 06:25:13] INFO: ✅ Scheduled sync done: 877 markets in 13694ms
+[2026-02-25 06:30:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 06:30:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-25 06:30:17] DEBUG: Trending fetch done
+[2026-02-25 06:30:17] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-25 06:30:20] DEBUG: Politics fetch done
+[2026-02-25 06:30:20] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-25 06:30:22] DEBUG: Crypto fetch done
+[2026-02-25 06:30:22] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-25 06:30:23] DEBUG: Sports fetch done
+[2026-02-25 06:30:23] INFO: Processing 877 unique markets...
+[2026-02-25 06:30:24] DEBUG: Upserted 184 events to DB
+[2026-02-25 06:30:27] INFO: ✅ Sync done: 877 saved | 0 failed | 27016ms
+[2026-02-25 06:30:27] INFO: ✅ Scheduled sync done: 877 markets in 27016ms

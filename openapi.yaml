@@ -1,0 +1,885 @@
+openapi: 3.0.3
+
+info:
+  title: Aurora Backend API
+  description: |
+    Backend API untuk **Aurora Prediction Market** app.
+    
+    Dibangun dengan Express.js + TypeScript + PostgreSQL + Prisma ORM.
+    Data market diambil dari **Polymarket API** (Gamma API, CLOB API, Data API).
+    
+    ## Autentikasi
+    Sebagian besar endpoint user membutuhkan **JWT Bearer Token**.
+    Login via `POST /api/auth/google` untuk mendapatkan token.
+    
+    ## Demo Mode
+    Deposit dan Withdrawal bersifat **simulated** — tidak ada transaksi uang nyata.
+    Setiap user baru mendapat $1000 USDC demo balance.
+  version: 1.0.0
+  contact:
+    name: Aurora App
+
+servers:
+  - url: http://localhost:3000
+    description: Local Development
+
+tags:
+  - name: Health
+    description: Server status
+  - name: Auth
+    description: Autentikasi user via Google OAuth + JWT
+  - name: Markets
+    description: Data market dari Polymarket (Gamma API)
+  - name: Orderbook
+    description: Real-time order book dari Polymarket (CLOB API)
+  - name: User
+    description: Portfolio, deposit, withdraw, watchlist, activity
+
+# ─────────────────────────────────────────────────────────────────────────────
+# COMPONENTS
+# ─────────────────────────────────────────────────────────────────────────────
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "JWT token dari POST /api/auth/google"
+
+  schemas:
+    # ── Generic ──────────────────────────────────────────────────────────────
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Something went wrong"
+
+    ValidationError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Validation error"
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+
+    # ── User ─────────────────────────────────────────────────────────────────
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "clx1234abcd"
+        email:
+          type: string
+          format: email
+          example: "user@gmail.com"
+        name:
+          type: string
+          example: "Aurora User"
+        photoUrl:
+          type: string
+          nullable: true
+          example: "https://lh3.googleusercontent.com/photo.jpg"
+        balance:
+          type: string
+          example: "1000.000000"
+        walletAddress:
+          type: string
+          nullable: true
+          example: "0x742d35Cc6634C0532925a3b8D4C9B5D1b2c3D4E5"
+
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT token — simpan di AsyncStorage Aurora app
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        user:
+          $ref: '#/components/schemas/User'
+
+    # ── Market ───────────────────────────────────────────────────────────────
+    Market:
+      type: object
+      properties:
+        id:
+          type: string
+          description: conditionId dari Polymarket
+          example: "0x1234abcd..."
+        polymarketId:
+          type: string
+          example: "market-slug-123"
+        slug:
+          type: string
+          example: "will-btc-reach-100k-2026"
+        question:
+          type: string
+          example: "Will Bitcoin reach $100K by end of 2026?"
+        description:
+          type: string
+          nullable: true
+        category:
+          type: string
+          enum: [Trending, New, Politics, Sports, Crypto]
+          example: "Crypto"
+        tags:
+          type: array
+          items:
+            type: string
+          example: ["bitcoin", "crypto", "price"]
+        outcomes:
+          type: array
+          items:
+            type: string
+          example: ["Yes", "No"]
+        outcomePrices:
+          type: object
+          description: Probabilitas per outcome (0.0 – 1.0)
+          example:
+            Yes: 0.65
+            No: 0.35
+        tokens:
+          type: array
+          items:
+            type: object
+            properties:
+              token_id:
+                type: string
+              outcome:
+                type: string
+        volume:
+          type: string
+          example: "1250000.50"
+        volume24h:
+          type: string
+          example: "45000.00"
+        liquidity:
+          type: string
+          example: "320000.00"
+        active:
+          type: boolean
+          example: true
+        closed:
+          type: boolean
+          example: false
+        imageUrl:
+          type: string
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+
+    PricePoint:
+      type: object
+      properties:
+        value:
+          type: number
+          description: Harga dalam persen (0–100)
+          example: 65.32
+        timestamp:
+          type: integer
+          description: Unix timestamp
+          example: 1735689600
+        label:
+          type: string
+          description: Label untuk chart
+          example: "Jan 1"
+
+    # ── Orderbook ────────────────────────────────────────────────────────────
+    OrderEntry:
+      type: object
+      properties:
+        price:
+          type: number
+          example: 0.65
+        size:
+          type: number
+          example: 1250.50
+
+    OutcomeOrderBook:
+      type: object
+      properties:
+        tokenId:
+          type: string
+        bids:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderEntry'
+        asks:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderEntry'
+        timestamp:
+          type: string
+
+    # ── Transaction ──────────────────────────────────────────────────────────
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        type:
+          type: string
+          enum: [DEPOSIT, WITHDRAWAL, TRADE, WALLET_CONNECT]
+        amount:
+          type: string
+          nullable: true
+          example: "500.000000"
+        description:
+          type: string
+          example: "Deposit via CARD"
+        status:
+          type: string
+          enum: [PENDING, COMPLETED, REJECTED]
+        metadata:
+          type: object
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+
+    # ── Portfolio ────────────────────────────────────────────────────────────
+    Position:
+      type: object
+      properties:
+        id:
+          type: string
+        market:
+          type: object
+          properties:
+            id:
+              type: string
+            question:
+              type: string
+            category:
+              type: string
+            imageUrl:
+              type: string
+              nullable: true
+        outcome:
+          type: string
+          example: "Yes"
+        shares:
+          type: string
+          example: "100.000000"
+        avgPrice:
+          type: string
+          example: "0.600000"
+        currentPrice:
+          type: string
+          example: "0.650000"
+        value:
+          type: string
+          example: "65.00"
+        pnl:
+          type: string
+          example: "5.00"
+        color:
+          type: string
+          nullable: true
+        isSimulated:
+          type: boolean
+
+    Portfolio:
+      type: object
+      properties:
+        balance:
+          type: string
+          example: "950.000000"
+        totalValue:
+          type: string
+          example: "65.00"
+        pnl:
+          type: string
+          example: "5.00"
+        pnlPercent:
+          type: string
+          example: "8.33"
+        positionCount:
+          type: integer
+          example: 3
+        positions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Position'
+        polymarketPositions:
+          type: array
+          description: Posisi real dari Polymarket (jika user connect wallet)
+          items:
+            type: object
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PATHS
+# ─────────────────────────────────────────────────────────────────────────────
+
+paths:
+
+  # ── Health ──────────────────────────────────────────────────────────────────
+  /health:
+    get:
+      tags: [Health]
+      summary: Health Check
+      description: Cek apakah server berjalan normal
+      responses:
+        '200':
+          description: Server OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+                  timestamp:
+                    type: string
+                    format: date-time
+                  env:
+                    type: string
+                    example: "development"
+
+  # ── Auth ────────────────────────────────────────────────────────────────────
+  /api/auth/google:
+    post:
+      tags: [Auth]
+      summary: Login via Google
+      description: |
+        Aurora app kirim data dari Google Sign In SDK.
+        Backend simpan/update user di DB dan return JWT token.
+        User baru otomatis mendapat $1000 USDC demo balance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [googleId, email, name]
+              properties:
+                googleId:
+                  type: string
+                  example: "google-uid-123456789"
+                email:
+                  type: string
+                  format: email
+                  example: "user@gmail.com"
+                name:
+                  type: string
+                  example: "Aurora User"
+                photoUrl:
+                  type: string
+                  nullable: true
+                  example: "https://lh3.googleusercontent.com/photo.jpg"
+      responses:
+        '200':
+          description: Login berhasil
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+
+  /api/auth/me:
+    get:
+      tags: [Auth]
+      summary: Get Current User
+      description: Verifikasi JWT dan return data user yang sedang login
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Data user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/auth/wallet:
+    put:
+      tags: [Auth]
+      summary: Connect Wallet Address
+      description: |
+        Hubungkan wallet Polygon ke akun Aurora.
+        Wallet address ini dipakai untuk fetch posisi real dari Polymarket Data API.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [walletAddress]
+              properties:
+                walletAddress:
+                  type: string
+                  pattern: '^0x[a-fA-F0-9]{40}$'
+                  example: "0x742d35Cc6634C0532925a3b8D4C9B5D1b2c3D4E5"
+      responses:
+        '200':
+          description: Wallet connected
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      email:
+                        type: string
+                      walletAddress:
+                        type: string
+                  message:
+                    type: string
+                    example: "Wallet connected successfully"
+        '400':
+          description: Invalid wallet address format
+        '401':
+          description: Unauthorized
+        '409':
+          description: Wallet already connected to another account
+
+  # ── Markets ─────────────────────────────────────────────────────────────────
+  /api/markets:
+    get:
+      tags: [Markets]
+      summary: Get Markets
+      description: |
+        Ambil daftar market dari DB (di-sync dari Polymarket Gamma API).
+        Jika DB belum ada data, fallback fetch langsung dari Polymarket.
+        Di-cache 60 detik.
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+            enum: [Trending, New, Politics, Sports, Crypto]
+          example: Crypto
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: search
+          in: query
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+          example: bitcoin
+      responses:
+        '200':
+          description: Daftar market
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Market'
+                  total:
+                    type: integer
+                    example: 20
+        '400':
+          description: Validation error
+
+  /api/markets/{id}:
+    get:
+      tags: [Markets]
+      summary: Get Market Detail
+      description: Ambil detail satu market. ID bisa berupa conditionId, polymarketId, atau slug.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "will-btc-reach-100k-2026"
+      responses:
+        '200':
+          description: Detail market
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Market'
+        '404':
+          description: Market not found
+
+  /api/markets/{id}/price-history:
+    get:
+      tags: [Markets]
+      summary: Get Price History
+      description: |
+        Data harga historis untuk chart di Aurora app.
+        Format response disesuaikan dengan LineChart dari `react-native-gifted-charts`.
+        Di-cache 5 menit (300 detik).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: interval
+          in: query
+          schema:
+            type: string
+            enum: [1m, 1h, 6h, 1d, 1w, all]
+            default: 1d
+          description: Resolusi data
+        - name: outcome
+          in: query
+          schema:
+            type: string
+            default: Yes
+          description: Nama outcome yang dicari (Yes, No, atau nama lain)
+      responses:
+        '200':
+          description: Data price history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PricePoint'
+                  outcome:
+                    type: string
+                    example: "Yes"
+                  tokenId:
+                    type: string
+                  interval:
+                    type: string
+                    example: "1d"
+                  count:
+                    type: integer
+        '404':
+          description: Market not found
+
+  # ── Orderbook ───────────────────────────────────────────────────────────────
+  /api/orderbook/{marketId}:
+    get:
+      tags: [Orderbook]
+      summary: Get Order Book
+      description: |
+        Real-time order book (bids & asks) untuk semua outcome dalam satu market.
+        Data di-cache **5 detik** agar tidak banjir request ke Polymarket CLOB API.
+      parameters:
+        - name: marketId
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "0x1234abcd..."
+      responses:
+        '200':
+          description: Order book per outcome
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: Key adalah nama outcome (Yes, No, dll)
+                    additionalProperties:
+                      $ref: '#/components/schemas/OutcomeOrderBook'
+                    example:
+                      Yes:
+                        tokenId: "token-id-yes"
+                        bids:
+                          - price: 0.64
+                            size: 1200
+                          - price: 0.63
+                            size: 800
+                        asks:
+                          - price: 0.65
+                            size: 950
+                          - price: 0.66
+                            size: 1500
+                        timestamp: "2026-02-25T00:00:00Z"
+                      No:
+                        tokenId: "token-id-no"
+                        bids:
+                          - price: 0.34
+                            size: 900
+                        asks:
+                          - price: 0.35
+                            size: 1100
+                        timestamp: "2026-02-25T00:00:00Z"
+                  marketId:
+                    type: string
+                  outcomes:
+                    type: array
+                    items:
+                      type: string
+                    example: ["Yes", "No"]
+        '404':
+          description: Market or tokens not found
+
+  # ── User ────────────────────────────────────────────────────────────────────
+  /api/user/portfolio:
+    get:
+      tags: [User]
+      summary: Get Portfolio
+      description: |
+        Posisi trading user + statistik portfolio (total value, P&L).
+        Jika user memiliki wallet address yang terhubung, juga fetch posisi real dari Polymarket.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Portfolio data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Portfolio'
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found
+
+  /api/user/activity:
+    get:
+      tags: [User]
+      summary: Get Activity / Transaction History
+      description: Histori transaksi user — deposit, withdrawal, trade, wallet connect.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [DEPOSIT, WITHDRAWAL, TRADE, WALLET_CONNECT]
+          description: Filter berdasarkan tipe transaksi
+      responses:
+        '200':
+          description: Daftar transaksi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Transaction'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+
+  /api/user/deposit:
+    post:
+      tags: [User]
+      summary: Deposit (Demo Mode)
+      description: |
+        Tambah balance demo user.
+        **Ini adalah simulasi — tidak ada transaksi uang nyata.**
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount]
+              properties:
+                amount:
+                  type: number
+                  minimum: 0.01
+                  maximum: 100000
+                  example: 500
+                method:
+                  type: string
+                  enum: [card, bank]
+                  default: card
+      responses:
+        '200':
+          description: Deposit berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Deposit successful (Demo Mode)"
+                  newBalance:
+                    type: string
+                    example: "1500.000000"
+                  amount:
+                    type: number
+                    example: 500
+        '400':
+          description: Validation error
+        '401':
+          description: Unauthorized
+
+  /api/user/withdraw:
+    post:
+      tags: [User]
+      summary: Withdraw (Demo Mode)
+      description: |
+        Kurangi balance demo user.
+        **Ini adalah simulasi — tidak ada transfer uang nyata.**
+        Akan gagal jika balance tidak mencukupi.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount]
+              properties:
+                amount:
+                  type: number
+                  minimum: 0.01
+                  example: 200
+                walletAddress:
+                  type: string
+                  nullable: true
+                  example: "0x742d35Cc6634C0532925a3b8D4C9B5D1b2c3D4E5"
+      responses:
+        '200':
+          description: Withdraw berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Withdrawal successful (Demo Mode)"
+                  newBalance:
+                    type: string
+                    example: "800.000000"
+                  amount:
+                    type: number
+                    example: 200
+        '400':
+          description: Insufficient balance atau validation error
+        '401':
+          description: Unauthorized
+
+  /api/user/watchlist:
+    get:
+      tags: [User]
+      summary: Get Watchlist
+      description: Daftar market yang di-bookmark user
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Daftar market di watchlist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Market'
+        '401':
+          description: Unauthorized
+
+  /api/user/watchlist/{marketId}:
+    post:
+      tags: [User]
+      summary: Toggle Watchlist
+      description: |
+        **Toggle** — tambah ke watchlist jika belum ada, hapus jika sudah ada.
+        Response `saved: true` berarti ditambahkan, `saved: false` berarti dihapus.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: marketId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Toggle berhasil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  saved:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Added to watchlist"
+        '401':
+          description: Unauthorized
+        '404':
+          description: Market not found
