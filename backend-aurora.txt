@@ -1,0 +1,3404 @@
+prisma
+// ─────────────────────────────────────────────────────────────────────────────
+// prisma/schema.prisma
+// Aurora Backend — Database Schema
+// ORM: Prisma | Database: PostgreSQL
+// ─────────────────────────────────────────────────────────────────────────────
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ENUM
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  TRADE
+  WALLET_CONNECT
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  REJECTED
+}
+
+enum AuthProvider {
+  GOOGLE
+  PHANTOM
+  METAMASK
+  COINBASE
+  WALLETCONNECT
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// USER
+// ─────────────────────────────────────────────────────────────────────────────
+
+model User {
+  id            String       @id @default(cuid())
+  email         String?      @unique // nullable — wallet-only user boleh tanpa email
+  name          String
+  photoUrl      String?
+  // OAuth providers
+  googleId      String?      @unique
+  // Wallet (semua tipe: Phantom, MetaMask, Coinbase, WalletConnect)
+  walletAddress String?      @unique // primary wallet (Polygon/EVM address)
+  solanaAddress String?      @unique // Phantom Solana address (opsional)
+  authProvider  AuthProvider @default(GOOGLE)
+  balance       Decimal      @default(0) @db.Decimal(18, 6)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  transactions Transaction[]
+  watchlist    Watchlist[]
+  positions    UserPosition[]
+
+  @@map("users")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TRANSACTION
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Transaction {
+  id          String            @id @default(cuid())
+  userId      String
+  type        TransactionType
+  amount      Decimal?          @db.Decimal(18, 6)
+  description String
+  status      TransactionStatus @default(PENDING)
+  metadata    Json?
+  createdAt   DateTime          @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, createdAt])
+  @@map("transactions")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EVENT
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Event {
+  id          String    @id
+  slug        String    @unique
+  title       String
+  description String?
+  category    String
+  imageUrl    String?
+  startDate   DateTime?
+  endDate     DateTime?
+  active      Boolean   @default(true)
+  closed      Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  markets Market[]
+
+  @@map("events")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARKET
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Market {
+  id              String   @id
+  polymarketId    String   @unique
+  slug            String   @unique
+  question        String
+  description     String?
+  category        String
+  tags            String[]
+  outcomes        String[]
+  outcomePrices   Json
+  tokens          Json
+  volume          Decimal  @default(0) @db.Decimal(18, 2)
+  volume24h       Decimal  @default(0) @db.Decimal(18, 2)
+  liquidity       Decimal  @default(0) @db.Decimal(18, 2)
+  spread          Decimal? @db.Decimal(10, 6)
+  active          Boolean  @default(true)
+  closed          Boolean  @default(false)
+  resolved        Boolean  @default(false)
+  resolvedOutcome String?
+
+  featured Boolean @default(false)
+  isNew    Boolean @default(false)
+
+  startDate    DateTime?
+  endDate      DateTime?
+  imageUrl     String?
+  icon         String?
+  eventId      String?
+  lastSyncedAt DateTime  @default(now())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  event        Event?         @relation(fields: [eventId], references: [id])
+  priceHistory PriceHistory[]
+  watchlist    Watchlist[]
+  positions    UserPosition[]
+
+  @@index([category])
+  @@index([active, closed])
+  @@index([volume24h])
+  @@index([featured, volume24h])
+  @@index([isNew, createdAt])
+  // Untuk Ending Soon — endDate yang dekat dengan waktu sekarang
+  @@index([endDate, active, closed])
+  // Untuk Highest Volume — sort by total volume
+  @@index([volume, active, closed])
+  @@map("markets")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PRICE HISTORY
+// ─────────────────────────────────────────────────────────────────────────────
+
+model PriceHistory {
+  id        String   @id @default(cuid())
+  marketId  String
+  tokenId   String
+  outcome   String
+  price     Decimal  @db.Decimal(10, 6)
+  timestamp DateTime
+
+  market Market @relation(fields: [marketId], references: [id], onDelete: Cascade)
+
+  @@unique([marketId, tokenId, timestamp])
+  @@index([marketId, timestamp])
+  @@map("price_history")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// WATCHLIST
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Watchlist {
+  id        String   @id @default(cuid())
+  userId    String
+  marketId  String
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  market Market @relation(fields: [marketId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, marketId])
+  @@map("watchlist")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// USER POSITION
+// ─────────────────────────────────────────────────────────────────────────────
+
+model UserPosition {
+  id           String   @id @default(cuid())
+  userId       String
+  marketId     String
+  outcome      String
+  shares       Decimal  @db.Decimal(18, 6)
+  avgPrice     Decimal  @db.Decimal(10, 6)
+  currentPrice Decimal  @default(0) @db.Decimal(10, 6)
+  color        String?
+  isSimulated  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  market Market @relation(fields: [marketId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, marketId, outcome])
+  @@map("user_positions")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SYNC LOG
+// ─────────────────────────────────────────────────────────────────────────────
+
+model SyncLog {
+  id        String   @id @default(cuid())
+  type      String
+  status    String
+  count     Int      @default(0)
+  error     String?
+  duration  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@map("sync_logs")
+}
+
+
+src
+-jobs
+sync-market.ts
+import cron from "node-cron";
+import { logger } from "../utils/logger";
+import { syncMarketsFromPolymarket } from "../services/market.service";
+
+let isRunning = false;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// startSyncJob
+// Jadwalkan sync market dari Polymarket secara berkala
+// Default: setiap 5 menit ("*/5 * * * *")
+//
+// Flow:
+// 1. Saat server start → langsung sync sekali (delay 3 detik)
+// 2. Setelah itu sync otomatis sesuai jadwal cron
+// ─────────────────────────────────────────────────────────────────────────────
+export function startSyncJob(): void {
+  const interval = process.env.SYNC_MARKETS_INTERVAL || "*/5 * * * *";
+
+  // Validasi cron expression
+  if (!cron.validate(interval)) {
+    logger.error(`Invalid cron expression: "${interval}"`);
+    return;
+  }
+
+  logger.info(`📅 Market sync scheduled: "${interval}"`);
+
+  // Schedule cron job
+  cron.schedule(interval, async () => {
+    // Skip jika job sebelumnya masih berjalan (hindari overlap)
+    if (isRunning) {
+      logger.warn("Sync job still running — skipping this tick");
+      return;
+    }
+
+    isRunning = true;
+    try {
+      const { count, duration } = await syncMarketsFromPolymarket();
+      logger.info(`✅ Scheduled sync done: ${count} markets in ${duration}ms`);
+    } catch (err) {
+      logger.error("Scheduled sync failed:", {
+        message: (err as Error).message,
+      });
+    } finally {
+      isRunning = false;
+    }
+  });
+
+  // Jalankan sekali langsung saat server start
+  // Delay 3 detik supaya DB connection sudah siap
+  setTimeout(async () => {
+    if (isRunning) return;
+    isRunning = true;
+    logger.info("🚀 Running initial market sync on startup...");
+    try {
+      const { count, duration } = await syncMarketsFromPolymarket();
+      logger.info(`✅ Initial sync done: ${count} markets in ${duration}ms`);
+    } catch (err) {
+      logger.warn("Initial sync failed (non-fatal):", {
+        message: (err as Error).message,
+      });
+    } finally {
+      isRunning = false;
+    }
+  }, 3000);
+}
+
+-middleware
+auth.ts
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+
+// ─── Type untuk payload JWT Aurora ──────────────────────────────────────────
+export interface AuthPayload {
+  userId: string;
+  email: string;
+}
+
+// Extend Express Request supaya bisa akses req.user di route handler
+declare global {
+  namespace Express {
+    interface Request {
+      user?: AuthPayload;
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// requireAuth
+// Middleware untuk proteksi route — verifikasi JWT dari header Authorization
+// Header format: "Authorization: Bearer <token>"
+// ─────────────────────────────────────────────────────────────────────────────
+export function requireAuth(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    res.status(401).json({ error: "Unauthorized: No token provided" });
+    return;
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      throw new Error("JWT_SECRET is not configured");
+    }
+
+    const payload = jwt.verify(token, secret) as AuthPayload;
+    req.user = payload;
+    next();
+  } catch (err) {
+    if (err instanceof jwt.TokenExpiredError) {
+      res.status(401).json({ error: "Unauthorized: Token has expired" });
+    } else if (err instanceof jwt.JsonWebTokenError) {
+      res.status(401).json({ error: "Unauthorized: Invalid token" });
+    } else {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// generateToken
+// Buat JWT baru untuk user yang berhasil login
+// ─────────────────────────────────────────────────────────────────────────────
+export function generateToken(payload: AuthPayload): string {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error("JWT_SECRET is not configured");
+  }
+
+  return jwt.sign(payload, secret, {
+    expiresIn: (process.env.JWT_EXPIRES_IN ||
+      "7d") as jwt.SignOptions["expiresIn"],
+  });
+}
+
+error-handler.ts
+import { Request, Response, NextFunction } from "express";
+import { ZodError } from "zod";
+import { logger } from "../utils/logger";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Global Error Handler
+// Harus dipasang paling bawah di Express (setelah semua route)
+// Menangani: ZodError (validasi), error umum, dan error server
+// ─────────────────────────────────────────────────────────────────────────────
+export function errorHandler(
+  err: unknown,
+  req: Request,
+  res: Response,
+  _next: NextFunction,
+): void {
+  // Zod validation error — request body/query tidak valid
+  if (err instanceof ZodError) {
+    res.status(400).json({
+      error: "Validation error",
+      details: err.issues.map((e) => ({
+        field: e.path.join("."),
+        message: e.message,
+      })),
+    });
+    return;
+  }
+
+  // Error dengan status code custom (misal: 404, 403)
+  const error = err as {
+    message?: string;
+    status?: number;
+    statusCode?: number;
+  };
+  const status = error.status || error.statusCode || 500;
+  const message =
+    status === 500
+      ? "Internal server error"
+      : error.message || "Something went wrong";
+
+  // Log error 500 ke file
+  if (status === 500) {
+    logger.error(`${req.method} ${req.originalUrl} — ${message}`, { err });
+  }
+
+  res.status(status).json({ error: message });
+}
+
+request-logger.ts
+import { Request, Response, NextFunction } from "express";
+import { logger } from "../utils/logger";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Request Logger Middleware
+// Log setiap HTTP request yang masuk beserta response time-nya
+// ─────────────────────────────────────────────────────────────────────────────
+export function requestLogger(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void {
+  const start = Date.now();
+
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    const level = res.statusCode >= 400 ? "warn" : "debug";
+    logger[level](
+      `${req.method} ${req.originalUrl} → ${res.statusCode} [${duration}ms]`,
+    );
+  });
+
+  next();
+}
+
+
+-routes
+auth.ts
+// ─────────────────────────────────────────────────────────────────────────────
+// src/routes/auth.ts
+// Aurora Backend — Auth Routes
+//
+// Provider yang didukung:
+//   1. Google Sign-In (OAuth via SDK mobile)
+//   2. Phantom      (Solana wallet — signature verification)
+//   3. MetaMask     (EVM wallet — signature verification)
+//   4. Coinbase Wallet (EVM wallet — signature verification)
+//   5. WalletConnect (EVM wallet — signature verification)
+//
+// Flow wallet auth:
+//   1. Client minta nonce → GET /api/auth/nonce?address=0x...
+//   2. Client sign nonce dengan wallet
+//   3. Client kirim { address, signature, walletType } → POST /api/auth/wallet
+//   4. Backend verifikasi signature → return JWT
+// ─────────────────────────────────────────────────────────────────────────────
+
+import { Router, Request, Response, NextFunction } from "express";
+import { z } from "zod";
+import { ethers } from "ethers";
+import { PublicKey } from "@solana/web3.js";
+import nacl from "tweetnacl";
+import bs58 from "bs58";
+import prisma from "../utils/prisma";
+import { generateToken, requireAuth } from "../middleware/auth";
+import { logger } from "../utils/logger";
+
+const router = Router();
+
+// In-memory nonce store (pakai Redis jika scale horizontal)
+// nonce expires 5 menit
+const nonceStore = new Map<string, { nonce: string; expiresAt: number }>();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────────────────────────────────────
+
+function generateNonce(): string {
+  return Math.random().toString(36).substring(2) + Date.now().toString(36);
+}
+
+function cleanExpiredNonces(): void {
+  const now = Date.now();
+  for (const [key, val] of nonceStore.entries()) {
+    if (now > val.expiresAt) nonceStore.delete(key);
+  }
+}
+
+/** Verifikasi EVM signature (MetaMask, Coinbase, WalletConnect) */
+function verifyEvmSignature(
+  address: string,
+  nonce: string,
+  signature: string,
+): boolean {
+  try {
+    const message = `Sign in to Aurora\n\nNonce: ${nonce}`;
+    const recovered = ethers.verifyMessage(message, signature);
+    return recovered.toLowerCase() === address.toLowerCase();
+  } catch {
+    return false;
+  }
+}
+
+/** Verifikasi Solana signature (Phantom) */
+function verifySolanaSignature(
+  address: string,
+  nonce: string,
+  signature: string,
+): boolean {
+  try {
+    const message = `Sign in to Aurora\n\nNonce: ${nonce}`;
+    const messageBytes = new TextEncoder().encode(message);
+    const signatureBytes = bs58.decode(signature);
+    const publicKeyBytes = new PublicKey(address).toBytes();
+    return nacl.sign.detached.verify(
+      messageBytes,
+      signatureBytes,
+      publicKeyBytes,
+    );
+  } catch {
+    return false;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/auth/nonce
+// Request nonce sebelum wallet sign in
+// Query: address (wallet address)
+// Response: { nonce, message }
+// ─────────────────────────────────────────────────────────────────────────────
+router.get("/nonce", (req: Request, res: Response) => {
+  const address = (req.query.address as string)?.toLowerCase();
+
+  if (!address) {
+    res.status(400).json({ error: "address query param is required" });
+    return;
+  }
+
+  cleanExpiredNonces();
+
+  const nonce = generateNonce();
+  nonceStore.set(address, {
+    nonce,
+    expiresAt: Date.now() + 5 * 60 * 1000, // 5 menit
+  });
+
+  const message = `Sign in to Aurora\n\nNonce: ${nonce}`;
+  res.json({ nonce, message });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POST /api/auth/wallet
+// Sign in dengan wallet (MetaMask, Coinbase, WalletConnect, Phantom)
+//
+// Body: { address, signature, walletType, name? }
+// walletType: "metamask" | "coinbase" | "walletconnect" | "phantom"
+// Response: { token, user }
+// ─────────────────────────────────────────────────────────────────────────────
+const walletAuthSchema = z.object({
+  address: z.string().min(10),
+  signature: z.string().min(10),
+  walletType: z.enum(["metamask", "coinbase", "walletconnect", "phantom"]),
+  name: z.string().min(1).max(100).optional(),
+});
+
+router.post(
+  "/wallet",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { address, signature, walletType, name } = walletAuthSchema.parse(
+        req.body,
+      );
+      const addressKey = address.toLowerCase();
+
+      // Ambil nonce
+      const stored = nonceStore.get(addressKey);
+      if (!stored) {
+        res
+          .status(400)
+          .json({ error: "Nonce not found or expired. Request a new nonce." });
+        return;
+      }
+      if (Date.now() > stored.expiresAt) {
+        nonceStore.delete(addressKey);
+        res.status(400).json({ error: "Nonce expired. Request a new nonce." });
+        return;
+      }
+
+      // Verifikasi signature
+      let isValid = false;
+      if (walletType === "phantom") {
+        // Phantom bisa sign di Solana (bs58) atau EVM (0x prefix hex)
+        if (signature.startsWith("0x")) {
+          isValid = verifyEvmSignature(address, stored.nonce, signature);
+        } else {
+          isValid = verifySolanaSignature(address, stored.nonce, signature);
+        }
+      } else {
+        // MetaMask, Coinbase, WalletConnect — semua EVM
+        isValid = verifyEvmSignature(address, stored.nonce, signature);
+      }
+
+      if (!isValid) {
+        res.status(401).json({ error: "Invalid signature" });
+        return;
+      }
+
+      // Hapus nonce setelah terpakai (one-time use)
+      nonceStore.delete(addressKey);
+
+      // Map walletType ke AuthProvider enum
+      const providerMap: Record<
+        string,
+        "PHANTOM" | "METAMASK" | "COINBASE" | "WALLETCONNECT"
+      > = {
+        phantom: "PHANTOM",
+        metamask: "METAMASK",
+        coinbase: "COINBASE",
+        walletconnect: "WALLETCONNECT",
+      };
+      const authProvider = providerMap[walletType];
+
+      // Determine field berdasarkan wallet type
+      const isSolana = walletType === "phantom" && !signature.startsWith("0x");
+
+      // Upsert user — cari berdasarkan wallet address
+      let user;
+      if (isSolana) {
+        user = await prisma.user.upsert({
+          where: { solanaAddress: address },
+          create: {
+            name:
+              name ?? `Phantom ${address.slice(0, 6)}...${address.slice(-4)}`,
+            solanaAddress: address,
+            authProvider,
+            balance: 1000,
+          },
+          update: {
+            authProvider,
+            updatedAt: new Date(),
+          },
+        });
+      } else {
+        const evmAddress = address.toLowerCase();
+        user = await prisma.user.upsert({
+          where: { walletAddress: evmAddress },
+          create: {
+            name:
+              name ??
+              `${walletType.charAt(0).toUpperCase() + walletType.slice(1)} ${evmAddress.slice(0, 6)}...${evmAddress.slice(-4)}`,
+            walletAddress: evmAddress,
+            authProvider,
+            balance: 1000,
+          },
+          update: {
+            authProvider,
+            updatedAt: new Date(),
+          },
+        });
+      }
+
+      const token = generateToken({
+        userId: user.id,
+        email: user.email ?? user.id,
+      });
+
+      logger.info(
+        `Wallet auth success: ${walletType} | ${address.slice(0, 10)}...`,
+      );
+
+      res.json({
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          photoUrl: user.photoUrl,
+          balance: user.balance,
+          walletAddress: user.walletAddress,
+          solanaAddress: user.solanaAddress,
+          authProvider: user.authProvider,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POST /api/auth/google
+// Aurora app kirim data dari Google Sign In SDK → backend simpan user → return JWT
+//
+// Body: { googleId, email, name, photoUrl? }
+// Response: { token, user }
+// ─────────────────────────────────────────────────────────────────────────────
+const googleAuthSchema = z.object({
+  googleId: z.string().min(1),
+  email: z.string().email(),
+  name: z.string().min(1),
+  photoUrl: z.string().url().optional().nullable(),
+});
+
+router.post(
+  "/google",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = googleAuthSchema.parse(req.body);
+
+      const user = await prisma.user.upsert({
+        where: { googleId: body.googleId },
+        create: {
+          googleId: body.googleId,
+          email: body.email,
+          name: body.name,
+          photoUrl: body.photoUrl,
+          authProvider: "GOOGLE",
+          balance: 1000, // Demo balance $1000 USDC
+        },
+        update: {
+          name: body.name,
+          photoUrl: body.photoUrl,
+          updatedAt: new Date(),
+        },
+      });
+
+      const token = generateToken({
+        userId: user.id,
+        email: user.email ?? body.email,
+      });
+
+      res.json({
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          photoUrl: user.photoUrl,
+          balance: user.balance,
+          walletAddress: user.walletAddress,
+          solanaAddress: user.solanaAddress,
+          authProvider: user.authProvider,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/auth/me
+// Verifikasi JWT dan return data user yang sedang login
+// ─────────────────────────────────────────────────────────────────────────────
+router.get(
+  "/me",
+  requireAuth,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: req.user!.userId },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          photoUrl: true,
+          balance: true,
+          walletAddress: true,
+          solanaAddress: true,
+          authProvider: true,
+          createdAt: true,
+        },
+      });
+
+      if (!user) {
+        res.status(404).json({ error: "User not found" });
+        return;
+      }
+
+      res.json({ data: user });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PUT /api/auth/wallet/connect
+// Link wallet ke akun yang sudah login (Google user tambahkan wallet)
+// Body: { address, signature, walletType }
+// ─────────────────────────────────────────────────────────────────────────────
+const connectWalletSchema = z.object({
+  address: z.string().min(10),
+  signature: z.string().min(10),
+  walletType: z.enum(["metamask", "coinbase", "walletconnect", "phantom"]),
+});
+
+router.put(
+  "/wallet/connect",
+  requireAuth,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { address, signature, walletType } = connectWalletSchema.parse(
+        req.body,
+      );
+      const addressKey = address.toLowerCase();
+
+      const stored = nonceStore.get(addressKey);
+      if (!stored || Date.now() > stored.expiresAt) {
+        nonceStore.delete(addressKey);
+        res.status(400).json({ error: "Nonce not found or expired." });
+        return;
+      }
+
+      const isSolana = walletType === "phantom" && !signature.startsWith("0x");
+      const isValid = isSolana
+        ? verifySolanaSignature(address, stored.nonce, signature)
+        : verifyEvmSignature(address, stored.nonce, signature);
+
+      if (!isValid) {
+        res.status(401).json({ error: "Invalid signature" });
+        return;
+      }
+
+      nonceStore.delete(addressKey);
+
+      // Cek conflict
+      if (isSolana) {
+        const existing = await prisma.user.findUnique({
+          where: { solanaAddress: address },
+        });
+        if (existing && existing.id !== req.user!.userId) {
+          res.status(409).json({
+            error: "Solana address already linked to another account",
+          });
+          return;
+        }
+        await prisma.user.update({
+          where: { id: req.user!.userId },
+          data: { solanaAddress: address },
+        });
+      } else {
+        const evmAddress = address.toLowerCase();
+        const existing = await prisma.user.findUnique({
+          where: { walletAddress: evmAddress },
+        });
+        if (existing && existing.id !== req.user!.userId) {
+          res.status(409).json({
+            error: "Wallet address already linked to another account",
+          });
+          return;
+        }
+        await prisma.user.update({
+          where: { id: req.user!.userId },
+          data: { walletAddress: evmAddress },
+        });
+      }
+
+      await prisma.transaction.create({
+        data: {
+          userId: req.user!.userId,
+          type: "WALLET_CONNECT",
+          description: `${walletType} wallet connected: ${address}`,
+          status: "COMPLETED",
+          metadata: { walletType, address },
+        },
+      });
+
+      res.json({ message: "Wallet connected successfully" });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+export default router;
+
+
+markets.ts
+// ─────────────────────────────────────────────────────────────────────────────
+// src/routes/markets.ts
+// Aurora Backend — Markets Routes
+//
+// Category yang tersedia:
+//   Static:  All, Politics, Crypto, Economy, Sports, Technology, Culture
+//   Dynamic: Trending, Breaking, Ending Soon, Highest Volume, New
+// ─────────────────────────────────────────────────────────────────────────────
+
+import { Router, Request, Response, NextFunction } from "express";
+import { z } from "zod";
+import { getMarkets, getMarketDetail } from "../services/market.service";
+import { cache } from "../utils/cache";
+import { fetchPriceHistory } from "../services/polymarket.service";
+
+const router = Router();
+
+// Semua nilai category yang valid di Aurora
+const VALID_CATEGORIES = [
+  // Static (tag-based)
+  "All",
+  "Politics",
+  "Crypto",
+  "Economy",
+  "Sports",
+  "Technology",
+  "Culture",
+  // Dynamic (computed)
+  "Trending",
+  "Breaking",
+  "EndingSoon",
+  "HighestVolume",
+  "New",
+] as const;
+
+type AuroraCategory = (typeof VALID_CATEGORIES)[number];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/markets
+// Ambil daftar market dengan filter opsional
+// Query: category, limit, offset, search
+// ─────────────────────────────────────────────────────────────────────────────
+const marketsQuerySchema = z.object({
+  category: z.enum(VALID_CATEGORIES).optional(),
+  limit: z.coerce.number().min(1).max(100).default(20),
+  offset: z.coerce.number().min(0).default(0),
+  search: z.string().min(1).max(200).optional(),
+});
+
+router.get("/", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const query = marketsQuerySchema.parse(req.query);
+    const markets = await getMarkets(query);
+    res.json({ data: markets, total: markets.length });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/markets/categories
+// Daftar semua category yang tersedia beserta deskripsinya
+// ─────────────────────────────────────────────────────────────────────────────
+router.get("/categories", (_req: Request, res: Response) => {
+  res.json({
+    data: [
+      {
+        id: "All",
+        label: "All Markets",
+        description: "Semua market yang sedang aktif",
+        type: "static",
+        icon: "grid",
+      },
+      {
+        id: "Trending",
+        label: "Trending",
+        description: "Market dengan volume & aktivitas tertinggi hari ini",
+        type: "dynamic",
+        icon: "trending-up",
+      },
+      {
+        id: "Breaking",
+        label: "Breaking",
+        description:
+          "Market yang mengalami pergerakan harga paling besar dalam 24 jam terakhir",
+        type: "dynamic",
+        icon: "zap",
+      },
+      {
+        id: "EndingSoon",
+        label: "Ending Soon",
+        description: "Market yang akan berakhir dalam 24 jam ke depan",
+        type: "dynamic",
+        icon: "clock",
+      },
+      {
+        id: "HighestVolume",
+        label: "Highest Volume",
+        description: "Market dengan total volume trading terbesar",
+        type: "dynamic",
+        icon: "bar-chart-2",
+      },
+      {
+        id: "New",
+        label: "New",
+        description: "Market yang baru ditambahkan",
+        type: "dynamic",
+        icon: "star",
+      },
+      {
+        id: "Politics",
+        label: "Politics",
+        description: "Pemilu, kebijakan pemerintah, geopolitik",
+        type: "static",
+        tagId: 2,
+        icon: "landmark",
+      },
+      {
+        id: "Crypto",
+        label: "Crypto",
+        description: "Bitcoin, Ethereum, DeFi, dan aset kripto lainnya",
+        type: "static",
+        tagId: 21,
+        icon: "bitcoin",
+      },
+      {
+        id: "Economy",
+        label: "Economy",
+        description: "Saham, forex, suku bunga, inflasi, ekonomi makro",
+        type: "static",
+        tagId: 120,
+        icon: "dollar-sign",
+      },
+      {
+        id: "Sports",
+        label: "Sports",
+        description: "NBA, NFL, sepak bola, UFC, F1, dan olahraga lainnya",
+        type: "static",
+        tagId: 100639,
+        icon: "trophy",
+      },
+      {
+        id: "Technology",
+        label: "Technology",
+        description: "AI, big tech, produk teknologi, startup",
+        type: "static",
+        tagId: 1401,
+        icon: "cpu",
+      },
+      {
+        id: "Culture",
+        label: "Culture",
+        description: "Pop culture, entertainment, selebriti, awards",
+        type: "static",
+        tagId: 596,
+        icon: "film",
+      },
+    ],
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/markets/:id
+// Detail satu market — id bisa berupa conditionId, polymarketId, atau slug
+// ─────────────────────────────────────────────────────────────────────────────
+router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const market = await getMarketDetail(req.params.id as string);
+    if (!market) {
+      res.status(404).json({ error: "Market not found" });
+      return;
+    }
+    res.json({ data: market });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/markets/:id/price-history
+// Data harga historis untuk chart
+// Query: interval (1m|1h|6h|1d|1w|all), outcome (Yes|No|nama lain)
+// ─────────────────────────────────────────────────────────────────────────────
+const priceHistorySchema = z.object({
+  interval: z.enum(["1m", "1h", "6h", "1d", "1w", "all"]).default("1d"),
+  outcome: z.string().default("Yes"),
+});
+
+router.get(
+  "/:id/price-history",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { interval, outcome } = priceHistorySchema.parse(req.query);
+      const CACHE_TTL = parseInt(process.env.CACHE_PRICE_HISTORY_TTL || "300");
+
+      const market = await getMarketDetail(req.params.id as string);
+      if (!market) {
+        res.status(404).json({ error: "Market not found" });
+        return;
+      }
+
+      type TokenEntry = { token_id: string; outcome: string };
+      const tokens = (market as { tokens?: TokenEntry[] }).tokens || [];
+      const token =
+        tokens.find((t: TokenEntry) => t.outcome === outcome) || tokens[0];
+
+      if (!token) {
+        res.json({ data: [], outcome, marketId: req.params.id });
+        return;
+      }
+
+      const cacheKey = `price-history:${token.token_id}:${interval}`;
+      const history = await cache.getOrSet(
+        cacheKey,
+        () =>
+          fetchPriceHistory(
+            token.token_id,
+            interval as "1m" | "1h" | "6h" | "1d" | "1w" | "all",
+          ),
+        CACHE_TTL,
+      );
+
+      // Format untuk LineChart — price 0.0–1.0 → 0–100%
+      const formatted = history.map((point) => ({
+        value: parseFloat((point.p * 100).toFixed(2)),
+        timestamp: point.t,
+        label: new Date(point.t * 1000).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        }),
+      }));
+
+      res.json({
+        data: formatted,
+        outcome,
+        tokenId: token.token_id,
+        interval,
+        count: formatted.length,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+export default router;
+
+
+orderbook.ts
+import { Router, Request, Response, NextFunction } from "express";
+import { cache } from "../utils/cache";
+import { fetchOrderBook } from "../services/polymarket.service";
+import { getMarketDetail } from "../services/market.service";
+
+const router = Router();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/orderbook/:marketId
+// Ambil order book (bids & asks) untuk semua outcome dalam sebuah market
+// Data di-cache 5 detik (real-time tapi tidak banjir request ke Polymarket)
+//
+// Response:
+// {
+//   data: {
+//     "Yes": { bids: [{price, size}], asks: [{price, size}], timestamp },
+//     "No":  { bids: [{price, size}], asks: [{price, size}], timestamp }
+//   }
+// }
+// ─────────────────────────────────────────────────────────────────────────────
+router.get(
+  "/:marketId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const CACHE_TTL = parseInt(process.env.CACHE_ORDERBOOK_TTL || "5");
+
+      const market = await getMarketDetail(req.params.marketId as string);
+      if (!market) {
+        res.status(404).json({ error: "Market not found" });
+        return;
+      }
+
+      type TokenEntry = { token_id: string; outcome: string };
+      const tokens = (market as { tokens?: TokenEntry[] }).tokens || [];
+
+      if (tokens.length === 0) {
+        res.status(404).json({ error: "Market has no tokens" });
+        return;
+      }
+
+      // Fetch order book untuk semua token (Yes, No) secara paralel
+      const results = await Promise.allSettled(
+        tokens.map(async (token: TokenEntry) => {
+          const cacheKey = `orderbook:${token.token_id}`;
+          const book = await cache.getOrSet(
+            cacheKey,
+            () => fetchOrderBook(token.token_id),
+            CACHE_TTL,
+          );
+          return { outcome: token.outcome, tokenId: token.token_id, book };
+        }),
+      );
+
+      // Susun response per outcome
+      const orderbook: Record<
+        string,
+        {
+          tokenId: string;
+          bids: Array<{ price: number; size: number }>;
+          asks: Array<{ price: number; size: number }>;
+          timestamp: string;
+        }
+      > = {};
+
+      results.forEach((result) => {
+        if (result.status === "fulfilled") {
+          const { outcome, tokenId, book } = result.value;
+          orderbook[outcome] = {
+            tokenId,
+            bids: book.bids.slice(0, 15).map((b) => ({
+              price: parseFloat(b.price),
+              size: parseFloat(b.size),
+            })),
+            asks: book.asks.slice(0, 15).map((a) => ({
+              price: parseFloat(a.price),
+              size: parseFloat(a.size),
+            })),
+            timestamp: book.timestamp,
+          };
+        }
+      });
+
+      res.json({
+        data: orderbook,
+        marketId: req.params.marketId,
+        outcomes: Object.keys(orderbook),
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+export default router;
+
+user.ts
+import { Router, Request, Response, NextFunction } from "express";
+import { string, z } from "zod";
+import prisma from "../utils/prisma";
+import { requireAuth } from "../middleware/auth";
+import { fetchUserPositions } from "../services/polymarket.service";
+
+const router = Router();
+
+// Semua route di bawah ini wajib login (JWT)
+router.use(requireAuth);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/user/portfolio
+// Posisi trading user + stats portfolio (total value, P&L)
+// Jika user punya wallet address → fetch juga posisi real dari Polymarket
+// ─────────────────────────────────────────────────────────────────────────────
+router.get(
+  "/portfolio",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // Prisma ORM — include relations
+      const user = await prisma.user.findUnique({
+        where: { id: req.user!.userId },
+        include: {
+          positions: {
+            include: { market: true },
+            orderBy: { updatedAt: "desc" },
+          },
+        },
+      });
+
+      if (!user) {
+        res.status(404).json({ error: "User not found" });
+        return;
+      }
+
+      // Hitung total value dan P&L dari posisi Aurora (simulated)
+      const totalValue = user.positions.reduce((sum, pos) => {
+        return (
+          sum +
+          parseFloat(pos.shares.toString()) *
+            parseFloat(pos.currentPrice.toString())
+        );
+      }, 0);
+
+      const totalCost = user.positions.reduce((sum, pos) => {
+        return (
+          sum +
+          parseFloat(pos.shares.toString()) *
+            parseFloat(pos.avgPrice.toString())
+        );
+      }, 0);
+
+      const pnl = totalValue - totalCost;
+      const pnlPercent = totalCost > 0 ? (pnl / totalCost) * 100 : 0;
+
+      // Fetch posisi real dari Polymarket jika user punya wallet
+      let polymarketPositions: unknown[] = [];
+      if (user.walletAddress) {
+        try {
+          polymarketPositions = await fetchUserPositions(user.walletAddress);
+        } catch {
+          // Non-fatal — lanjut dengan data simulasi saja
+        }
+      }
+
+      res.json({
+        data: {
+          balance: user.balance,
+          totalValue: totalValue.toFixed(2),
+          pnl: pnl.toFixed(2),
+          pnlPercent: pnlPercent.toFixed(2),
+          positionCount: user.positions.length,
+          positions: user.positions.map((pos) => ({
+            id: pos.id,
+            market: {
+              id: pos.market.id,
+              question: pos.market.question,
+              category: pos.market.category,
+              imageUrl: pos.market.imageUrl,
+            },
+            outcome: pos.outcome,
+            shares: pos.shares,
+            avgPrice: pos.avgPrice,
+            currentPrice: pos.currentPrice,
+            value: (
+              parseFloat(pos.shares.toString()) *
+              parseFloat(pos.currentPrice.toString())
+            ).toFixed(2),
+            pnl: (
+              (parseFloat(pos.currentPrice.toString()) -
+                parseFloat(pos.avgPrice.toString())) *
+              parseFloat(pos.shares.toString())
+            ).toFixed(2),
+            color: pos.color,
+            isSimulated: pos.isSimulated,
+          })),
+          polymarketPositions,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/user/activity
+// Histori transaksi user — deposit, withdrawal, trade
+// Query: limit (default 20), type (DEPOSIT|WITHDRAWAL|TRADE|WALLET_CONNECT)
+// ─────────────────────────────────────────────────────────────────────────────
+const activityQuerySchema = z.object({
+  limit: z.coerce.number().min(1).max(100).default(20),
+  type: z.enum(["DEPOSIT", "WITHDRAWAL", "TRADE", "WALLET_CONNECT"]).optional(),
+});
+
+router.get(
+  "/activity",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { limit, type } = activityQuerySchema.parse(req.query);
+
+      // Prisma ORM query dengan filter opsional
+      const transactions = await prisma.transaction.findMany({
+        where: {
+          userId: req.user!.userId,
+          ...(type && { type }),
+        },
+        orderBy: { createdAt: "desc" },
+        take: limit,
+      });
+
+      res.json({ data: transactions, total: transactions.length });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POST /api/user/deposit
+// Simulated deposit — tambah balance demo user
+// Body: { amount, method }
+// ─────────────────────────────────────────────────────────────────────────────
+const depositSchema = z.object({
+  amount: z.number().positive().max(100000),
+  method: z.enum(["card", "bank"]).default("card"),
+});
+
+router.post(
+  "/deposit",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { amount, method } = depositSchema.parse(req.body);
+
+      // Prisma $transaction — atomic: update balance + buat record transaksi
+      const [updatedUser] = await prisma.$transaction([
+        prisma.user.update({
+          where: { id: req.user!.userId },
+          data: { balance: { increment: amount } },
+        }),
+        prisma.transaction.create({
+          data: {
+            userId: req.user!.userId,
+            type: "DEPOSIT",
+            amount,
+            description: `Deposit via ${method.toUpperCase()}`,
+            status: "COMPLETED",
+            metadata: { method, simulated: true },
+          },
+        }),
+      ]);
+
+      res.json({
+        message: "Deposit successful (Demo Mode)",
+        newBalance: updatedUser.balance,
+        amount,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POST /api/user/withdraw
+// Simulated withdrawal — kurangi balance demo user
+// Body: { amount, walletAddress? }
+// ─────────────────────────────────────────────────────────────────────────────
+const withdrawSchema = z.object({
+  amount: z.number().positive(),
+  walletAddress: z.string().optional(),
+});
+
+router.post(
+  "/withdraw",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { amount, walletAddress } = withdrawSchema.parse(req.body);
+
+      // Cek balance dulu — Prisma ORM
+      const user = await prisma.user.findUnique({
+        where: { id: req.user!.userId },
+      });
+
+      if (!user) {
+        res.status(404).json({ error: "User not found" });
+        return;
+      }
+
+      if (parseFloat(user.balance.toString()) < amount) {
+        res.status(400).json({ error: "Insufficient balance" });
+        return;
+      }
+
+      // Prisma $transaction — atomic
+      const [updatedUser] = await prisma.$transaction([
+        prisma.user.update({
+          where: { id: req.user!.userId },
+          data: { balance: { decrement: amount } },
+        }),
+        prisma.transaction.create({
+          data: {
+            userId: req.user!.userId,
+            type: "WITHDRAWAL",
+            amount,
+            description: `Withdrawal to ${walletAddress || "wallet"}`,
+            status: "COMPLETED",
+            metadata: { walletAddress: walletAddress || null, simulated: true },
+          },
+        }),
+      ]);
+
+      res.json({
+        message: "Withdrawal successful (Demo Mode)",
+        newBalance: updatedUser.balance,
+        amount,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/user/watchlist
+// Daftar market yang di-bookmark user
+// ─────────────────────────────────────────────────────────────────────────────
+router.get(
+  "/watchlist",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // Prisma ORM dengan include (JOIN ke market)
+      const watchlist = await prisma.watchlist.findMany({
+        where: { userId: req.user!.userId },
+        include: { market: true },
+        orderBy: { createdAt: "desc" },
+      });
+
+      res.json({ data: watchlist.map((w) => w.market) });
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POST /api/user/watchlist/:marketId
+// Toggle watchlist — tambah jika belum ada, hapus jika sudah ada
+// ─────────────────────────────────────────────────────────────────────────────
+router.post(
+  "/watchlist/:marketId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { marketId } = req.params;
+
+      // Cek apakah market ada di DB via Prisma
+      const market = await prisma.market.findUnique({
+        where: { id: marketId as string },
+      });
+      if (!market) {
+        res.status(404).json({ error: "Market not found" });
+        return;
+      }
+
+      // Cek apakah sudah ada di watchlist
+      const existing = await prisma.watchlist.findUnique({
+        where: {
+          userId_marketId: {
+            userId: req.user!.userId,
+            marketId: marketId as string,
+          },
+        },
+      });
+
+      if (existing) {
+        // Hapus dari watchlist
+        await prisma.watchlist.delete({ where: { id: existing.id } });
+        res.json({ saved: false, message: "Removed from watchlist" });
+      } else {
+        // Tambah ke watchlist
+        await prisma.watchlist.create({
+          data: { userId: req.user!.userId, marketId: marketId as string },
+        });
+        res.json({ saved: true, message: "Added to watchlist" });
+      }
+    } catch (err) {
+      next(err);
+    }
+  },
+);
+
+export default router;
+
+-services
+market.service.ts
+// ─────────────────────────────────────────────────────────────────────────────
+// src/services/market.service.ts
+// Aurora Backend — Market Business Logic
+//
+// Category mapping ke Polymarket Tag IDs:
+//   All          → no tag filter (semua)
+//   Politics     → tag_id: 2
+//   Crypto       → tag_id: 21
+//   Economy      → tag_id: 120  (Finance/Economy)
+//   Sports       → tag_id: 100639
+//   Technology   → tag_id: 1401
+//   Culture      → tag_id: 596
+//
+// Dynamic categories (tidak ada tag_id, dicompute dari data):
+//   Trending     → default sort API (sudah trending/volume)
+//   Breaking     → pergerakan harga terbesar 24 jam (competitive score / volume24h spike)
+//   EndingSoon   → endDate dalam 24–48 jam ke depan
+//   HighestVolume→ sort by volume total descending
+//   New          → event.new === true atau baru dibuat
+// ─────────────────────────────────────────────────────────────────────────────
+
+import prisma from "../utils/prisma";
+import { cache } from "../utils/cache";
+import { logger } from "../utils/logger";
+import {
+  fetchGammaEvents,
+  fetchGammaEventBySlug,
+  fetchGammaMarketByConditionId,
+  fetchGammaMarketBySlug,
+  fetchGammaSearch,
+  fetchEndingSoonEvents,
+  fetchTokenPricesViaWS,
+  POLYMARKET_TAG_IDS,
+  type GammaEvent,
+  type GammaEventMarket,
+  type AuroraMarket,
+} from "./polymarket.service";
+
+const CACHE_TTL = parseInt(process.env.CACHE_MARKETS_TTL || "60");
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CATEGORY → TAG_ID MAP
+// ─────────────────────────────────────────────────────────────────────────────
+const CATEGORY_TAG_MAP: Record<string, number | undefined> = {
+  All: undefined,
+  Trending: undefined,
+  Breaking: undefined,
+  EndingSoon: undefined,
+  HighestVolume: undefined,
+  New: undefined,
+  Politics: POLYMARKET_TAG_IDS.Politics, // 2
+  Crypto: POLYMARKET_TAG_IDS.Crypto, // 21
+  Economy: POLYMARKET_TAG_IDS.Economy, // 120
+  Sports: POLYMARKET_TAG_IDS.Sports, // 100639
+  Technology: POLYMARKET_TAG_IDS.Technology, // 1401
+  Culture: POLYMARKET_TAG_IDS.Culture, // 596
+};
+
+const BLACKLIST_TAGS = ["Recurring", "Hide From New"];
+const MIN_REMAINING_MS = 60 * 60 * 1000; // 1 jam
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: parseJsonArray
+// ─────────────────────────────────────────────────────────────────────────────
+function parseJsonArray<T>(raw: string | T[] | undefined | null): T[] {
+  if (!raw) return [];
+  if (Array.isArray(raw)) return raw;
+  try {
+    const parsed = JSON.parse(raw as string);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: safeFloat
+// ─────────────────────────────────────────────────────────────────────────────
+function safeFloat(val: string | number | undefined | null): number {
+  if (val === undefined || val === null) return 0;
+  const n = typeof val === "number" ? val : parseFloat(String(val));
+  return isNaN(n) ? 0 : n;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: buildOutcomePrices
+// ─────────────────────────────────────────────────────────────────────────────
+function buildOutcomePrices(
+  outcomesRaw: string,
+  pricesRaw: string,
+): Record<string, number> {
+  const outcomes = parseJsonArray<string>(outcomesRaw);
+  const prices = parseJsonArray<string>(pricesRaw);
+  const result: Record<string, number> = {};
+  outcomes.forEach((outcome, i) => {
+    result[outcome] = safeFloat(prices[i]);
+  });
+  return result;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: buildTokens
+// ─────────────────────────────────────────────────────────────────────────────
+function buildTokens(
+  clobTokenIdsRaw: string,
+  outcomesRaw: string,
+): Array<{ token_id: string; outcome: string }> {
+  const tokenIds = parseJsonArray<string>(clobTokenIdsRaw);
+  const outcomes = parseJsonArray<string>(outcomesRaw);
+  return tokenIds.map((token_id, i) => ({
+    token_id,
+    outcome: outcomes[i] ?? (i === 0 ? "Yes" : "No"),
+  }));
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: mapTagsToCategory
+// Mapping tag labels ke Aurora category
+// ─────────────────────────────────────────────────────────────────────────────
+function mapTagsToCategory(tags: string[], rawCategory?: string): string {
+  const allText = [...tags, rawCategory ?? ""].join(" ").toLowerCase();
+
+  if (
+    allText.includes("crypto") ||
+    allText.includes("bitcoin") ||
+    allText.includes("ethereum") ||
+    allText.includes("defi") ||
+    allText.includes("blockchain") ||
+    allText.includes("nft") ||
+    allText.includes("btc") ||
+    allText.includes("eth") ||
+    allText.includes("solana") ||
+    allText.includes("xrp") ||
+    allText.includes("doge") ||
+    allText.includes("bnb") ||
+    allText.includes("altcoin")
+  )
+    return "Crypto";
+
+  if (
+    allText.includes("politics") ||
+    allText.includes("elections") ||
+    allText.includes("government") ||
+    allText.includes("trump") ||
+    allText.includes("president") ||
+    allText.includes("congress") ||
+    allText.includes("senate") ||
+    allText.includes("geopolit") ||
+    allText.includes("war") ||
+    allText.includes("iran") ||
+    allText.includes("russia") ||
+    allText.includes("nato") ||
+    allText.includes("tariff") ||
+    allText.includes("sanction") ||
+    allText.includes("military") ||
+    allText.includes("ceasefire") ||
+    allText.includes("election") ||
+    allText.includes("vote") ||
+    allText.includes("democrat") ||
+    allText.includes("republican")
+  )
+    return "Politics";
+
+  if (
+    allText.includes("sports") ||
+    allText.includes("nba") ||
+    allText.includes("nfl") ||
+    allText.includes("nhl") ||
+    allText.includes("mlb") ||
+    allText.includes("soccer") ||
+    allText.includes("football") ||
+    allText.includes("tennis") ||
+    allText.includes("ufc") ||
+    allText.includes("mma") ||
+    allText.includes("golf") ||
+    allText.includes("esports") ||
+    allText.includes("dota 2") ||
+    allText.includes("formula 1") ||
+    allText.includes("formula e") ||
+    allText.includes("f1 ") ||
+    allText.includes("premier league") ||
+    allText.includes("champions league") ||
+    allText.includes("ncaa") ||
+    allText.includes("wnba") ||
+    allText.includes("serie a") ||
+    allText.includes("bundesliga") ||
+    allText.includes("la liga") ||
+    allText.includes("ligue 1") ||
+    allText.includes("baseball") ||
+    allText.includes("basketball") ||
+    allText.includes("cricket") ||
+    allText.includes("rugby")
+  )
+    return "Sports";
+
+  if (
+    allText.includes("economy") ||
+    allText.includes("economic") ||
+    allText.includes("finance") ||
+    allText.includes("financial") ||
+    allText.includes("stock") ||
+    allText.includes("fed rate") ||
+    allText.includes("interest rate") ||
+    allText.includes("inflation") ||
+    allText.includes("gdp") ||
+    allText.includes("recession") ||
+    allText.includes("forex") ||
+    allText.includes("bond") ||
+    allText.includes("treasury") ||
+    allText.includes("ipo") ||
+    allText.includes("s&p") ||
+    allText.includes("nasdaq") ||
+    allText.includes("dow jones") ||
+    allText.includes("federal reserve") ||
+    allText.includes("unemployment") ||
+    allText.includes("trade war") ||
+    allText.includes("tariff")
+  )
+    return "Economy";
+
+  if (
+    allText.includes("technology") ||
+    allText.includes("tech") ||
+    allText.includes("ai ") ||
+    allText.includes("artificial intelligence") ||
+    allText.includes("openai") ||
+    allText.includes("chatgpt") ||
+    allText.includes("apple") ||
+    allText.includes("google") ||
+    allText.includes("microsoft") ||
+    allText.includes("meta ") ||
+    allText.includes("tesla") ||
+    allText.includes("nvidia") ||
+    allText.includes("startup") ||
+    allText.includes("software") ||
+    allText.includes("hardware") ||
+    allText.includes("chip") ||
+    allText.includes("semiconductor")
+  )
+    return "Technology";
+
+  if (
+    allText.includes("culture") ||
+    allText.includes("entertainment") ||
+    allText.includes("celebrity") ||
+    allText.includes("movie") ||
+    allText.includes("music") ||
+    allText.includes("award") ||
+    allText.includes("oscar") ||
+    allText.includes("grammy") ||
+    allText.includes("tv show") ||
+    allText.includes("netflix") ||
+    allText.includes("pop culture") ||
+    allText.includes("viral") ||
+    allText.includes("meme") ||
+    allText.includes("game show") ||
+    allText.includes("reality tv")
+  )
+    return "Culture";
+
+  return "Trending";
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: isRecurringMarket
+// Hapus market yang berulang setiap 5 menit / 1 jam (noise)
+// ─────────────────────────────────────────────────────────────────────────────
+function isRecurringMarket(
+  market: GammaEventMarket,
+  tagLabels: string[],
+): boolean {
+  if (tagLabels.some((tag) => BLACKLIST_TAGS.includes(tag))) return true;
+  const slug = (market.slug || "").toLowerCase();
+  return [
+    /[-_]5m[-_\d]/,
+    /[-_]15m[-_\d]/,
+    /[-_]1h[-_\d]/,
+    /[-_]6h[-_\d]/,
+    /updown-\d+m/,
+    /up-or-down.*\d+[mh]-/,
+  ].some((p) => p.test(slug));
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: shouldShowMarket
+// ─────────────────────────────────────────────────────────────────────────────
+function shouldShowMarket(
+  market: GammaEventMarket,
+  category: string,
+  now: Date,
+): boolean {
+  const volume = safeFloat(market.volume);
+  const volume24h = safeFloat(market.volume24hr);
+  const liquidity = safeFloat(market.liquidity);
+
+  if (market.endDate) {
+    const remaining = new Date(market.endDate).getTime() - now.getTime();
+    if (remaining > 0 && remaining < MIN_REMAINING_MS) return false;
+  }
+
+  if (category === "Sports") {
+    if (volume === 0 && volume24h === 0 && liquidity < 10) return false;
+    if (
+      (market.question || "").toLowerCase().startsWith("spread:") &&
+      liquidity < 10
+    )
+      return false;
+  }
+
+  if (category === "Trending" || category === "All") {
+    if (volume === 0 && volume24h === 0 && liquidity === 0) return false;
+  }
+
+  return true;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: transformEventMarket
+// ─────────────────────────────────────────────────────────────────────────────
+function transformEventMarket(
+  market: GammaEventMarket,
+  event: GammaEvent,
+): AuroraMarket {
+  const outcomePrices = buildOutcomePrices(
+    market.outcomes,
+    market.outcomePrices,
+  );
+  const tokens = buildTokens(market.clobTokenIds, market.outcomes);
+  const priceValues = Object.values(outcomePrices);
+  const spread =
+    priceValues.length >= 2
+      ? parseFloat(Math.abs(priceValues[0] - priceValues[1]).toFixed(6))
+      : null;
+
+  const eventTagLabels = (event.tags ?? []).map((t) => t.label ?? t.slug ?? "");
+  const marketTagLabels = (market.tags ?? []).map(
+    (t) => t.label ?? t.slug ?? "",
+  );
+  const allTagLabels = [...new Set([...eventTagLabels, ...marketTagLabels])];
+
+  return {
+    id: market.conditionId || market.id,
+    polymarketId: market.id,
+    slug: market.slug || market.id,
+    eventSlug: event.slug,
+    question: market.question || "Unknown Market",
+    description: market.description || null,
+    category: mapTagsToCategory(allTagLabels, event.category),
+    tags: allTagLabels,
+    outcomes: parseJsonArray<string>(market.outcomes),
+    outcomePrices,
+    tokens,
+    volume: safeFloat(market.volume) || safeFloat(event.volume),
+    volume24h: safeFloat(market.volume24hr) || safeFloat(event.volume24hr),
+    liquidity: safeFloat(market.liquidity) || safeFloat(event.liquidity),
+    spread,
+    active: market.active ?? true,
+    closed: market.closed ?? false,
+    featured: event.featured ?? false,
+    isNew: event.new ?? false,
+    imageUrl: market.image || event.image || null,
+    icon: market.icon || event.icon || null,
+    endDate: market.endDate ? new Date(market.endDate) : null,
+    startDate: market.startDate ? new Date(market.startDate) : null,
+    eventId: event.id,
+    lastSyncedAt: new Date(),
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper: enrichWithRealPrices
+// Enrich market prices via CLOB WebSocket untuk akurasi real-time
+// ─────────────────────────────────────────────────────────────────────────────
+async function enrichWithRealPrices(
+  markets: AuroraMarket[],
+): Promise<AuroraMarket[]> {
+  const tokenIds: string[] = [];
+  markets.forEach((market) => {
+    market.tokens.forEach((token) => {
+      if (token.token_id && token.token_id.length > 10)
+        tokenIds.push(token.token_id);
+    });
+  });
+
+  if (tokenIds.length === 0) return markets;
+
+  logger.debug(`Enriching ${tokenIds.length} tokens via CLOB WebSocket...`);
+
+  try {
+    const priceMap = await fetchTokenPricesViaWS(tokenIds, 8000);
+    if (priceMap.size === 0) {
+      logger.debug("WS returned no prices, using Gamma prices");
+      return markets;
+    }
+
+    markets.forEach((market) => {
+      let updated = false;
+      const newPrices = { ...market.outcomePrices };
+      market.tokens.forEach((token) => {
+        const snap = priceMap.get(token.token_id);
+        if (!snap) return;
+        const spreadVal = snap.bestAsk - snap.bestBid;
+        const displayPrice = spreadVal < 0.02 ? snap.midpoint : snap.lastPrice;
+        if (displayPrice > 0) {
+          newPrices[token.outcome] = parseFloat(displayPrice.toFixed(4));
+          updated = true;
+        }
+      });
+      if (updated) {
+        market.outcomePrices = newPrices;
+        const vals = Object.values(newPrices);
+        market.spread =
+          vals.length >= 2
+            ? parseFloat(Math.abs(vals[0] - vals[1]).toFixed(6))
+            : null;
+      }
+    });
+
+    logger.debug(`WS enriched prices for ${priceMap.size} tokens`);
+  } catch (err) {
+    logger.warn(
+      `WS price enrichment failed, using Gamma prices: ${(err as Error).message}`,
+    );
+  }
+
+  return markets;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Shared: processEvents
+// Process array of GammaEvent → filter → transform → AuroraMarket[]
+// ─────────────────────────────────────────────────────────────────────────────
+function processEvents(
+  events: GammaEvent[],
+  category: string,
+  now: Date,
+  seenIds?: Set<string>,
+): AuroraMarket[] {
+  const markets: AuroraMarket[] = [];
+  const ids = seenIds ?? new Set<string>();
+
+  events.forEach((event) => {
+    if (!event.markets || event.markets.length === 0) return;
+    if (event.closed || event.archived) return;
+
+    event.markets.forEach((market) => {
+      if (!market.active || market.closed) return;
+
+      const eventTagLabels = (event.tags ?? []).map(
+        (t) => t.label ?? t.slug ?? "",
+      );
+      const marketTagLabels = (market.tags ?? []).map(
+        (t) => t.label ?? t.slug ?? "",
+      );
+      const tagLabels = [...new Set([...eventTagLabels, ...marketTagLabels])];
+
+      if (isRecurringMarket(market, tagLabels)) return;
+
+      // Sports: skip yang sudah expired
+      if (category === "Sports" && market.endDate) {
+        if (new Date(market.endDate) < now) return;
+      }
+
+      // Skip expired + zero volume
+      const endDate = market.endDate ? new Date(market.endDate) : null;
+      if (endDate && endDate < now && safeFloat(market.volume24hr) === 0)
+        return;
+
+      if (!shouldShowMarket(market, category, now)) return;
+
+      const transformed = transformEventMarket(market, event);
+      if (!ids.has(transformed.id)) {
+        ids.add(transformed.id);
+        markets.push(transformed);
+      }
+    });
+  });
+
+  return markets;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// getMarkets
+// Main entry point untuk fetch market berdasarkan category
+// ─────────────────────────────────────────────────────────────────────────────
+export async function getMarkets(params?: {
+  category?: string;
+  limit?: number;
+  offset?: number;
+  search?: string;
+}): Promise<AuroraMarket[]> {
+  const cacheKey = `markets:${JSON.stringify(params || {})}`;
+
+  return cache.getOrSet(
+    cacheKey,
+    async () => {
+      const limit = params?.limit ?? 20;
+      const offset = params?.offset ?? 0;
+      const category = params?.category ?? "Trending";
+
+      let events: GammaEvent[];
+      const now = new Date();
+
+      // ── Search ─────────────────────────────────────────────────────────────
+      if (params?.search) {
+        events = await fetchGammaSearch(params.search, 50);
+        const markets = processEvents(events, "All", now);
+        return enrichWithRealPrices(markets.slice(offset, offset + limit));
+      }
+
+      // ── Breaking ───────────────────────────────────────────────────────────
+      // Market yang mengalami pergerakan/aktivitas terbesar 24 jam terakhir
+      // Implementasi: sort by volume24h DESC + competitive score
+      if (category === "Breaking") {
+        events = await fetchGammaEvents({
+          limit: 100,
+          closed: false,
+          // Tidak ada order param — filter client-side by volume24h spike
+        });
+        const allMarkets = processEvents(events, "Breaking", now);
+        // Sort by volume24h DESC — pasar dengan aktivitas terbesar = "breaking"
+        const sorted = allMarkets
+          .filter((m) => m.volume24h > 0)
+          .sort((a, b) => b.volume24h - a.volume24h);
+        return enrichWithRealPrices(sorted.slice(offset, offset + limit));
+      }
+
+      // ── Ending Soon ────────────────────────────────────────────────────────
+      // Market yang berakhir dalam 48 jam ke depan, sort by endDate ASC
+      if (category === "EndingSoon") {
+        // Coba API-level filter dulu
+        let endingSoonEvents = await fetchEndingSoonEvents(48, 100);
+
+        // Fallback: fetch general dan filter client-side
+        if (endingSoonEvents.length < 5) {
+          const fallback = await fetchGammaEvents({
+            limit: 100,
+            closed: false,
+          });
+          endingSoonEvents = [...endingSoonEvents, ...fallback];
+        }
+
+        const allMarkets = processEvents(endingSoonEvents, "EndingSoon", now);
+        const deadline = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+
+        const filtered = allMarkets
+          .filter((m) => {
+            if (!m.endDate) return false;
+            return m.endDate > now && m.endDate <= deadline;
+          })
+          .sort((a, b) => {
+            if (!a.endDate || !b.endDate) return 0;
+            return a.endDate.getTime() - b.endDate.getTime(); // terkecil dulu
+          });
+
+        return enrichWithRealPrices(filtered.slice(offset, offset + limit));
+      }
+
+      // ── Highest Volume ─────────────────────────────────────────────────────
+      // Market dengan total trading volume terbesar sepanjang waktu
+      if (category === "HighestVolume") {
+        events = await fetchGammaEvents({
+          limit: 100,
+          closed: false,
+          // Default API tidak ada order yang eksak untuk volume
+          // sort client-side lebih reliable
+        });
+        const allMarkets = processEvents(events, "HighestVolume", now);
+        const sorted = allMarkets.sort((a, b) => b.volume - a.volume);
+        return enrichWithRealPrices(sorted.slice(offset, offset + limit));
+      }
+
+      // ── New ────────────────────────────────────────────────────────────────
+      if (category === "New") {
+        events = await fetchGammaEvents({
+          limit: Math.min(limit + offset + 40, 100),
+          closed: false,
+        });
+        const newEvents = events.filter((e) => e.new === true);
+        const sourceEvents = newEvents.length >= limit ? newEvents : events;
+        const allMarkets = processEvents(sourceEvents, "New", now);
+        const filtered = allMarkets.filter((m) => m.isNew);
+        const final = filtered.length >= limit ? filtered : allMarkets;
+        return enrichWithRealPrices(final.slice(offset, offset + limit));
+      }
+
+      // ── Sports ─────────────────────────────────────────────────────────────
+      if (category === "Sports") {
+        events = await fetchGammaEvents({
+          limit: Math.min(limit + offset + 60, 100),
+          closed: false,
+          tag_id: CATEGORY_TAG_MAP.Sports,
+          order: "startDate",
+          // ascending tidak dikirim (false = descending = terbaru dulu)
+        });
+        const allMarkets = processEvents(events, "Sports", now);
+        return enrichWithRealPrices(allMarkets.slice(offset, offset + limit));
+      }
+
+      // ── Trending ───────────────────────────────────────────────────────────
+      if (category === "Trending") {
+        events = await fetchGammaEvents({
+          limit: Math.min((limit + offset) * 2, 100),
+          closed: false,
+          // Default Polymarket API sudah sort by trending/volume
+        });
+        const allMarkets = processEvents(events, "Trending", now);
+        return enrichWithRealPrices(allMarkets.slice(offset, offset + limit));
+      }
+
+      // ── All ────────────────────────────────────────────────────────────────
+      if (category === "All") {
+        events = await fetchGammaEvents({
+          limit: Math.min((limit + offset) * 2, 100),
+          closed: false,
+        });
+        const allMarkets = processEvents(events, "All", now);
+        return enrichWithRealPrices(allMarkets.slice(offset, offset + limit));
+      }
+
+      // ── Static categories (Politics, Crypto, Economy, Technology, Culture) ─
+      const tagId = CATEGORY_TAG_MAP[category];
+      events = await fetchGammaEvents({
+        limit: Math.min((limit + offset) * 2, 100),
+        closed: false,
+        tag_id: tagId,
+        related_tags: true, // include related tags untuk coverage lebih luas
+        // Default sort API
+      });
+      const allMarkets = processEvents(events, category, now);
+      return enrichWithRealPrices(allMarkets.slice(offset, offset + limit));
+    },
+    CACHE_TTL,
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// getMarketDetail
+// Cari detail satu market — fallback chain:
+//   1. Event slug → 2. Condition ID → 3. Market slug → 4. DB
+// ─────────────────────────────────────────────────────────────────────────────
+export async function getMarketDetail(
+  idOrSlug: string,
+): Promise<AuroraMarket | null> {
+  const cacheKey = `market:${idOrSlug}`;
+
+  return cache.getOrSet(
+    cacheKey,
+    async () => {
+      // 1. Coba via event slug
+      const event = await fetchGammaEventBySlug(idOrSlug);
+      if (event && event.markets?.length > 0) {
+        const result = transformEventMarket(event.markets[0], event);
+        const enriched = await enrichWithRealPrices([result]);
+        return enriched[0] ?? null;
+      }
+
+      // 2. Coba via condition ID
+      const marketById = await fetchGammaMarketByConditionId(idOrSlug);
+      if (marketById?.id) {
+        const dummyEvent: GammaEvent = {
+          id: marketById.id,
+          slug: idOrSlug,
+          title: marketById.question,
+          active: marketById.active,
+          closed: marketById.closed,
+          featured: false,
+          new: false,
+          volume: 0,
+          volume24hr: 0,
+          liquidity: 0,
+          tags: [],
+          markets: [marketById],
+        };
+        const result = transformEventMarket(marketById, dummyEvent);
+        const enriched = await enrichWithRealPrices([result]);
+        return enriched[0] ?? null;
+      }
+
+      // 3. Coba via market slug
+      const marketBySlug = await fetchGammaMarketBySlug(idOrSlug);
+      if (marketBySlug?.id) {
+        const dummyEvent: GammaEvent = {
+          id: marketBySlug.id,
+          slug: idOrSlug,
+          title: marketBySlug.question,
+          active: marketBySlug.active,
+          closed: marketBySlug.closed,
+          featured: false,
+          new: false,
+          volume: 0,
+          volume24hr: 0,
+          liquidity: 0,
+          tags: [],
+          markets: [marketBySlug],
+        };
+        const result = transformEventMarket(marketBySlug, dummyEvent);
+        const enriched = await enrichWithRealPrices([result]);
+        return enriched[0] ?? null;
+      }
+
+      // 4. Last resort: DB
+      logger.info(`Last resort — checking DB for: ${idOrSlug}`);
+      const dbMarket = await prisma.market.findFirst({
+        where: {
+          OR: [
+            { id: idOrSlug },
+            { slug: idOrSlug },
+            { polymarketId: idOrSlug },
+          ],
+        },
+      });
+      return (dbMarket as unknown as AuroraMarket) ?? null;
+    },
+    CACHE_TTL,
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// syncMarketsFromPolymarket
+// Sync semua category ke DB — dijalankan oleh cron job
+// ─────────────────────────────────────────────────────────────────────────────
+export async function syncMarketsFromPolymarket(): Promise<{
+  count: number;
+  duration: number;
+}> {
+  const startTime = Date.now();
+  let count = 0;
+
+  try {
+    logger.info("⏳ Syncing markets to DB via /events endpoint...");
+
+    const allMarkets: AuroraMarket[] = [];
+    const seenIds = new Set<string>();
+
+    const syncCategoryConfig = [
+      { name: "Trending", tagId: undefined as number | undefined },
+      { name: "Politics", tagId: POLYMARKET_TAG_IDS.Politics },
+      { name: "Crypto", tagId: POLYMARKET_TAG_IDS.Crypto },
+      { name: "Economy", tagId: POLYMARKET_TAG_IDS.Economy },
+      { name: "Sports", tagId: POLYMARKET_TAG_IDS.Sports },
+      { name: "Technology", tagId: POLYMARKET_TAG_IDS.Technology },
+      { name: "Culture", tagId: POLYMARKET_TAG_IDS.Culture },
+    ];
+
+    for (const cat of syncCategoryConfig) {
+      try {
+        const events = await fetchGammaEvents({
+          limit: 100,
+          closed: false,
+          ...(cat.tagId !== undefined && { tag_id: cat.tagId }),
+        });
+
+        events.forEach((event) => {
+          if (event.closed || event.archived) return;
+          const tagLabels = (event.tags ?? []).map(
+            (t) => t.label ?? t.slug ?? "",
+          );
+          event.markets?.forEach((m) => {
+            if (!m.active || m.closed) return;
+            if (isRecurringMarket(m, tagLabels)) return;
+            const market = transformEventMarket(m, event);
+            if (!seenIds.has(market.id)) {
+              seenIds.add(market.id);
+              allMarkets.push(market);
+            }
+          });
+        });
+
+        logger.debug(`${cat.name} sync: fetched events`);
+      } catch (err) {
+        logger.warn(`Failed ${cat.name} fetch: ${(err as Error).message}`);
+      }
+    }
+
+    logger.info(`Processing ${allMarkets.length} unique markets...`);
+
+    // Step 1: Upsert Events (FK constraint)
+    const uniqueEvents = new Map<string, AuroraMarket>();
+    allMarkets.forEach((m) => {
+      if (m.eventId && !uniqueEvents.has(m.eventId))
+        uniqueEvents.set(m.eventId, m);
+    });
+
+    await Promise.allSettled(
+      Array.from(uniqueEvents.values()).map((m) =>
+        prisma.event.upsert({
+          where: { id: m.eventId! },
+          create: {
+            id: m.eventId!,
+            slug: m.eventSlug || m.eventId!,
+            title: m.question,
+            description: m.description,
+            category: m.category,
+            imageUrl: m.imageUrl,
+            startDate: m.startDate,
+            endDate: m.endDate,
+            active: m.active,
+            closed: m.closed,
+          },
+          update: { active: m.active, closed: m.closed },
+        }),
+      ),
+    );
+    logger.debug(`Upserted ${uniqueEvents.size} events to DB`);
+
+    // Step 2: Upsert Markets
+    const results = await Promise.allSettled(
+      allMarkets.map(async (d) => {
+        const updateData = {
+          question: d.question,
+          category: d.category,
+          tags: d.tags,
+          outcomePrices: d.outcomePrices,
+          tokens: d.tokens,
+          volume: d.volume,
+          volume24h: d.volume24h,
+          liquidity: d.liquidity,
+          spread: d.spread,
+          active: d.active,
+          closed: d.closed,
+          featured: d.featured,
+          isNew: d.isNew,
+          lastSyncedAt: new Date(),
+        };
+
+        const updated = await prisma.market.updateMany({
+          where: { polymarketId: d.polymarketId },
+          data: updateData,
+        });
+
+        if (updated.count === 0) {
+          const [idExists, slugExists] = await Promise.all([
+            prisma.market.findUnique({
+              where: { id: d.id },
+              select: { id: true },
+            }),
+            prisma.market.findUnique({
+              where: { slug: d.slug },
+              select: { id: true },
+            }),
+          ]);
+          if (idExists || slugExists) return "skipped";
+
+          await prisma.market.create({
+            data: {
+              id: d.id,
+              polymarketId: d.polymarketId,
+              slug: d.slug,
+              question: d.question,
+              description: d.description,
+              category: d.category,
+              tags: d.tags,
+              outcomes: d.outcomes,
+              outcomePrices: d.outcomePrices,
+              tokens: d.tokens,
+              volume: d.volume,
+              volume24h: d.volume24h,
+              liquidity: d.liquidity,
+              spread: d.spread,
+              active: d.active,
+              closed: d.closed,
+              featured: d.featured,
+              isNew: d.isNew,
+              imageUrl: d.imageUrl,
+              icon: d.icon,
+              endDate: d.endDate,
+              startDate: d.startDate,
+              eventId: d.eventId ?? null,
+              lastSyncedAt: new Date(),
+            },
+          });
+          return "created";
+        }
+        return "updated";
+      }),
+    );
+
+    const succeeded = results.filter((r) => r.status === "fulfilled").length;
+    const failed = results.filter((r) => r.status === "rejected").length;
+    count = succeeded;
+
+    if (failed > 0) {
+      results
+        .filter((r): r is PromiseRejectedResult => r.status === "rejected")
+        .slice(0, 5)
+        .forEach((r) =>
+          logger.warn(`Upsert failed: ${r.reason?.message ?? r.reason}`),
+        );
+    }
+
+    cache.deleteByPrefix("markets:");
+    cache.deleteByPrefix("market:");
+
+    const duration = Date.now() - startTime;
+    logger.info(
+      `✅ Sync done: ${succeeded} saved | ${failed} failed | ${duration}ms`,
+    );
+
+    await prisma.syncLog.create({
+      data: { type: "markets", status: "success", count, duration },
+    });
+
+    return { count, duration };
+  } catch (err) {
+    const duration = Date.now() - startTime;
+    const message = err instanceof Error ? err.message : "Unknown error";
+    logger.error(`❌ Sync failed: ${message}`);
+    await prisma.syncLog.create({
+      data: {
+        type: "markets",
+        status: "failed",
+        count,
+        duration,
+        error: message,
+      },
+    });
+    throw err;
+  }
+}
+
+
+
+polymarket.service.ts
+// ─────────────────────────────────────────────────────────────────────────────
+// src/services/polymarket.service.ts
+// Aurora Backend — Polymarket API Integration
+//
+// API Endpoints:
+//   Gamma API  → https://gamma-api.polymarket.com  (market/event data)
+//   CLOB API   → https://clob.polymarket.com       (orderbook, price history)
+//   Data API   → https://data-api.polymarket.com   (user positions)
+//
+// Tag IDs resmi Polymarket (verified dari docs & safe-wallet-integration repo):
+//   Politics   = 2
+//   Crypto     = 21
+//   Economy    = 120    (Finance/Economy)
+//   Sports     = 100639
+//   Technology = 1401
+//   Culture    = 596
+//   Geopolitics = 100265
+// ─────────────────────────────────────────────────────────────────────────────
+
+import axios from "axios";
+import WebSocket from "ws";
+import { logger } from "../utils/logger";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Axios Clients
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const gammaClient = axios.create({
+  baseURL:
+    process.env.POLYMARKET_GAMMA_URL || "https://gamma-api.polymarket.com",
+  timeout: 15000,
+  headers: { Accept: "application/json" },
+});
+
+export const clobClient = axios.create({
+  baseURL: process.env.POLYMARKET_CLOB_URL || "https://clob.polymarket.com",
+  timeout: 15000,
+  headers: { Accept: "application/json" },
+});
+
+export const dataClient = axios.create({
+  baseURL: process.env.POLYMARKET_DATA_URL || "https://data-api.polymarket.com",
+  timeout: 15000,
+  headers: { Accept: "application/json" },
+});
+
+[gammaClient, clobClient, dataClient].forEach((client) => {
+  client.interceptors.response.use(
+    (res) => res,
+    (err) => {
+      const params = err.config?.params ?? {};
+      const qs = Object.entries(params)
+        .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
+        .join("&");
+      logger.error(`Polymarket API error: ${err.message}`, {
+        url: `${err.config?.baseURL ?? ""}${err.config?.url ?? ""}${qs ? `?${qs}` : ""}`,
+        status: err.response?.status,
+        body: JSON.stringify(err.response?.data ?? {}),
+      });
+      return Promise.reject(err);
+    },
+  );
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TYPES
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface GammaTag {
+  id: string;
+  label: string;
+  slug: string;
+}
+
+export interface GammaEventMarket {
+  id: string;
+  question: string;
+  conditionId: string;
+  slug: string;
+  resolutionSource?: string;
+  endDate?: string;
+  startDate?: string;
+  image?: string;
+  icon?: string;
+  description?: string;
+  outcomes: string; // JSON string: '["Yes","No"]'
+  outcomePrices: string; // JSON string: '["0.65","0.35"]'
+  volume: string; // string di market level (anomali API)
+  volume24hr: number;
+  liquidity: string; // string di market level (anomali API)
+  active: boolean;
+  closed: boolean;
+  archived?: boolean;
+  new?: boolean;
+  featured?: boolean;
+  marketType?: string;
+  clobTokenIds: string; // JSON string: '["tokenId1","tokenId2"]'
+  tokens?: Array<{ token_id: string; outcome: string }>;
+  tags?: GammaTag[];
+  enableOrderBook?: boolean;
+  spread?: number;
+  lastTradePrice?: number;
+  bestBid?: number;
+  bestAsk?: number;
+  competitive?: number;
+  gameStartTime?: string;
+  eventStartTime?: string;
+}
+
+export interface GammaEvent {
+  id: string;
+  slug: string;
+  title: string;
+  description?: string;
+  category?: string;
+  subcategory?: string;
+  image?: string;
+  icon?: string;
+  active: boolean;
+  closed: boolean;
+  archived?: boolean;
+  featured: boolean;
+  new: boolean;
+  restricted?: boolean;
+  volume: number;
+  volume24hr: number;
+  liquidity: number;
+  openInterest?: number;
+  tags: GammaTag[];
+  markets: GammaEventMarket[];
+  startDate?: string;
+  endDate?: string;
+  creationDate?: string;
+  sortBy?: string;
+  competitive?: number;
+  enableOrderBook?: boolean;
+}
+
+export interface AuroraMarket {
+  id: string;
+  polymarketId: string;
+  slug: string;
+  eventSlug: string;
+  question: string;
+  description: string | null;
+  category: string;
+  tags: string[];
+  outcomes: string[];
+  outcomePrices: Record<string, number>;
+  tokens: Array<{ token_id: string; outcome: string }>;
+  volume: number;
+  volume24h: number;
+  liquidity: number;
+  spread: number | null;
+  active: boolean;
+  closed: boolean;
+  featured: boolean;
+  isNew: boolean;
+  imageUrl: string | null;
+  icon: string | null;
+  endDate: Date | null;
+  startDate: Date | null;
+  eventId: string;
+  lastSyncedAt: Date;
+}
+
+export interface ClobOrderBook {
+  market: string;
+  asset_id: string;
+  bids: Array<{ price: string; size: string }>;
+  asks: Array<{ price: string; size: string }>;
+  hash: string;
+  timestamp: string;
+}
+
+export interface ClobPricePoint {
+  t: number;
+  p: number;
+}
+
+export interface PolymarketPosition {
+  market: string;
+  asset: string;
+  outcome: string;
+  size: number;
+  avg_price: number;
+  current_price: number;
+  value: number;
+  realized_pnl: number;
+  unrealized_pnl: number;
+}
+
+export interface TokenPriceSnapshot {
+  tokenId: string;
+  bestBid: number;
+  bestAsk: number;
+  lastPrice: number;
+  midpoint: number;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TAG IDs RESMI POLYMARKET
+// Source: https://github.com/Polymarket/safe-wallet-integration
+//         + verifikasi manual via /tags endpoint
+// ─────────────────────────────────────────────────────────────────────────────
+export const POLYMARKET_TAG_IDS = {
+  Politics: 2,
+  Crypto: 21,
+  Economy: 120, // Finance/Economy
+  Sports: 100639,
+  Technology: 1401,
+  Culture: 596,
+  Geopolitics: 100265,
+} as const;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// fetchGammaEvents
+// Parameter valid berdasarkan docs resmi Polymarket:
+//   - closed: boolean (filter event terbuka/tertutup)
+//   - tag_id: number (filter per kategori)
+//   - related_tags: boolean (include related tags)
+//   - order: string (nama field camelCase dari response)
+//   - ascending: boolean (arah sort, default false)
+//   - limit: number (max 100)
+//   - offset: number
+// ─────────────────────────────────────────────────────────────────────────────
+export async function fetchGammaEvents(params?: {
+  limit?: number;
+  offset?: number;
+  closed?: boolean;
+  tag_id?: number;
+  exclude_tag_id?: number;
+  related_tags?: boolean;
+  order?: string;
+  ascending?: boolean;
+  featured?: boolean;
+  slug?: string;
+  id?: number;
+  cyom?: boolean;
+  start_date_min?: string;
+  start_date_max?: string;
+  end_date_min?: string;
+  end_date_max?: string;
+  end_date_max_epoch?: number; // untuk Ending Soon filter
+}): Promise<GammaEvent[]> {
+  const reqParams: Record<string, unknown> = {
+    limit: Math.min(params?.limit ?? 20, 100),
+  };
+
+  if (params?.offset && params.offset > 0) reqParams.offset = params.offset;
+  if (params?.closed !== undefined) reqParams.closed = params.closed;
+  if (params?.order) reqParams.order = params.order;
+  if (params?.ascending === true) reqParams.ascending = true;
+  if (params?.tag_id !== undefined) reqParams.tag_id = params.tag_id;
+  if (params?.exclude_tag_id !== undefined)
+    reqParams.exclude_tag_id = params.exclude_tag_id;
+  if (params?.related_tags !== undefined)
+    reqParams.related_tags = params.related_tags;
+  if (params?.featured !== undefined) reqParams.featured = params.featured;
+  if (params?.slug !== undefined) reqParams.slug = params.slug;
+  if (params?.id !== undefined) reqParams.id = params.id;
+  if (params?.cyom !== undefined) reqParams.cyom = params.cyom;
+  if (params?.start_date_min) reqParams.start_date_min = params.start_date_min;
+  if (params?.start_date_max) reqParams.start_date_max = params.start_date_max;
+  if (params?.end_date_min) reqParams.end_date_min = params.end_date_min;
+  if (params?.end_date_max) reqParams.end_date_max = params.end_date_max;
+
+  logger.debug(`fetchGammaEvents params: ${JSON.stringify(reqParams)}`);
+
+  const { data } = await gammaClient.get<GammaEvent[]>("/events", {
+    params: reqParams,
+  });
+  return Array.isArray(data) ? data : [];
+}
+
+export async function fetchGammaEventBySlug(
+  slug: string,
+): Promise<GammaEvent | null> {
+  try {
+    const { data } = await gammaClient.get<GammaEvent[]>("/events", {
+      params: { slug },
+    });
+    return Array.isArray(data) && data.length > 0 ? data[0] : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchGammaMarketByConditionId(
+  conditionId: string,
+): Promise<GammaEventMarket | null> {
+  try {
+    const { data } = await gammaClient.get<GammaEventMarket>(
+      `/markets/${conditionId}`,
+    );
+    return data?.id ? data : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchGammaMarketBySlug(
+  slug: string,
+): Promise<GammaEventMarket | null> {
+  try {
+    const { data } = await gammaClient.get<GammaEventMarket[]>("/markets", {
+      params: { slug },
+    });
+    return Array.isArray(data) && data.length > 0 ? data[0] : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchGammaSearch(
+  term: string,
+  limit: number = 20,
+): Promise<GammaEvent[]> {
+  try {
+    const { data } = await gammaClient.get<GammaEvent[]>("/events", {
+      params: {
+        title_contains: term,
+        limit: Math.min(limit, 100),
+        closed: false,
+      },
+    });
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    logger.warn(`Search fetch failed: ${(err as Error).message}`);
+    return [];
+  }
+}
+
+// Fetch events yang berakhir dalam timeframe tertentu (untuk Ending Soon)
+export async function fetchEndingSoonEvents(
+  withinHours: number = 24,
+  limit: number = 50,
+): Promise<GammaEvent[]> {
+  const now = new Date();
+  const deadline = new Date(now.getTime() + withinHours * 60 * 60 * 1000);
+
+  try {
+    // Gunakan end_date_min & end_date_max untuk filter di API level
+    const { data } = await gammaClient.get<GammaEvent[]>("/events", {
+      params: {
+        limit,
+        closed: false,
+        end_date_min: now.toISOString(),
+        end_date_max: deadline.toISOString(),
+        order: "endDate",
+        ascending: true,
+      },
+    });
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    logger.warn(`Ending soon fetch failed: ${(err as Error).message}`);
+    return [];
+  }
+}
+
+export async function fetchClobPrice(tokenId: string): Promise<number | null> {
+  try {
+    const { data } = await clobClient.get<{ price: string }>(
+      "/last-trade-price",
+      { params: { token_id: tokenId } },
+    );
+    const price = parseFloat(data.price ?? "0");
+    return isNaN(price) ? null : price;
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchClobMidpoint(
+  tokenId: string,
+): Promise<number | null> {
+  try {
+    const { data } = await clobClient.get<{ mid: string }>("/midpoint", {
+      params: { token_id: tokenId },
+    });
+    const mid = parseFloat(data.mid ?? "0");
+    return isNaN(mid) ? null : mid;
+  } catch {
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// fetchTokenPricesViaWS
+// Real-time harga via Polymarket CLOB WebSocket
+// Timeout 8 detik — resolve dengan data yang sudah ada jika tidak semua token terpenuhi
+// ─────────────────────────────────────────────────────────────────────────────
+const WS_CLOB_URL = "wss://ws-subscriptions-clob.polymarket.com/ws/market";
+const WS_PING_INTERVAL_MS = 10_000;
+
+export function fetchTokenPricesViaWS(
+  tokenIds: string[],
+  timeoutMs = 8000,
+): Promise<Map<string, TokenPriceSnapshot>> {
+  return new Promise((resolve) => {
+    if (tokenIds.length === 0) {
+      resolve(new Map());
+      return;
+    }
+
+    const prices = new Map<string, TokenPriceSnapshot>();
+    let ws: WebSocket;
+    let pingTimer: NodeJS.Timeout;
+    let resolved = false;
+
+    const finish = () => {
+      if (resolved) return;
+      resolved = true;
+      clearTimeout(timeout);
+      clearInterval(pingTimer);
+      try {
+        ws.close();
+      } catch {
+        /* ignore */
+      }
+      resolve(prices);
+    };
+
+    const timeout = setTimeout(finish, timeoutMs);
+
+    try {
+      ws = new WebSocket(WS_CLOB_URL);
+    } catch (err) {
+      logger.warn(`WS init failed: ${(err as Error).message}`);
+      clearTimeout(timeout);
+      resolve(new Map());
+      return;
+    }
+
+    ws.on("open", () => {
+      ws.send(JSON.stringify({ assets_ids: tokenIds, type: "market" }));
+      pingTimer = setInterval(() => {
+        if (ws.readyState === WebSocket.OPEN) ws.send("PING");
+      }, WS_PING_INTERVAL_MS);
+    });
+
+    ws.on("message", (raw: Buffer) => {
+      try {
+        const msg = JSON.parse(raw.toString());
+        const eventType: string = msg.event_type;
+
+        if (eventType === "book") {
+          const assetId: string = msg.asset_id;
+          if (!tokenIds.includes(assetId)) return;
+          const bids: Array<{ price: string; size: string }> = msg.bids ?? [];
+          const asks: Array<{ price: string; size: string }> = msg.asks ?? [];
+          const bestBid = bids.length > 0 ? parseFloat(bids[0].price) : 0;
+          const bestAsk = asks.length > 0 ? parseFloat(asks[0].price) : 0;
+          const midpoint =
+            bestBid > 0 && bestAsk > 0 ? (bestBid + bestAsk) / 2 : 0;
+          prices.set(assetId, {
+            tokenId: assetId,
+            bestBid,
+            bestAsk,
+            lastPrice: midpoint,
+            midpoint,
+          });
+          if (prices.size >= tokenIds.length) finish();
+        } else if (eventType === "price_change") {
+          const changes: Array<{
+            asset_id: string;
+            best_bid: string;
+            best_ask: string;
+          }> = msg.price_changes ?? [];
+          changes.forEach((change) => {
+            const existing = prices.get(change.asset_id);
+            if (!existing) return;
+            const bestBid = parseFloat(change.best_bid ?? "0");
+            const bestAsk = parseFloat(change.best_ask ?? "0");
+            existing.bestBid = bestBid;
+            existing.bestAsk = bestAsk;
+            existing.midpoint = (bestBid + bestAsk) / 2;
+          });
+        } else if (eventType === "last_trade_price") {
+          const existing = prices.get(msg.asset_id as string);
+          if (existing) existing.lastPrice = parseFloat(msg.price ?? "0");
+        }
+      } catch {
+        /* ignore parse errors */
+      }
+    });
+
+    ws.on("error", (err) => {
+      logger.warn(`WS error: ${err.message}`);
+      finish();
+    });
+
+    ws.on("close", () => finish());
+  });
+}
+
+export async function fetchOrderBook(tokenId: string): Promise<ClobOrderBook> {
+  const { data } = await clobClient.get<ClobOrderBook>("/book", {
+    params: { token_id: tokenId },
+  });
+  return data;
+}
+
+export async function fetchPriceHistory(
+  tokenId: string,
+  interval: "1m" | "1h" | "6h" | "1d" | "1w" | "all" = "1d",
+): Promise<ClobPricePoint[]> {
+  const fidelityMap: Record<string, number> = {
+    "1m": 1,
+    "1h": 60,
+    "6h": 360,
+    "1d": 60,
+    "1w": 360,
+    all: 1440,
+  };
+  const { data } = await clobClient.get<{ history: ClobPricePoint[] }>(
+    "/prices-history",
+    {
+      params: {
+        market: tokenId,
+        interval,
+        fidelity: fidelityMap[interval] ?? 60,
+      },
+    },
+  );
+  return data.history ?? [];
+}
+
+export async function fetchUserPositions(
+  walletAddress: string,
+): Promise<PolymarketPosition[]> {
+  const { data } = await dataClient.get<PolymarketPosition[]>("/positions", {
+    params: { user: walletAddress.toLowerCase() },
+  });
+  return Array.isArray(data) ? data : [];
+}
+
+export async function fetchUserActivity(
+  walletAddress: string,
+  limit = 20,
+): Promise<unknown[]> {
+  const { data } = await dataClient.get("/activity", {
+    params: { user: walletAddress.toLowerCase(), limit },
+  });
+  return Array.isArray(data) ? data : [];
+}
+
+
+
+-utils
+cache.ts
+// ─────────────────────────────────────────────────────────────────────────────
+// Simple in-memory cache dengan TTL
+// Digunakan untuk mengurangi request berulang ke Polymarket API
+// ─────────────────────────────────────────────────────────────────────────────
+
+interface CacheEntry<T> {
+  data: T;
+  expiresAt: number;
+}
+
+const store = new Map<string, CacheEntry<unknown>>();
+
+export const cache = {
+  /**
+   * Simpan data ke cache
+   * @param key   - cache key
+   * @param data  - data yang disimpan
+   * @param ttl   - time-to-live dalam detik
+   */
+  set<T>(key: string, data: T, ttl: number): void {
+    store.set(key, {
+      data,
+      expiresAt: Date.now() + ttl * 1000,
+    });
+  },
+
+  /**
+   * Ambil data dari cache
+   * Return null jika tidak ada atau sudah expired
+   */
+  get<T>(key: string): T | null {
+    const entry = store.get(key) as CacheEntry<T> | undefined;
+    if (!entry) return null;
+    if (Date.now() > entry.expiresAt) {
+      store.delete(key);
+      return null;
+    }
+    return entry.data;
+  },
+
+  /**
+   * Hapus satu entry dari cache
+   */
+  delete(key: string): void {
+    store.delete(key);
+  },
+
+  /**
+   * Hapus semua entry yang key-nya dimulai dengan prefix tertentu
+   * Berguna untuk invalidate semua cache market sekaligus
+   */
+  deleteByPrefix(prefix: string): void {
+    for (const key of store.keys()) {
+      if (key.startsWith(prefix)) {
+        store.delete(key);
+      }
+    }
+  },
+
+  /**
+   * Ambil dari cache — jika tidak ada / expired, jalankan fetcher lalu simpan
+   * Pattern: stale-while-revalidate sederhana
+   *
+   * @param key     - cache key
+   * @param fetcher - async function untuk ambil data baru
+   * @param ttl     - time-to-live dalam detik
+   */
+  async getOrSet<T>(
+    key: string,
+    fetcher: () => Promise<T>,
+    ttl: number,
+  ): Promise<T> {
+    const cached = cache.get<T>(key);
+    if (cached !== null) return cached;
+
+    const fresh = await fetcher();
+    cache.set(key, fresh, ttl);
+    return fresh;
+  },
+
+  /**
+   * Hapus semua isi cache
+   */
+  clear(): void {
+    store.clear();
+  },
+
+  /**
+   * Lihat berapa banyak item di cache (untuk debugging)
+   */
+  size(): number {
+    return store.size;
+  },
+};
+
+logger.ts
+import winston from "winston";
+import path from "path";
+import fs from "fs";
+
+// Buat folder logs kalau belum ada
+const logsDir = path.join(process.cwd(), "logs");
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir, { recursive: true });
+}
+
+export const logger = winston.createLogger({
+  level: process.env.NODE_ENV === "production" ? "info" : "debug",
+  format: winston.format.combine(
+    winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    winston.format.errors({ stack: true }),
+    winston.format.printf(({ timestamp, level, message, ...meta }) => {
+      const metaStr = Object.keys(meta).length
+        ? ` ${JSON.stringify(meta)}`
+        : "";
+      return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaStr}`;
+    }),
+  ),
+  transports: [
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+        winston.format.printf(({ timestamp, level, message, ...meta }) => {
+          const metaStr = Object.keys(meta).length
+            ? ` ${JSON.stringify(meta)}`
+            : "";
+          return `[${timestamp}] ${level}: ${message}${metaStr}`;
+        }),
+      ),
+    }),
+    new winston.transports.File({
+      filename: path.join(logsDir, "error.log"),
+      level: "error",
+    }),
+    new winston.transports.File({
+      filename: path.join(logsDir, "combined.log"),
+    }),
+  ],
+});
+
+prisma.ts
+import { PrismaClient } from "@prisma/client";
+import { logger } from "./logger";
+
+// Singleton pattern — satu instance PrismaClient untuk seluruh aplikasi
+const prisma = new PrismaClient({
+  log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
+});
+
+// Connect ke database saat aplikasi start
+prisma
+  .$connect()
+  .then(() => {
+    logger.info("✅ PostgreSQL connected via Prisma");
+  })
+  .catch((err: Error) => {
+    logger.error("❌ Failed to connect to PostgreSQL:", {
+      message: err.message,
+    });
+    process.exit(1);
+  });
+
+export default prisma;
+
+index.ts
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import { rateLimit } from "express-rate-limit";
+
+import { logger } from "./utils/logger";
+import { errorHandler } from "./middleware/error-handler";
+import { requestLogger } from "./middleware/request-logger";
+
+import marketsRouter from "./routes/markets";
+import orderbookRouter from "./routes/orderbook";
+import authRouter from "./routes/auth";
+import userRouter from "./routes/user";
+import { startSyncJob } from "./jobs/sync-markets";
+
+const app = express();
+const PORT = parseInt(process.env.PORT || "3000", 10);
+
+// ─── Security ───────────────────────────────────────────────────────────────
+app.use(helmet());
+app.use(
+  cors({
+    // Gunakan env variable — ganti "*" dengan URL spesifik di production
+    origin: process.env.CORS_ORIGIN || "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
+// ─── Rate Limiting ───────────────────────────────────────────────────────────
+// Max 100 request per menit per IP
+app.use(
+  "/api",
+  rateLimit({
+    windowMs: 60 * 1000,
+    max: 100,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: "Too many requests. Please slow down." },
+  }),
+);
+
+// ─── Body Parser ────────────────────────────────────────────────────────────
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true }));
+
+// ─── Request Logger ──────────────────────────────────────────────────────────
+app.use(requestLogger);
+
+// ─── Health Check ────────────────────────────────────────────────────────────
+app.get("/health", (_req, res) => {
+  res.json({
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV,
+  });
+});
+
+// ─── API Routes ──────────────────────────────────────────────────────────────
+app.use("/api/markets", marketsRouter);
+app.use("/api/orderbook", orderbookRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
+
+// ─── 404 Handler ─────────────────────────────────────────────────────────────
+app.use((_req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
+
+// ─── Global Error Handler ───────────────────────────────────────────────────
+app.use(errorHandler);
+
+// ─── Start Server ────────────────────────────────────────────────────────────
+app.listen(PORT, () => {
+  logger.info(`Aurora Backend running on http://localhost:${PORT}`);
+  logger.info(`Environment  : ${process.env.NODE_ENV || "development"}`);
+  logger.info(`Database     : PostgreSQL via Prisma ORM`);
+  logger.info(
+    `Auth support : Google | Phantom | MetaMask | Coinbase | WalletConnect`,
+  );
+  logger.info(
+    `Categories   : All | Trending | Breaking | EndingSoon | HighestVolume | New | Politics | Crypto | Economy | Sports | Technology | Culture`,
+  );
+
+  startSyncJob();
+});
+
+export default app;
+
+
+.env
+# ─────────────────────────────────────────────────────────────────────────────
+# Aurora Backend — Environment Variables
+# JANGAN commit file ini ke version control!
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Server
+PORT=3000
+NODE_ENV=development
+
+# Database (WAJIB DIISI)
+DATABASE_URL="postgresql://postgres:muhammadalimran22@localhost:5432/aurora_db"
+
+# JWT (ganti dengan string random panjang — minimum 64 karakter)
+JWT_SECRET="GANTI_DENGAN_STRING_RANDOM_PANJANG_MINIMAL_64_KARAKTER_CONTOH_abc123xyz"
+JWT_EXPIRES_IN="7d"
+
+# Polymarket API (public, tidak perlu API key)
+POLYMARKET_GAMMA_URL="https://gamma-api.polymarket.com"
+POLYMARKET_CLOB_URL="https://clob.polymarket.com"
+POLYMARKET_DATA_URL="https://data-api.polymarket.com"
+
+# Cache TTL dalam detik
+CACHE_MARKETS_TTL=60
+CACHE_ORDERBOOK_TTL=5
+CACHE_PRICE_HISTORY_TTL=300
+
+# Interval sync market (cron syntax: setiap 5 menit)
+SYNC_MARKETS_INTERVAL="*/5 * * * *"
+
+# CORS — ganti dengan URL Aurora app saat production
+# Contoh: CORS_ORIGIN="https://aurora.app"
+CORS_ORIGIN="*"
+
+
+package.json
+{
+  "name": "aurora-backend",
+  "version": "1.1.0",
+  "description": "Aurora Prediction Market Backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate",
+    "db:studio": "prisma studio",
+    "db:seed": "ts-node prisma/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "@solana/web3.js": "^1.98.2",
+    "axios": "^1.13.5",
+    "bs58": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "ethers": "^6.14.0",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "node-cron": "^4.2.1",
+    "prisma": "^5.22.0",
+    "tweetnacl": "^1.0.3",
+    "winston": "^3.19.0",
+    "ws": "^8.18.3",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/bs58": "^4.0.4",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.3.0",
+    "@types/node-cron": "^3.0.11",
+    "@types/tweetnacl": "^1.0.3",
+    "@types/ws": "^8.18.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  }
+}
+
+
+tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "sourceMap": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "prisma"]
+}

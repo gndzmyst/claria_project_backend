@@ -21,7 +21,8 @@ const PORT = parseInt(process.env.PORT || "3000", 10);
 app.use(helmet());
 app.use(
   cors({
-    origin: "*", // ganti dengan URL Aurora app saat production
+    // Gunakan env variable — ganti "*" dengan URL spesifik di production
+    origin: process.env.CORS_ORIGIN || "*",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
@@ -67,16 +68,21 @@ app.use((_req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
 
-// ─── Global Error Handler (harus paling bawah) ──────────────────────────────
+// ─── Global Error Handler ───────────────────────────────────────────────────
 app.use(errorHandler);
 
 // ─── Start Server ────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  logger.info(`🚀 Aurora Backend running on http://localhost:${PORT}`);
-  logger.info(`📊 Environment : ${process.env.NODE_ENV || "development"}`);
-  logger.info(`🗄️  Database    : PostgreSQL via Prisma ORM`);
+  logger.info(`Aurora Backend running on http://localhost:${PORT}`);
+  logger.info(`Environment  : ${process.env.NODE_ENV || "development"}`);
+  logger.info(`Database     : PostgreSQL via Prisma ORM`);
+  logger.info(
+    `Auth support : Google | Phantom | MetaMask | Coinbase | WalletConnect`,
+  );
+  logger.info(
+    `Categories   : All | Trending | Breaking | EndingSoon | HighestVolume | New | Politics | Crypto | Economy | Sports | Technology | Culture`,
+  );
 
-  // Start background cron job — sync market dari Polymarket
   startSyncJob();
 });
 

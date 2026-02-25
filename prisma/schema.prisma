@@ -31,20 +31,32 @@ enum TransactionStatus {
   REJECTED
 }
 
+enum AuthProvider {
+  GOOGLE
+  PHANTOM
+  METAMASK
+  COINBASE
+  WALLETCONNECT
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // USER
 // ─────────────────────────────────────────────────────────────────────────────
 
 model User {
-  id            String   @id @default(cuid())
-  email         String   @unique
+  id            String       @id @default(cuid())
+  email         String?      @unique // nullable — wallet-only user boleh tanpa email
   name          String
   photoUrl      String?
-  googleId      String?  @unique
-  walletAddress String?  @unique
-  balance       Decimal  @default(0) @db.Decimal(18, 6)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  // OAuth providers
+  googleId      String?      @unique
+  // Wallet (semua tipe: Phantom, MetaMask, Coinbase, WalletConnect)
+  walletAddress String?      @unique // primary wallet (Polygon/EVM address)
+  solanaAddress String?      @unique // Phantom Solana address (opsional)
+  authProvider  AuthProvider @default(GOOGLE)
+  balance       Decimal      @default(0) @db.Decimal(18, 6)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 
   transactions Transaction[]
   watchlist    Watchlist[]
@@ -70,6 +82,7 @@ model Transaction {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+  @@index([userId, createdAt])
   @@map("transactions")
 }
 
@@ -120,9 +133,8 @@ model Market {
   resolved        Boolean  @default(false)
   resolvedOutcome String?
 
-  // ── Field baru: metadata dari Polymarket ──────────────────────────────────
-  featured Boolean @default(false) // market unggulan di Polymarket
-  isNew    Boolean @default(false) // market baru di Polymarket
+  featured Boolean @default(false)
+  isNew    Boolean @default(false)
 
   startDate    DateTime?
   endDate      DateTime?
@@ -141,9 +153,12 @@ model Market {
   @@index([category])
   @@index([active, closed])
   @@index([volume24h])
-  // Index baru untuk sorting Trending yang benar
   @@index([featured, volume24h])
-  @@index([isNew])
+  @@index([isNew, createdAt])
+  // Untuk Ending Soon — endDate yang dekat dengan waktu sekarang
+  @@index([endDate, active, closed])
+  // Untuk Highest Volume — sort by total volume
+  @@index([volume, active, closed])
   @@map("markets")
 }
 

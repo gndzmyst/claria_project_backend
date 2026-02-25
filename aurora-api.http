@@ -13,6 +13,8 @@
 @baseUrl = http://localhost:3000
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbW0weGJxZ2UwMDA1Znk0enFzZGF5M3M5IiwiZW1haWwiOiJtdWhhbW1hZGFsaW1yYW4yMkBnbWFpbC5jb20iLCJpYXQiOjE3NzE5NTY3OTYsImV4cCI6MTc3MjU2MTU5Nn0.od51_nOTAXwBL8RtSoZxe5VNNpdb4vxpQ7vBvlNkcC4
 @marketId = 553850
+@evmAddress = 0x742d35Cc6634C0532925a3b8D4C9B5D1b2c3D4E5
+@solanaAddress = 7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -24,7 +26,7 @@ GET {{baseUrl}}/health
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# AUTH
+# AUTH — Google
 # ═════════════════════════════════════════════════════════════════════════════
 
 ### [AUTH] Login via Google
@@ -37,61 +39,193 @@ Content-Type: application/json
   "googleId": "google-uid-11",
   "email": "muhammadalimran22@gmail.com",
   "name": "Aurora User",
-  "photoUrl": "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fphoto&psig=AOvVaw0X5csacITd9vHxl2TgRpUZ&ust=1772043183883000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIDO2LXd8pIDFQAAAAAdAAAAABAE"
+  "photoUrl": "https://lh3.googleusercontent.com/photo.jpg"
 }
 
 ###
 
 ### [AUTH] Get Current User (Me)
-# Verifikasi token dan return data user yang login
 GET {{baseUrl}}/api/auth/me
 Authorization: Bearer {{token}}
 
+
+# ═════════════════════════════════════════════════════════════════════════════
+# AUTH — Wallet Sign In (Phantom / MetaMask / Coinbase / WalletConnect)
+#
+# Flow:
+#   Step 1 → GET  /api/auth/nonce?address=<wallet_address>
+#   Step 2 → Sign nonce dengan wallet di sisi client
+#   Step 3 → POST /api/auth/wallet dengan { address, signature, walletType }
+# ═════════════════════════════════════════════════════════════════════════════
+
+### [AUTH] Step 1 — Request Nonce (MetaMask / Coinbase / WalletConnect)
+# Nonce expires dalam 5 menit
+GET {{baseUrl}}/api/auth/nonce?address={{evmAddress}}
+
 ###
 
-### [AUTH] Connect Wallet Address
-# Hubungkan wallet Polygon ke akun Aurora
-# Wallet ini dipakai untuk fetch posisi real dari Polymarket
-PUT {{baseUrl}}/api/auth/wallet
+### [AUTH] Step 1 — Request Nonce (Phantom Solana)
+GET {{baseUrl}}/api/auth/nonce?address={{solanaAddress}}
+
+###
+
+### [AUTH] Step 3 — Login via MetaMask
+# Isi "signature" dengan hasil sign dari wallet client
+POST {{baseUrl}}/api/auth/wallet
+Content-Type: application/json
+
+{
+  "address": "{{evmAddress}}",
+  "signature": "0xSIGNATURE_DARI_METAMASK",
+  "walletType": "metamask",
+  "name": "MetaMask User"
+}
+
+###
+
+### [AUTH] Step 3 — Login via Coinbase Wallet
+POST {{baseUrl}}/api/auth/wallet
+Content-Type: application/json
+
+{
+  "address": "{{evmAddress}}",
+  "signature": "0xSIGNATURE_DARI_COINBASE",
+  "walletType": "coinbase"
+}
+
+###
+
+### [AUTH] Step 3 — Login via WalletConnect
+POST {{baseUrl}}/api/auth/wallet
+Content-Type: application/json
+
+{
+  "address": "{{evmAddress}}",
+  "signature": "0xSIGNATURE_DARI_WALLETCONNECT",
+  "walletType": "walletconnect"
+}
+
+###
+
+### [AUTH] Step 3 — Login via Phantom (Solana)
+# signature adalah base58 encoded string dari wallet Phantom
+POST {{baseUrl}}/api/auth/wallet
+Content-Type: application/json
+
+{
+  "address": "{{solanaAddress}}",
+  "signature": "BASE58_SIGNATURE_DARI_PHANTOM",
+  "walletType": "phantom",
+  "name": "Phantom User"
+}
+
+###
+
+### [AUTH] Step 3 — Login via Phantom (EVM mode)
+# Phantom juga mendukung signing EVM-style (0x prefix)
+POST {{baseUrl}}/api/auth/wallet
+Content-Type: application/json
+
+{
+  "address": "{{evmAddress}}",
+  "signature": "0xSIGNATURE_DARI_PHANTOM_EVM",
+  "walletType": "phantom"
+}
+
+###
+
+### [AUTH] Link Wallet ke Akun Google (Sudah Login)
+# Step 1: Request nonce dulu → GET /api/auth/nonce?address=...
+# Step 2: Sign → kirim ke endpoint ini
+PUT {{baseUrl}}/api/auth/wallet/connect
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "walletAddress": "0x742d35Cc6634C0532925a3b8D4C9B5D1b2c3D4E5"
+  "address": "{{evmAddress}}",
+  "signature": "0xSIGNATURE_DARI_WALLET",
+  "walletType": "metamask"
 }
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# MARKETS
+# MARKETS — Static Categories
 # ═════════════════════════════════════════════════════════════════════════════
 
-### [MARKETS] Get All Markets (Trending)
-GET {{baseUrl}}/api/markets
+### [MARKETS] Get All Markets
+GET {{baseUrl}}/api/markets?category=All&limit=20
 
 ###
 
-### [MARKETS] Get Markets — Filter by Category: Crypto
-GET {{baseUrl}}/api/markets?category=Crypto&limit=10
-
-###
-
-### [MARKETS] Get Markets — Filter by Category: Politics
+### [MARKETS] Politics
 GET {{baseUrl}}/api/markets?category=Politics&limit=10
 
 ###
 
-### [MARKETS] Get Markets — Filter by Category: Sports
+### [MARKETS] Crypto
+GET {{baseUrl}}/api/markets?category=Crypto&limit=10
+
+###
+
+### [MARKETS] Economy
+GET {{baseUrl}}/api/markets?category=Economy&limit=10
+
+###
+
+### [MARKETS] Sports
 GET {{baseUrl}}/api/markets?category=Sports&limit=10
 
 ###
 
-### [MARKETS] Get Markets — Terbaru (New)
-GET {{baseUrl}}/api/markets?category=New&limit=20
+### [MARKETS] Technology
+GET {{baseUrl}}/api/markets?category=Technology&limit=10
 
 ###
 
-### [MARKETS] Get Markets — Dengan Pagination
-GET {{baseUrl}}/api/markets?limit=10&offset=20
+### [MARKETS] Culture
+GET {{baseUrl}}/api/markets?category=Culture&limit=10
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# MARKETS — Dynamic Categories
+# ═════════════════════════════════════════════════════════════════════════════
+
+### [MARKETS] Trending
+# Market dengan volume & aktivitas tertinggi (default sort Polymarket)
+GET {{baseUrl}}/api/markets?category=Trending&limit=20
+
+###
+
+### [MARKETS] Breaking
+# Market dengan pergerakan volume24h terbesar — pasar yang sedang ramai
+GET {{baseUrl}}/api/markets?category=Breaking&limit=20
+
+###
+
+### [MARKETS] Ending Soon
+# Market yang berakhir dalam 48 jam ke depan, diurutkan dari yang paling dekat
+GET {{baseUrl}}/api/markets?category=EndingSoon&limit=20
+
+###
+
+### [MARKETS] Highest Volume
+# Market dengan total volume trading terbesar sepanjang waktu
+GET {{baseUrl}}/api/markets?category=HighestVolume&limit=20
+
+###
+
+### [MARKETS] New
+# Market yang baru saja ditambahkan oleh Polymarket
+GET {{baseUrl}}/api/markets?category=New&limit=20
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# MARKETS — Misc
+# ═════════════════════════════════════════════════════════════════════════════
+
+### [MARKETS] Get Categories List
+# Daftar semua kategori + metadata (icon, description, tagId)
+GET {{baseUrl}}/api/markets/categories
 
 ###
 
@@ -100,25 +234,32 @@ GET {{baseUrl}}/api/markets?search=bitcoin
 
 ###
 
+### [MARKETS] Dengan Pagination
+GET {{baseUrl}}/api/markets?category=Trending&limit=10&offset=20
+
+###
+
 ### [MARKETS] Get Market Detail by ID
 GET {{baseUrl}}/api/markets/{{marketId}}
 
 ###
 
-### [MARKETS] Get Price History — 1 Day (default)
-# Data untuk chart di Aurora app
-# interval: 1m | 1h | 6h | 1d | 1w | all
-# outcome: Yes | No (atau nama outcome lain)
+### [MARKETS] Price History — 1 Day
 GET {{baseUrl}}/api/markets/{{marketId}}/price-history?interval=1d&outcome=Yes
 
 ###
 
-### [MARKETS] Get Price History — 1 Week
+### [MARKETS] Price History — 1 Week
 GET {{baseUrl}}/api/markets/{{marketId}}/price-history?interval=1w&outcome=Yes
 
 ###
 
-### [MARKETS] Get Price History — All Time
+### [MARKETS] Price History — 1 Hour
+GET {{baseUrl}}/api/markets/{{marketId}}/price-history?interval=1h&outcome=Yes
+
+###
+
+### [MARKETS] Price History — All Time
 GET {{baseUrl}}/api/markets/{{marketId}}/price-history?interval=all&outcome=No
 
 
@@ -127,8 +268,7 @@ GET {{baseUrl}}/api/markets/{{marketId}}/price-history?interval=all&outcome=No
 # ═════════════════════════════════════════════════════════════════════════════
 
 ### [ORDERBOOK] Get Order Book for a Market
-# Real-time bids & asks untuk semua outcome (Yes, No)
-# Di-cache 5 detik
+# Real-time bids & asks untuk semua outcome (Yes, No) — di-cache 5 detik
 GET {{baseUrl}}/api/orderbook/{{marketId}}
 
 
@@ -137,7 +277,6 @@ GET {{baseUrl}}/api/orderbook/{{marketId}}
 # ═════════════════════════════════════════════════════════════════════════════
 
 ### [USER] Get Portfolio
-# Total value, P&L, daftar posisi trading
 GET {{baseUrl}}/api/user/portfolio
 Authorization: Bearer {{token}}
 
@@ -146,26 +285,32 @@ Authorization: Bearer {{token}}
 # USER — Activity / Transaction History
 # ═════════════════════════════════════════════════════════════════════════════
 
-### [USER] Get Activity — All Transactions
+### [USER] Get All Activity
 GET {{baseUrl}}/api/user/activity
 Authorization: Bearer {{token}}
 
 ###
 
-### [USER] Get Activity — Filter DEPOSIT only
+### [USER] Filter DEPOSIT only
 GET {{baseUrl}}/api/user/activity?type=DEPOSIT&limit=10
 Authorization: Bearer {{token}}
 
 ###
 
-### [USER] Get Activity — Filter WITHDRAWAL only
+### [USER] Filter WITHDRAWAL only
 GET {{baseUrl}}/api/user/activity?type=WITHDRAWAL&limit=10
 Authorization: Bearer {{token}}
 
 ###
 
-### [USER] Get Activity — Filter TRADE only
+### [USER] Filter TRADE only
 GET {{baseUrl}}/api/user/activity?type=TRADE&limit=20
+Authorization: Bearer {{token}}
+
+###
+
+### [USER] Filter WALLET_CONNECT only
+GET {{baseUrl}}/api/user/activity?type=WALLET_CONNECT&limit=10
 Authorization: Bearer {{token}}
 
 
@@ -230,7 +375,7 @@ Content-Type: application/json
 
 {
   "amount": 200,
-  "walletAddress": "0x742d35Cc6634C0532925a3b8D4C9B5D1b2c3D4E5"
+  "walletAddress": "{{evmAddress}}"
 }
 
 
@@ -239,15 +384,12 @@ Content-Type: application/json
 # ═════════════════════════════════════════════════════════════════════════════
 
 ### [USER] Get Watchlist
-# Daftar market yang di-bookmark user
 GET {{baseUrl}}/api/user/watchlist
 Authorization: Bearer {{token}}
 
 ###
 
-### [USER] Toggle Watchlist — Add/Remove Market
-# Jika belum ada → tambah ke watchlist
-# Jika sudah ada → hapus dari watchlist
+### [USER] Toggle Watchlist (Add / Remove)
 POST {{baseUrl}}/api/user/watchlist/{{marketId}}
 Authorization: Bearer {{token}}
 
@@ -256,7 +398,7 @@ Authorization: Bearer {{token}}
 # ERROR CASES — untuk testing validasi
 # ═════════════════════════════════════════════════════════════════════════════
 
-### [ERROR] Login tanpa email → harus return 400 Validation Error
+### [ERROR] Login Google tanpa email → 400 Validation Error
 POST {{baseUrl}}/api/auth/google
 Content-Type: application/json
 
@@ -267,7 +409,32 @@ Content-Type: application/json
 
 ###
 
-### [ERROR] Deposit amount negatif → harus return 400
+### [ERROR] Wallet login tanpa nonce → 400 Nonce not found
+POST {{baseUrl}}/api/auth/wallet
+Content-Type: application/json
+
+{
+  "address": "0x0000000000000000000000000000000000000001",
+  "signature": "0xfake",
+  "walletType": "metamask"
+}
+
+###
+
+### [ERROR] Wallet login signature salah → 401 Invalid signature
+# (nonce sudah di-request tapi signature tidak match)
+POST {{baseUrl}}/api/auth/wallet
+Content-Type: application/json
+
+{
+  "address": "{{evmAddress}}",
+  "signature": "0xinvalidsignature",
+  "walletType": "metamask"
+}
+
+###
+
+### [ERROR] Deposit amount negatif → 400
 POST {{baseUrl}}/api/user/deposit
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -279,21 +446,21 @@ Content-Type: application/json
 
 ###
 
-### [ERROR] Akses tanpa token → harus return 401
+### [ERROR] Akses tanpa token → 401
 GET {{baseUrl}}/api/user/portfolio
 
 ###
 
-### [ERROR] Token salah → harus return 401
+### [ERROR] Token salah → 401
 GET {{baseUrl}}/api/user/portfolio
 Authorization: Bearer ini-token-palsu-tidak-valid
 
 ###
 
-### [ERROR] Market tidak ditemukan → harus return 404
+### [ERROR] Market tidak ditemukan → 404
 GET {{baseUrl}}/api/markets/market-id-yang-tidak-ada
 
 ###
 
-### [ERROR] Route tidak ada → harus return 404
+### [ERROR] Route tidak ada → 404
 GET {{baseUrl}}/api/tidak-ada

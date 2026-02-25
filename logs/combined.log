@@ -2294,3 +2294,1181 @@ Unique constraint failed on the fields: (`polymarketId`)
 [2026-02-25 06:30:24] DEBUG: Upserted 184 events to DB
 [2026-02-25 06:30:27] INFO: ✅ Sync done: 877 saved | 0 failed | 27016ms
 [2026-02-25 06:30:27] INFO: ✅ Scheduled sync done: 877 markets in 27016ms
+[2026-02-25 06:35:58] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-25 06:35:58] INFO: 📊 Environment : development
+[2026-02-25 06:35:58] INFO: 🗄️  Database    : PostgreSQL via Prisma ORM
+[2026-02-25 06:35:58] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-25 06:35:58] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-25 06:36:01] INFO: 🚀 Running initial market sync on startup...
+[2026-02-25 06:36:01] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 06:36:01] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-25 06:36:10] ERROR: Polymarket API error: read ECONNRESET {"url":"https://gamma-api.polymarket.com/events?limit=100&closed=false","body":"{}"}
+[2026-02-25 06:36:10] WARN: Failed trending fetch: read ECONNRESET
+[2026-02-25 06:36:10] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-25 06:36:21] DEBUG: Enriching 200 tokens via CLOB WebSocket...
+[2026-02-25 06:36:29] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:36:29] DEBUG: GET /api/markets?category=Sports&limit=100&offset=0&search=soccer → 200 [16884ms]
+[2026-02-25 06:36:38] DEBUG: Politics fetch done
+[2026-02-25 06:36:38] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-25 06:36:45] DEBUG: Crypto fetch done
+[2026-02-25 06:36:45] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-25 06:36:53] DEBUG: Sports fetch done
+[2026-02-25 06:36:53] INFO: Processing 492 unique markets...
+[2026-02-25 06:36:54] DEBUG: Upserted 149 events to DB
+[2026-02-25 06:36:55] INFO: ✅ Sync done: 492 saved | 0 failed | 54395ms
+[2026-02-25 06:36:55] INFO: ✅ Initial sync done: 492 markets in 54395ms
+[2026-02-25 06:36:59] DEBUG: Enriching 200 tokens via CLOB WebSocket...
+[2026-02-25 06:37:07] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:37:07] DEBUG: GET /api/markets?category=Sports&limit=100&offset=0&search=sport → 200 [15730ms]
+[2026-02-25 06:38:01] ERROR: Polymarket API error: read ECONNRESET {"url":"https://gamma-api.polymarket.com/events?title_contains=sport&limit=50&closed=false","body":"{}"}
+[2026-02-25 06:38:01] WARN: Search fetch failed: read ECONNRESET
+[2026-02-25 06:38:01] DEBUG: GET /api/markets?category=New&limit=100&offset=0&search=sport → 200 [11272ms]
+[2026-02-25 06:38:10] DEBUG: Enriching 200 tokens via CLOB WebSocket...
+[2026-02-25 06:38:18] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:38:18] DEBUG: GET /api/markets?category=New&limit=100&offset=0&search=sports → 200 [14365ms]
+[2026-02-25 06:39:03] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-25 06:39:06] DEBUG: Enriching 200 tokens via CLOB WebSocket...
+[2026-02-25 06:39:14] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:39:14] DEBUG: GET /api/markets?category=Trending&limit=100&offset=0 → 200 [10482ms]
+[2026-02-25 06:39:27] DEBUG: Enriching 200 tokens via CLOB WebSocket...
+[2026-02-25 06:39:35] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:39:35] DEBUG: GET /api/markets?limit=100&offset=0&search=sports → 200 [9234ms]
+[2026-02-25 06:40:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-25 06:40:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-25 06:40:02] DEBUG: Trending fetch done
+[2026-02-25 06:40:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-25 06:40:04] DEBUG: Politics fetch done
+[2026-02-25 06:40:04] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-25 06:40:05] DEBUG: Crypto fetch done
+[2026-02-25 06:40:05] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-25 06:40:05] DEBUG: Sports fetch done
+[2026-02-25 06:40:05] INFO: Processing 877 unique markets...
+[2026-02-25 06:40:06] DEBUG: Upserted 184 events to DB
+[2026-02-25 06:40:09] INFO: ✅ Sync done: 877 saved | 0 failed | 8887ms
+[2026-02-25 06:40:09] INFO: ✅ Scheduled sync done: 877 markets in 8887ms
+[2026-02-25 06:40:29] DEBUG: Enriching 200 tokens via CLOB WebSocket...
+[2026-02-25 06:40:37] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:40:37] DEBUG: GET /api/markets?limit=100&offset=0&search=soccer → 200 [10210ms]
+[2026-02-25 06:41:23] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 06:41:31] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:41:31] DEBUG: GET /api/markets?search=soccer → 200 [9919ms]
+[2026-02-25 06:41:42] DEBUG: GET /api/markets?search=soccer → 200 [2ms]
+[2026-02-25 06:41:54] DEBUG: GET /api/markets?search=soccer → 200 [3ms]
+[2026-02-25 06:42:05] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 06:42:07] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 06:42:13] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:42:13] DEBUG: GET /api/markets?search=%22soccer%22 → 200 [10983ms]
+[2026-02-25 06:42:15] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:42:15] DEBUG: GET /api/markets?search=%22soccer%22 → 200 [11097ms]
+[2026-02-25 06:42:24] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-25 06:42:26] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-25 06:42:34] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-25 06:42:34] DEBUG: GET /api/markets?category=New&limit=20 → 200 [10166ms]
+[2026-02-26 00:00:18] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-26 00:00:18] INFO: 📊 Environment  : development
+[2026-02-26 00:00:18] INFO: 🗄️  Database     : PostgreSQL via Prisma ORM
+[2026-02-26 00:00:18] INFO: 🔐 Auth support : Google | Phantom | MetaMask | Coinbase | WalletConnect
+[2026-02-26 00:00:18] INFO: 📈 Categories   : All | Trending | Breaking | EndingSoon | HighestVolume | New | Politics | Crypto | Economy | Sports | Technology | Culture
+[2026-02-26 00:00:18] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-26 00:00:18] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-26 00:00:21] INFO: 🚀 Running initial market sync on startup...
+[2026-02-26 00:00:21] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:00:21] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:00:21] DEBUG: Trending fetch done
+[2026-02-26 00:00:21] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:00:22] DEBUG: Politics fetch done
+[2026-02-26 00:00:23] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:00:23] DEBUG: Crypto fetch done
+[2026-02-26 00:00:23] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:00:24] DEBUG: Sports fetch done
+[2026-02-26 00:00:24] INFO: Processing 869 unique markets...
+[2026-02-26 00:00:24] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:00:26] INFO: ✅ Sync done: 869 saved | 0 failed | 4872ms
+[2026-02-26 00:00:26] INFO: ✅ Initial sync done: 869 markets in 4872ms
+[2026-02-26 00:00:35] DEBUG: GET /health → 200 [7ms]
+[2026-02-26 00:00:42] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-26 00:00:42] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-26 00:00:50] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:00:50] DEBUG: GET /api/markets → 200 [8514ms]
+[2026-02-26 00:01:42] DEBUG: fetchGammaEvents params: {"limit":70,"closed":false,"order":"startDate","tag_id":100639}
+[2026-02-26 00:01:43] DEBUG: Enriching 8 tokens via CLOB WebSocket...
+[2026-02-26 00:01:51] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:01:51] DEBUG: GET /api/markets?category=Sports&limit=10 → 200 [8971ms]
+[2026-02-26 00:03:02] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-26 00:03:02] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-26 00:03:10] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:03:10] DEBUG: GET /api/markets → 200 [8426ms]
+[2026-02-26 00:04:56] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-26 00:04:56] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-26 00:05:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:05:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:05:00] DEBUG: Trending fetch done
+[2026-02-26 00:05:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:05:02] DEBUG: Politics fetch done
+[2026-02-26 00:05:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:05:02] DEBUG: Crypto fetch done
+[2026-02-26 00:05:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:05:03] DEBUG: Sports fetch done
+[2026-02-26 00:05:03] INFO: Processing 869 unique markets...
+[2026-02-26 00:05:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:05:04] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:05:04] DEBUG: GET /api/markets?category=All&limit=20 → 200 [8295ms]
+[2026-02-26 00:05:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5393ms
+[2026-02-26 00:05:05] INFO: ✅ Scheduled sync done: 869 markets in 5393ms
+[2026-02-26 00:05:21] DEBUG: fetchGammaEvents params: {"limit":20,"closed":false}
+[2026-02-26 00:05:22] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-26 00:05:30] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:05:30] DEBUG: GET /api/markets?category=Economy&limit=10 → 200 [8782ms]
+[2026-02-26 00:05:37] DEBUG: fetchGammaEvents params: {"limit":20,"closed":false}
+[2026-02-26 00:05:37] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-26 00:05:45] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:05:45] DEBUG: GET /api/markets?category=Technology&limit=10 → 200 [8151ms]
+[2026-02-26 00:05:55] DEBUG: fetchGammaEvents params: {"limit":20,"closed":false}
+[2026-02-26 00:05:56] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-26 00:06:04] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:06:04] DEBUG: GET /api/markets?category=Culture&limit=10 → 200 [8372ms]
+[2026-02-26 00:06:31] DEBUG: fetchGammaEvents params: {"limit":20,"closed":false,"tag_id":2}
+[2026-02-26 00:06:31] DEBUG: Enriching 20 tokens via CLOB WebSocket...
+[2026-02-26 00:06:39] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:06:39] DEBUG: GET /api/markets?category=Politics&limit=10 → 200 [8531ms]
+[2026-02-26 00:06:52] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-26 00:06:53] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-26 00:07:01] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:07:01] DEBUG: GET /api/markets?category=Trending&limit=20 → 200 [8616ms]
+[2026-02-26 00:07:06] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-26 00:07:06] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-26 00:07:14] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:07:14] DEBUG: GET /api/markets?category=Breaking&limit=20 → 200 [8251ms]
+[2026-02-26 00:07:27] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-26 00:07:27] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-26 00:07:35] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:07:35] DEBUG: GET /api/markets?category=EndingSoon&limit=20 → 200 [8118ms]
+[2026-02-26 00:07:58] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 00:08:00] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-26 00:08:08] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:08:08] DEBUG: GET /api/markets?category=New&limit=20 → 200 [9636ms]
+[2026-02-26 00:08:33] DEBUG: GET /api/markets/categories → 200 [2ms]
+[2026-02-26 00:10:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:10:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:10:00] DEBUG: Trending fetch done
+[2026-02-26 00:10:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:10:01] DEBUG: Politics fetch done
+[2026-02-26 00:10:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:10:02] DEBUG: Crypto fetch done
+[2026-02-26 00:10:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:10:03] DEBUG: Sports fetch done
+[2026-02-26 00:10:03] INFO: Processing 869 unique markets...
+[2026-02-26 00:10:04] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:10:06] INFO: ✅ Sync done: 869 saved | 0 failed | 6000ms
+[2026-02-26 00:10:06] INFO: ✅ Scheduled sync done: 869 markets in 6000ms
+[2026-02-26 00:10:17] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-26 00:10:18] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-26 00:10:26] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:10:26] DEBUG: GET /api/markets?category=Breaking&limit=20 → 200 [8925ms]
+[2026-02-26 00:18:52] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-26 00:18:52] INFO: 📊 Environment  : development
+[2026-02-26 00:18:52] INFO: 🗄️  Database     : PostgreSQL via Prisma ORM
+[2026-02-26 00:18:52] INFO: 🔐 Auth support : Google | Phantom | MetaMask | Coinbase | WalletConnect
+[2026-02-26 00:18:52] INFO: 📈 Categories   : All | Trending | Breaking | EndingSoon | HighestVolume | New | Politics | Crypto | Economy | Sports | Technology | Culture
+[2026-02-26 00:18:52] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-26 00:18:53] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-26 00:18:55] INFO: 🚀 Running initial market sync on startup...
+[2026-02-26 00:18:55] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:18:55] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:18:56] DEBUG: Trending fetch done
+[2026-02-26 00:18:56] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:18:58] DEBUG: Politics fetch done
+[2026-02-26 00:18:58] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:18:58] DEBUG: Crypto fetch done
+[2026-02-26 00:18:58] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:18:59] DEBUG: Sports fetch done
+[2026-02-26 00:18:59] INFO: Processing 869 unique markets...
+[2026-02-26 00:18:59] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:19:01] INFO: ✅ Sync done: 869 saved | 0 failed | 5866ms
+[2026-02-26 00:19:01] INFO: ✅ Initial sync done: 869 markets in 5866ms
+[2026-02-26 00:19:38] INFO: 🚀 Aurora Backend running on http://localhost:3000
+[2026-02-26 00:19:38] INFO: 📊 Environment  : development
+[2026-02-26 00:19:38] INFO: 🗄️  Database     : PostgreSQL via Prisma ORM
+[2026-02-26 00:19:38] INFO: 🔐 Auth support : Google | Phantom | MetaMask | Coinbase | WalletConnect
+[2026-02-26 00:19:38] INFO: 📈 Categories   : All | Trending | Breaking | EndingSoon | HighestVolume | New | Politics | Crypto | Economy | Sports | Technology | Culture
+[2026-02-26 00:19:38] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-26 00:19:39] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-26 00:19:41] INFO: 🚀 Running initial market sync on startup...
+[2026-02-26 00:19:41] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:19:41] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:19:42] DEBUG: Trending fetch done
+[2026-02-26 00:19:42] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:19:43] DEBUG: Politics fetch done
+[2026-02-26 00:19:43] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:19:43] DEBUG: Crypto fetch done
+[2026-02-26 00:19:43] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:19:43] DEBUG: Sports fetch done
+[2026-02-26 00:19:43] INFO: Processing 869 unique markets...
+[2026-02-26 00:19:44] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:19:46] INFO: ✅ Sync done: 869 saved | 0 failed | 4150ms
+[2026-02-26 00:19:46] INFO: ✅ Initial sync done: 869 markets in 4150ms
+[2026-02-26 00:20:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:20:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:20:00] DEBUG: Trending fetch done
+[2026-02-26 00:20:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:20:00] DEBUG: Politics fetch done
+[2026-02-26 00:20:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:20:00] DEBUG: Crypto fetch done
+[2026-02-26 00:20:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:20:01] DEBUG: Sports fetch done
+[2026-02-26 00:20:04] INFO: Aurora Backend running on http://localhost:3000
+[2026-02-26 00:20:04] INFO: Environment  : development
+[2026-02-26 00:20:04] INFO: Database     : PostgreSQL via Prisma ORM
+[2026-02-26 00:20:04] INFO: Auth support : Google | Phantom | MetaMask | Coinbase | WalletConnect
+[2026-02-26 00:20:04] INFO: Categories   : All | Trending | Breaking | EndingSoon | HighestVolume | New | Politics | Crypto | Economy | Sports | Technology | Culture
+[2026-02-26 00:20:04] INFO: 📅 Market sync scheduled: "*/5 * * * *"
+[2026-02-26 00:20:04] INFO: ✅ PostgreSQL connected via Prisma
+[2026-02-26 00:20:07] INFO: 🚀 Running initial market sync on startup...
+[2026-02-26 00:20:07] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:20:07] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:20:07] DEBUG: Trending fetch done
+[2026-02-26 00:20:07] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:20:08] DEBUG: Politics fetch done
+[2026-02-26 00:20:08] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:20:08] DEBUG: Crypto fetch done
+[2026-02-26 00:20:08] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:20:08] DEBUG: Sports fetch done
+[2026-02-26 00:20:08] INFO: Processing 869 unique markets...
+[2026-02-26 00:20:08] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:20:10] INFO: ✅ Sync done: 869 saved | 0 failed | 3444ms
+[2026-02-26 00:20:10] INFO: ✅ Initial sync done: 869 markets in 3444ms
+[2026-02-26 00:20:57] DEBUG: GET /health → 200 [13ms]
+[2026-02-26 00:25:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:25:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:25:00] DEBUG: Trending fetch done
+[2026-02-26 00:25:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:25:02] DEBUG: Politics fetch done
+[2026-02-26 00:25:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:25:02] DEBUG: Crypto fetch done
+[2026-02-26 00:25:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:25:03] DEBUG: Sports fetch done
+[2026-02-26 00:25:03] INFO: Processing 869 unique markets...
+[2026-02-26 00:25:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:25:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5622ms
+[2026-02-26 00:25:05] INFO: ✅ Scheduled sync done: 869 markets in 5622ms
+[2026-02-26 00:27:46] DEBUG: fetchGammaEvents params: {"limit":80,"closed":false,"order":"startDate","tag_id":100639}
+[2026-02-26 00:27:49] DEBUG: Enriching 8 tokens via CLOB WebSocket...
+[2026-02-26 00:27:57] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:27:57] DEBUG: GET /api/markets?category=Sports&limit=20&offset=0 → 200 [10703ms]
+[2026-02-26 00:28:23] DEBUG: fetchGammaEvents params: {"limit":40,"closed":false}
+[2026-02-26 00:28:24] DEBUG: Enriching 40 tokens via CLOB WebSocket...
+[2026-02-26 00:28:32] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 00:28:32] DEBUG: GET /api/markets?limit=20&offset=0 → 200 [8763ms]
+[2026-02-26 00:30:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:30:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:30:00] DEBUG: Trending fetch done
+[2026-02-26 00:30:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:30:01] DEBUG: Politics fetch done
+[2026-02-26 00:30:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:30:01] DEBUG: Crypto fetch done
+[2026-02-26 00:30:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:30:02] DEBUG: Sports fetch done
+[2026-02-26 00:30:02] INFO: Processing 869 unique markets...
+[2026-02-26 00:30:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:30:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4929ms
+[2026-02-26 00:30:04] INFO: ✅ Scheduled sync done: 869 markets in 4929ms
+[2026-02-26 00:35:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:35:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:35:00] DEBUG: Trending fetch done
+[2026-02-26 00:35:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:35:01] DEBUG: Politics fetch done
+[2026-02-26 00:35:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:35:02] DEBUG: Crypto fetch done
+[2026-02-26 00:35:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:35:02] DEBUG: Sports fetch done
+[2026-02-26 00:35:02] INFO: Processing 869 unique markets...
+[2026-02-26 00:35:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:35:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5110ms
+[2026-02-26 00:35:05] INFO: ✅ Scheduled sync done: 869 markets in 5110ms
+[2026-02-26 00:40:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:40:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:40:00] DEBUG: Trending fetch done
+[2026-02-26 00:40:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:40:01] DEBUG: Politics fetch done
+[2026-02-26 00:40:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:40:02] DEBUG: Crypto fetch done
+[2026-02-26 00:40:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:40:02] DEBUG: Sports fetch done
+[2026-02-26 00:40:02] INFO: Processing 869 unique markets...
+[2026-02-26 00:40:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:40:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5252ms
+[2026-02-26 00:40:05] INFO: ✅ Scheduled sync done: 869 markets in 5252ms
+[2026-02-26 00:45:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:45:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:45:00] DEBUG: Trending fetch done
+[2026-02-26 00:45:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:45:02] DEBUG: Politics fetch done
+[2026-02-26 00:45:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:45:02] DEBUG: Crypto fetch done
+[2026-02-26 00:45:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:45:03] DEBUG: Sports fetch done
+[2026-02-26 00:45:03] INFO: Processing 869 unique markets...
+[2026-02-26 00:45:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:45:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5760ms
+[2026-02-26 00:45:05] INFO: ✅ Scheduled sync done: 869 markets in 5760ms
+[2026-02-26 00:50:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:50:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:50:00] DEBUG: Trending fetch done
+[2026-02-26 00:50:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:50:02] DEBUG: Politics fetch done
+[2026-02-26 00:50:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:50:02] DEBUG: Crypto fetch done
+[2026-02-26 00:50:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:50:03] DEBUG: Sports fetch done
+[2026-02-26 00:50:03] INFO: Processing 869 unique markets...
+[2026-02-26 00:50:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:50:06] INFO: ✅ Sync done: 869 saved | 0 failed | 6452ms
+[2026-02-26 00:50:06] INFO: ✅ Scheduled sync done: 869 markets in 6452ms
+[2026-02-26 00:55:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 00:55:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 00:55:00] DEBUG: Trending fetch done
+[2026-02-26 00:55:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 00:55:01] DEBUG: Politics fetch done
+[2026-02-26 00:55:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 00:55:02] DEBUG: Crypto fetch done
+[2026-02-26 00:55:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 00:55:02] DEBUG: Sports fetch done
+[2026-02-26 00:55:02] INFO: Processing 869 unique markets...
+[2026-02-26 00:55:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 00:55:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5009ms
+[2026-02-26 00:55:05] INFO: ✅ Scheduled sync done: 869 markets in 5009ms
+[2026-02-26 01:00:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:00:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:00:00] DEBUG: Trending fetch done
+[2026-02-26 01:00:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:00:02] DEBUG: Politics fetch done
+[2026-02-26 01:00:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:00:02] DEBUG: Crypto fetch done
+[2026-02-26 01:00:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:00:03] DEBUG: Sports fetch done
+[2026-02-26 01:00:03] INFO: Processing 869 unique markets...
+[2026-02-26 01:00:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:00:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5657ms
+[2026-02-26 01:00:05] INFO: ✅ Scheduled sync done: 869 markets in 5657ms
+[2026-02-26 01:05:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:05:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:05:00] DEBUG: Trending fetch done
+[2026-02-26 01:05:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:05:01] DEBUG: Politics fetch done
+[2026-02-26 01:05:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:05:02] DEBUG: Crypto fetch done
+[2026-02-26 01:05:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:05:02] DEBUG: Sports fetch done
+[2026-02-26 01:05:02] INFO: Processing 869 unique markets...
+[2026-02-26 01:05:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:05:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4726ms
+[2026-02-26 01:05:04] INFO: ✅ Scheduled sync done: 869 markets in 4726ms
+[2026-02-26 01:10:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:10:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:10:00] DEBUG: Trending fetch done
+[2026-02-26 01:10:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:10:01] DEBUG: Politics fetch done
+[2026-02-26 01:10:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:10:02] DEBUG: Crypto fetch done
+[2026-02-26 01:10:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:10:02] DEBUG: Sports fetch done
+[2026-02-26 01:10:02] INFO: Processing 869 unique markets...
+[2026-02-26 01:10:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:10:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5549ms
+[2026-02-26 01:10:05] INFO: ✅ Scheduled sync done: 869 markets in 5549ms
+[2026-02-26 01:15:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:15:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:15:00] DEBUG: Trending fetch done
+[2026-02-26 01:15:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:15:02] DEBUG: Politics fetch done
+[2026-02-26 01:15:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:15:02] DEBUG: Crypto fetch done
+[2026-02-26 01:15:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:15:03] DEBUG: Sports fetch done
+[2026-02-26 01:15:03] INFO: Processing 869 unique markets...
+[2026-02-26 01:15:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:15:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5723ms
+[2026-02-26 01:15:05] INFO: ✅ Scheduled sync done: 869 markets in 5723ms
+[2026-02-26 01:20:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:20:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:20:00] DEBUG: Trending fetch done
+[2026-02-26 01:20:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:20:02] DEBUG: Politics fetch done
+[2026-02-26 01:20:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:20:02] DEBUG: Crypto fetch done
+[2026-02-26 01:20:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:20:03] DEBUG: Sports fetch done
+[2026-02-26 01:20:03] INFO: Processing 869 unique markets...
+[2026-02-26 01:20:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:20:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5516ms
+[2026-02-26 01:20:05] INFO: ✅ Scheduled sync done: 869 markets in 5516ms
+[2026-02-26 01:25:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:25:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:25:00] DEBUG: Trending fetch done
+[2026-02-26 01:25:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:25:01] DEBUG: Politics fetch done
+[2026-02-26 01:25:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:25:02] DEBUG: Crypto fetch done
+[2026-02-26 01:25:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:25:03] DEBUG: Sports fetch done
+[2026-02-26 01:25:03] INFO: Processing 869 unique markets...
+[2026-02-26 01:25:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:25:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5501ms
+[2026-02-26 01:25:05] INFO: ✅ Scheduled sync done: 869 markets in 5501ms
+[2026-02-26 01:30:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:30:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:30:00] DEBUG: Trending fetch done
+[2026-02-26 01:30:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:30:01] DEBUG: Politics fetch done
+[2026-02-26 01:30:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:30:02] DEBUG: Crypto fetch done
+[2026-02-26 01:30:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:30:03] DEBUG: Sports fetch done
+[2026-02-26 01:30:03] INFO: Processing 869 unique markets...
+[2026-02-26 01:30:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:30:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5122ms
+[2026-02-26 01:30:05] INFO: ✅ Scheduled sync done: 869 markets in 5122ms
+[2026-02-26 01:35:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:35:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:35:00] DEBUG: Trending fetch done
+[2026-02-26 01:35:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:35:01] DEBUG: Politics fetch done
+[2026-02-26 01:35:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:35:02] DEBUG: Crypto fetch done
+[2026-02-26 01:35:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:35:02] DEBUG: Sports fetch done
+[2026-02-26 01:35:02] INFO: Processing 869 unique markets...
+[2026-02-26 01:35:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:35:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4730ms
+[2026-02-26 01:35:04] INFO: ✅ Scheduled sync done: 869 markets in 4730ms
+[2026-02-26 01:40:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:40:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:40:00] DEBUG: Trending fetch done
+[2026-02-26 01:40:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:40:02] DEBUG: Politics fetch done
+[2026-02-26 01:40:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:40:03] DEBUG: Crypto fetch done
+[2026-02-26 01:40:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:40:03] DEBUG: Sports fetch done
+[2026-02-26 01:40:03] INFO: Processing 869 unique markets...
+[2026-02-26 01:40:04] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:40:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5974ms
+[2026-02-26 01:40:06] INFO: ✅ Scheduled sync done: 869 markets in 5974ms
+[2026-02-26 01:45:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:45:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:45:00] DEBUG: Trending fetch done
+[2026-02-26 01:45:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:45:01] DEBUG: Politics fetch done
+[2026-02-26 01:45:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:45:02] DEBUG: Crypto fetch done
+[2026-02-26 01:45:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:45:03] DEBUG: Sports fetch done
+[2026-02-26 01:45:03] INFO: Processing 869 unique markets...
+[2026-02-26 01:45:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:45:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5353ms
+[2026-02-26 01:45:05] INFO: ✅ Scheduled sync done: 869 markets in 5353ms
+[2026-02-26 01:50:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:50:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:50:00] DEBUG: Trending fetch done
+[2026-02-26 01:50:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:50:01] DEBUG: Politics fetch done
+[2026-02-26 01:50:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:50:02] DEBUG: Crypto fetch done
+[2026-02-26 01:50:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:50:02] DEBUG: Sports fetch done
+[2026-02-26 01:50:02] INFO: Processing 869 unique markets...
+[2026-02-26 01:50:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:50:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5131ms
+[2026-02-26 01:50:05] INFO: ✅ Scheduled sync done: 869 markets in 5131ms
+[2026-02-26 01:55:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 01:55:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 01:55:00] DEBUG: Trending fetch done
+[2026-02-26 01:55:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 01:55:01] DEBUG: Politics fetch done
+[2026-02-26 01:55:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 01:55:02] DEBUG: Crypto fetch done
+[2026-02-26 01:55:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 01:55:02] DEBUG: Sports fetch done
+[2026-02-26 01:55:02] INFO: Processing 869 unique markets...
+[2026-02-26 01:55:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 01:55:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4837ms
+[2026-02-26 01:55:04] INFO: ✅ Scheduled sync done: 869 markets in 4837ms
+[2026-02-26 02:00:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:00:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:00:00] DEBUG: Trending fetch done
+[2026-02-26 02:00:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:00:01] DEBUG: Politics fetch done
+[2026-02-26 02:00:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:00:02] DEBUG: Crypto fetch done
+[2026-02-26 02:00:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:00:02] DEBUG: Sports fetch done
+[2026-02-26 02:00:02] INFO: Processing 869 unique markets...
+[2026-02-26 02:00:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:00:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5625ms
+[2026-02-26 02:00:05] INFO: ✅ Scheduled sync done: 869 markets in 5625ms
+[2026-02-26 02:05:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:05:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:05:00] DEBUG: Trending fetch done
+[2026-02-26 02:05:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:05:01] DEBUG: Politics fetch done
+[2026-02-26 02:05:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:05:02] DEBUG: Crypto fetch done
+[2026-02-26 02:05:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:05:02] DEBUG: Sports fetch done
+[2026-02-26 02:05:02] INFO: Processing 869 unique markets...
+[2026-02-26 02:05:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:05:06] INFO: ✅ Sync done: 869 saved | 0 failed | 6681ms
+[2026-02-26 02:05:06] INFO: ✅ Scheduled sync done: 869 markets in 6681ms
+[2026-02-26 02:10:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:10:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:10:01] DEBUG: Trending fetch done
+[2026-02-26 02:10:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:10:02] DEBUG: Politics fetch done
+[2026-02-26 02:10:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:10:03] DEBUG: Crypto fetch done
+[2026-02-26 02:10:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:10:04] DEBUG: Sports fetch done
+[2026-02-26 02:10:04] INFO: Processing 869 unique markets...
+[2026-02-26 02:10:06] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:10:12] INFO: ✅ Sync done: 869 saved | 0 failed | 12402ms
+[2026-02-26 02:10:12] INFO: ✅ Scheduled sync done: 869 markets in 12402ms
+[2026-02-26 02:15:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:15:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:15:01] DEBUG: Trending fetch done
+[2026-02-26 02:15:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:15:03] DEBUG: Politics fetch done
+[2026-02-26 02:15:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:15:05] DEBUG: Crypto fetch done
+[2026-02-26 02:15:05] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:15:06] DEBUG: Sports fetch done
+[2026-02-26 02:15:06] INFO: Processing 869 unique markets...
+[2026-02-26 02:15:07] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:15:12] INFO: ✅ Sync done: 869 saved | 0 failed | 12824ms
+[2026-02-26 02:15:13] INFO: ✅ Scheduled sync done: 869 markets in 12824ms
+[2026-02-26 02:20:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:20:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:20:00] DEBUG: Trending fetch done
+[2026-02-26 02:20:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:20:01] DEBUG: Politics fetch done
+[2026-02-26 02:20:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:20:02] DEBUG: Crypto fetch done
+[2026-02-26 02:20:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:20:02] DEBUG: Sports fetch done
+[2026-02-26 02:20:02] INFO: Processing 869 unique markets...
+[2026-02-26 02:20:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:20:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5451ms
+[2026-02-26 02:20:05] INFO: ✅ Scheduled sync done: 869 markets in 5451ms
+[2026-02-26 02:25:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:25:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:25:01] DEBUG: Trending fetch done
+[2026-02-26 02:25:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:25:03] DEBUG: Politics fetch done
+[2026-02-26 02:25:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:25:04] DEBUG: Crypto fetch done
+[2026-02-26 02:25:04] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:25:04] DEBUG: Sports fetch done
+[2026-02-26 02:25:04] INFO: Processing 869 unique markets...
+[2026-02-26 02:25:05] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:25:07] INFO: ✅ Sync done: 869 saved | 0 failed | 7353ms
+[2026-02-26 02:25:07] INFO: ✅ Scheduled sync done: 869 markets in 7353ms
+[2026-02-26 02:26:17] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:26:19] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:26:27] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:26:27] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [9922ms]
+[2026-02-26 02:26:43] DEBUG: fetchGammaEvents params: {"limit":70,"closed":false}
+[2026-02-26 02:26:44] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false,"tag_id":2}
+[2026-02-26 02:26:44] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:26:45] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:26:52] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:26:52] DEBUG: GET /api/markets?category=New&limit=30 → 200 [9567ms]
+[2026-02-26 02:26:52] DEBUG: GET /api/markets?category=New&limit=30 → 304 [5ms]
+[2026-02-26 02:26:53] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:26:53] DEBUG: GET /api/markets?category=Politics&limit=30 → 200 [9059ms]
+[2026-02-26 02:26:56] DEBUG: fetchGammaEvents params: {"limit":90,"closed":false,"order":"startDate","tag_id":100639}
+[2026-02-26 02:26:57] DEBUG: Enriching 8 tokens via CLOB WebSocket...
+[2026-02-26 02:27:05] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:27:05] DEBUG: GET /api/markets?category=Sports&limit=30 → 200 [8691ms]
+[2026-02-26 02:27:21] DEBUG: POST /api/auth/google → 200 [35ms]
+[2026-02-26 02:27:21] DEBUG: GET /api/user/activity?limit=50 → 200 [25ms]
+[2026-02-26 02:27:21] DEBUG: GET /api/user/portfolio → 200 [33ms]
+[2026-02-26 02:27:41] DEBUG: GET /api/user/portfolio → 304 [10ms]
+[2026-02-26 02:27:41] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:41] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:42] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:42] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 02:27:42] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:42] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:42] DEBUG: GET /api/user/portfolio → 304 [10ms]
+[2026-02-26 02:27:43] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:43] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:43] DEBUG: GET /api/user/portfolio → 304 [10ms]
+[2026-02-26 02:27:43] DEBUG: GET /api/user/portfolio → 304 [11ms]
+[2026-02-26 02:27:43] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:43] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:43] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:43] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:44] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:44] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:44] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:44] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:44] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:44] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:44] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:44] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:45] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:45] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:45] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:45] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:45] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:45] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:45] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:45] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:45] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:46] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:46] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:46] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:46] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:46] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:46] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:46] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:46] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:46] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:47] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:47] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:47] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:47] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:47] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:47] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:47] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:47] DEBUG: GET /api/user/portfolio → 304 [11ms]
+[2026-02-26 02:27:48] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:48] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:48] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:48] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:48] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:48] DEBUG: GET /api/user/portfolio → 304 [10ms]
+[2026-02-26 02:27:49] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:49] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:49] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:49] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:49] DEBUG: GET /api/user/portfolio → 304 [10ms]
+[2026-02-26 02:27:49] DEBUG: GET /api/user/portfolio → 304 [10ms]
+[2026-02-26 02:27:50] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:50] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 02:27:50] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:50] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:51] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:51] DEBUG: GET /api/user/portfolio → 304 [10ms]
+[2026-02-26 02:27:51] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:51] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:51] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:27:51] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:52] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:52] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:52] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:27:52] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:27:52] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:27:52] DEBUG: GET /api/user/activity?limit=50 → 304 [11ms]
+[2026-02-26 02:27:52] DEBUG: GET /api/user/activity?limit=50 → 304 [8ms]
+[2026-02-26 02:28:08] DEBUG: GET /api/user/activity?limit=50 → 304 [10ms]
+[2026-02-26 02:28:29] DEBUG: POST /api/auth/google → 200 [10ms]
+[2026-02-26 02:28:29] DEBUG: GET /api/user/activity?limit=50 → 304 [12ms]
+[2026-02-26 02:28:29] DEBUG: GET /api/user/portfolio → 304 [16ms]
+[2026-02-26 02:29:03] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:29:03] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:29:11] DEBUG: WS enriched prices for 2 tokens
+[2026-02-26 02:29:11] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [8935ms]
+[2026-02-26 02:30:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:30:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:30:00] DEBUG: Trending fetch done
+[2026-02-26 02:30:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:30:01] DEBUG: Politics fetch done
+[2026-02-26 02:30:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:30:02] DEBUG: Crypto fetch done
+[2026-02-26 02:30:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:30:03] DEBUG: Sports fetch done
+[2026-02-26 02:30:03] INFO: Processing 869 unique markets...
+[2026-02-26 02:30:04] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:30:07] INFO: ✅ Sync done: 869 saved | 0 failed | 7904ms
+[2026-02-26 02:30:07] INFO: ✅ Scheduled sync done: 869 markets in 7904ms
+[2026-02-26 02:30:40] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:30:41] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:30:49] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:30:49] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [9337ms]
+[2026-02-26 02:31:41] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [3ms]
+[2026-02-26 02:31:53] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:31:54] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:31:55] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:31:56] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:31:57] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:31:57] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:32:03] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:32:04] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:32:04] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [9283ms]
+[2026-02-26 02:32:05] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:32:05] DEBUG: GET /api/markets?category=Breaking&limit=30 → 200 [8197ms]
+[2026-02-26 02:33:42] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:33:43] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:33:51] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:33:51] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [8852ms]
+[2026-02-26 02:33:57] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [8ms]
+[2026-02-26 02:34:41] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [4ms]
+[2026-02-26 02:35:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:35:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:35:00] DEBUG: Trending fetch done
+[2026-02-26 02:35:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:35:02] DEBUG: Politics fetch done
+[2026-02-26 02:35:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:35:02] DEBUG: Crypto fetch done
+[2026-02-26 02:35:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:35:03] DEBUG: Sports fetch done
+[2026-02-26 02:35:03] INFO: Processing 869 unique markets...
+[2026-02-26 02:35:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:35:06] INFO: ✅ Sync done: 869 saved | 0 failed | 6017ms
+[2026-02-26 02:35:06] INFO: ✅ Scheduled sync done: 869 markets in 6017ms
+[2026-02-26 02:40:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:40:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:40:02] DEBUG: Trending fetch done
+[2026-02-26 02:40:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:40:04] DEBUG: Politics fetch done
+[2026-02-26 02:40:04] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:40:04] DEBUG: Crypto fetch done
+[2026-02-26 02:40:04] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:40:05] DEBUG: Sports fetch done
+[2026-02-26 02:40:06] INFO: Processing 869 unique markets...
+[2026-02-26 02:40:08] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:40:12] INFO: ✅ Sync done: 869 saved | 0 failed | 12355ms
+[2026-02-26 02:40:12] INFO: ✅ Scheduled sync done: 869 markets in 12355ms
+[2026-02-26 02:45:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:45:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:45:01] DEBUG: Trending fetch done
+[2026-02-26 02:45:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:45:02] DEBUG: Politics fetch done
+[2026-02-26 02:45:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:45:03] DEBUG: Crypto fetch done
+[2026-02-26 02:45:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:45:04] DEBUG: Sports fetch done
+[2026-02-26 02:45:04] INFO: Processing 869 unique markets...
+[2026-02-26 02:45:04] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:45:08] INFO: ✅ Sync done: 869 saved | 0 failed | 8180ms
+[2026-02-26 02:45:08] INFO: ✅ Scheduled sync done: 869 markets in 8180ms
+[2026-02-26 02:46:05] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:46:07] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:46:15] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:46:15] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [10348ms]
+[2026-02-26 02:46:19] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [5ms]
+[2026-02-26 02:46:52] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [3ms]
+[2026-02-26 02:47:36] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:47:37] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:47:40] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:47:41] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:47:45] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:47:49] DEBUG: WS enriched prices for 2 tokens
+[2026-02-26 02:47:49] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [8266ms]
+[2026-02-26 02:47:57] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [3ms]
+[2026-02-26 02:47:59] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [3ms]
+[2026-02-26 02:48:43] DEBUG: fetchGammaEvents params: {"limit":70,"closed":false}
+[2026-02-26 02:48:45] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:48:53] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:48:53] DEBUG: GET /api/markets?category=New&limit=30 → 200 [10460ms]
+[2026-02-26 02:48:55] DEBUG: GET /api/markets?category=New&limit=30 → 304 [4ms]
+[2026-02-26 02:48:57] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false,"tag_id":2}
+[2026-02-26 02:48:58] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:49:06] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:49:06] DEBUG: GET /api/markets?category=Politics&limit=30 → 200 [9366ms]
+[2026-02-26 02:49:10] DEBUG: fetchGammaEvents params: {"limit":90,"closed":false,"order":"startDate","tag_id":100639}
+[2026-02-26 02:49:11] DEBUG: Enriching 8 tokens via CLOB WebSocket...
+[2026-02-26 02:49:19] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:49:19] DEBUG: GET /api/markets?category=Sports&limit=30 → 200 [9043ms]
+[2026-02-26 02:49:32] DEBUG: GET /api/markets?category=Sports&limit=30 → 304 [1ms]
+[2026-02-26 02:49:35] DEBUG: GET /api/markets?category=Sports&limit=30 → 304 [1ms]
+[2026-02-26 02:49:36] DEBUG: GET /api/markets?category=Sports&limit=30 → 304 [1ms]
+[2026-02-26 02:49:40] DEBUG: GET /api/markets?category=Sports&limit=30 → 304 [2ms]
+[2026-02-26 02:49:41] DEBUG: GET /api/markets?category=Sports&limit=30 → 304 [1ms]
+[2026-02-26 02:49:43] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:49:44] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:49:52] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:49:52] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [9335ms]
+[2026-02-26 02:50:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:50:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:50:00] DEBUG: Trending fetch done
+[2026-02-26 02:50:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:50:01] DEBUG: Politics fetch done
+[2026-02-26 02:50:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:50:02] DEBUG: Crypto fetch done
+[2026-02-26 02:50:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:50:03] DEBUG: Sports fetch done
+[2026-02-26 02:50:03] INFO: Processing 869 unique markets...
+[2026-02-26 02:50:04] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:50:07] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [5ms]
+[2026-02-26 02:50:08] INFO: ✅ Sync done: 869 saved | 0 failed | 8864ms
+[2026-02-26 02:50:08] INFO: ✅ Scheduled sync done: 869 markets in 8864ms
+[2026-02-26 02:50:54] DEBUG: POST /api/auth/google → 200 [21ms]
+[2026-02-26 02:50:54] DEBUG: GET /api/user/activity?limit=50 → 200 [18ms]
+[2026-02-26 02:50:54] DEBUG: GET /api/user/portfolio → 200 [30ms]
+[2026-02-26 02:51:03] DEBUG: GET /api/user/portfolio → 304 [13ms]
+[2026-02-26 02:51:03] DEBUG: GET /api/user/portfolio → 304 [20ms]
+[2026-02-26 02:51:04] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:51:04] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:51:05] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:51:05] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:51:06] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:51:06] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 02:51:07] DEBUG: GET /api/user/portfolio → 304 [11ms]
+[2026-02-26 02:51:07] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:51:08] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:51:09] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:51:09] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:51:10] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:51:10] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:51:11] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:51:11] DEBUG: GET /api/user/portfolio → 304 [11ms]
+[2026-02-26 02:51:12] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:51:12] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:51:13] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:51:14] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 02:51:14] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:51:15] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 02:51:16] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:51:16] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 02:51:17] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 02:51:18] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 02:51:48] DEBUG: GET /api/user/activity?limit=50 → 304 [11ms]
+[2026-02-26 02:51:54] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:51:55] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:52:03] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:52:03] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [9432ms]
+[2026-02-26 02:52:53] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [7ms]
+[2026-02-26 02:52:56] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [3ms]
+[2026-02-26 02:54:27] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:54:29] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:54:29] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:54:29] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:54:37] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:54:37] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [9806ms]
+[2026-02-26 02:54:37] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:54:37] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [8248ms]
+[2026-02-26 02:54:44] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:54:45] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:54:53] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:54:53] DEBUG: GET /api/markets?category=Breaking&limit=30 → 200 [8586ms]
+[2026-02-26 02:54:58] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [6ms]
+[2026-02-26 02:55:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 02:55:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 02:55:00] DEBUG: Trending fetch done
+[2026-02-26 02:55:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 02:55:01] DEBUG: Politics fetch done
+[2026-02-26 02:55:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 02:55:02] DEBUG: Crypto fetch done
+[2026-02-26 02:55:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 02:55:02] DEBUG: Sports fetch done
+[2026-02-26 02:55:02] INFO: Processing 869 unique markets...
+[2026-02-26 02:55:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 02:55:07] INFO: ✅ Sync done: 869 saved | 0 failed | 7068ms
+[2026-02-26 02:55:07] INFO: ✅ Scheduled sync done: 869 markets in 7068ms
+[2026-02-26 02:57:45] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:57:46] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:57:54] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:57:54] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [9344ms]
+[2026-02-26 02:58:07] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [5ms]
+[2026-02-26 02:58:29] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [2ms]
+[2026-02-26 02:58:48] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [3ms]
+[2026-02-26 02:59:02] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 02:59:02] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 02:59:10] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 02:59:10] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [8588ms]
+[2026-02-26 03:00:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:00:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:00:00] DEBUG: Trending fetch done
+[2026-02-26 03:00:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:00:01] DEBUG: Politics fetch done
+[2026-02-26 03:00:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:00:01] DEBUG: Crypto fetch done
+[2026-02-26 03:00:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:00:02] DEBUG: Sports fetch done
+[2026-02-26 03:00:02] INFO: Processing 869 unique markets...
+[2026-02-26 03:00:02] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:00:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4101ms
+[2026-02-26 03:00:04] INFO: ✅ Scheduled sync done: 869 markets in 4101ms
+[2026-02-26 03:00:23] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 03:00:25] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 03:00:33] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 03:00:33] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [10007ms]
+[2026-02-26 03:00:33] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [10ms]
+[2026-02-26 03:00:46] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [2ms]
+[2026-02-26 03:00:47] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [3ms]
+[2026-02-26 03:00:48] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [4ms]
+[2026-02-26 03:00:50] DEBUG: fetchGammaEvents params: {"limit":70,"closed":false}
+[2026-02-26 03:00:52] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 03:01:00] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 03:01:00] DEBUG: GET /api/markets?category=New&limit=30 → 200 [10006ms]
+[2026-02-26 03:01:12] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false,"tag_id":2}
+[2026-02-26 03:01:13] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 03:01:21] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 03:01:21] DEBUG: GET /api/markets?category=Politics&limit=30 → 200 [8935ms]
+[2026-02-26 03:01:33] DEBUG: fetchGammaEvents params: {"limit":90,"closed":false,"order":"startDate","tag_id":100639}
+[2026-02-26 03:01:34] DEBUG: Enriching 8 tokens via CLOB WebSocket...
+[2026-02-26 03:01:42] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 03:01:42] DEBUG: GET /api/markets?category=Sports&limit=30 → 200 [8654ms]
+[2026-02-26 03:01:59] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 03:01:59] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 03:02:07] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 03:02:07] DEBUG: GET /api/markets?category=Breaking&limit=30 → 200 [8286ms]
+[2026-02-26 03:02:49] DEBUG: POST /api/auth/google → 200 [185ms]
+[2026-02-26 03:02:49] DEBUG: GET /api/user/activity?limit=50 → 304 [14ms]
+[2026-02-26 03:02:49] DEBUG: GET /api/user/portfolio → 304 [20ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [23ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [97ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [13ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:01] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [14ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [18ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:02] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [13ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [5ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:03] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:04] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:04] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:04] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:04] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:04] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 03:03:04] DEBUG: GET /api/user/portfolio → 304 [9ms]
+[2026-02-26 03:03:04] DEBUG: GET /api/user/portfolio → 304 [13ms]
+[2026-02-26 03:03:04] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:05] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:05] DEBUG: GET /api/user/portfolio → 304 [14ms]
+[2026-02-26 03:03:05] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:05] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:05] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 03:03:05] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:05] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:05] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 03:03:05] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:06] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:06] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:06] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:06] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:06] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 03:03:06] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:06] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:06] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:06] DEBUG: GET /api/user/portfolio → 304 [5ms]
+[2026-02-26 03:03:07] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:07] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 03:03:07] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:07] DEBUG: GET /api/user/portfolio → 304 [15ms]
+[2026-02-26 03:03:07] DEBUG: GET /api/user/portfolio → 304 [8ms]
+[2026-02-26 03:03:07] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:07] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:07] DEBUG: GET /api/user/portfolio → 304 [12ms]
+[2026-02-26 03:03:08] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:08] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:08] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:08] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:08] DEBUG: GET /api/user/portfolio → 304 [7ms]
+[2026-02-26 03:03:08] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:08] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:08] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:09] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:09] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:09] DEBUG: GET /api/user/portfolio → 304 [6ms]
+[2026-02-26 03:03:15] DEBUG: POST /api/user/deposit → 200 [45ms]
+[2026-02-26 03:03:15] DEBUG: GET /api/user/activity?limit=50 → 200 [20ms]
+[2026-02-26 03:03:15] DEBUG: GET /api/user/activity?limit=50 → 304 [6ms]
+[2026-02-26 03:05:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:05:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:05:00] DEBUG: Trending fetch done
+[2026-02-26 03:05:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:05:01] DEBUG: Politics fetch done
+[2026-02-26 03:05:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:05:01] DEBUG: Crypto fetch done
+[2026-02-26 03:05:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:05:02] DEBUG: Sports fetch done
+[2026-02-26 03:05:02] INFO: Processing 869 unique markets...
+[2026-02-26 03:05:02] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:05:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4384ms
+[2026-02-26 03:05:04] INFO: ✅ Scheduled sync done: 869 markets in 4384ms
+[2026-02-26 03:06:57] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 03:06:59] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 03:07:06] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 03:07:06] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 03:07:07] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 03:07:14] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 03:07:14] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [8380ms]
+[2026-02-26 03:08:03] DEBUG: GET /api/markets?category=Trending&limit=30 → 304 [4ms]
+[2026-02-26 03:09:16] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 03:09:17] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 03:09:25] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 03:09:25] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [9461ms]
+[2026-02-26 03:09:30] ERROR: Polymarket API error: Request failed with status code 422 {"url":"https://gamma-api.polymarket.com/markets/0x8213d395e079614d6c4d7f4cbb9be9337ab51648a21cc2a334ae8f1966d164b4","status":422,"body":"{\"type\":\"validation error\",\"error\":\"id is invalid\"}"}
+[2026-02-26 03:09:30] INFO: Last resort — checking DB for: 0x8213d395e079614d6c4d7f4cbb9be9337ab51648a21cc2a334ae8f1966d164b4
+[2026-02-26 03:09:31] DEBUG: GET /api/markets/0x8213d395e079614d6c4d7f4cbb9be9337ab51648a21cc2a334ae8f1966d164b4/price-history?interval=1d&outcome=Yes → 200 [1607ms]
+[2026-02-26 03:10:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:10:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:10:00] DEBUG: Trending fetch done
+[2026-02-26 03:10:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:10:02] DEBUG: Politics fetch done
+[2026-02-26 03:10:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:10:02] DEBUG: Crypto fetch done
+[2026-02-26 03:10:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:10:03] DEBUG: Sports fetch done
+[2026-02-26 03:10:03] INFO: Processing 869 unique markets...
+[2026-02-26 03:10:04] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:10:06] INFO: ✅ Sync done: 869 saved | 0 failed | 6209ms
+[2026-02-26 03:10:06] INFO: ✅ Scheduled sync done: 869 markets in 6209ms
+[2026-02-26 03:11:04] DEBUG: fetchGammaEvents params: {"limit":60,"closed":false}
+[2026-02-26 03:11:05] DEBUG: Enriching 60 tokens via CLOB WebSocket...
+[2026-02-26 03:11:13] DEBUG: WS returned no prices, using Gamma prices
+[2026-02-26 03:11:13] DEBUG: GET /api/markets?category=Trending&limit=30 → 200 [8982ms]
+[2026-02-26 03:15:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:15:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:15:00] DEBUG: Trending fetch done
+[2026-02-26 03:15:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:15:01] DEBUG: Politics fetch done
+[2026-02-26 03:15:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:15:01] DEBUG: Crypto fetch done
+[2026-02-26 03:15:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:15:02] DEBUG: Sports fetch done
+[2026-02-26 03:15:02] INFO: Processing 869 unique markets...
+[2026-02-26 03:15:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:15:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5354ms
+[2026-02-26 03:15:05] INFO: ✅ Scheduled sync done: 869 markets in 5354ms
+[2026-02-26 03:20:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:20:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:20:00] DEBUG: Trending fetch done
+[2026-02-26 03:20:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:20:01] DEBUG: Politics fetch done
+[2026-02-26 03:20:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:20:01] DEBUG: Crypto fetch done
+[2026-02-26 03:20:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:20:02] DEBUG: Sports fetch done
+[2026-02-26 03:20:02] INFO: Processing 869 unique markets...
+[2026-02-26 03:20:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:20:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4622ms
+[2026-02-26 03:20:04] INFO: ✅ Scheduled sync done: 869 markets in 4622ms
+[2026-02-26 03:25:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:25:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:25:00] DEBUG: Trending fetch done
+[2026-02-26 03:25:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:25:02] DEBUG: Politics fetch done
+[2026-02-26 03:25:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:25:02] DEBUG: Crypto fetch done
+[2026-02-26 03:25:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:25:03] DEBUG: Sports fetch done
+[2026-02-26 03:25:03] INFO: Processing 869 unique markets...
+[2026-02-26 03:25:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:25:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5039ms
+[2026-02-26 03:25:05] INFO: ✅ Scheduled sync done: 869 markets in 5039ms
+[2026-02-26 03:30:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:30:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:30:01] DEBUG: Trending fetch done
+[2026-02-26 03:30:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:30:01] DEBUG: Politics fetch done
+[2026-02-26 03:30:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:30:02] DEBUG: Crypto fetch done
+[2026-02-26 03:30:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:30:02] DEBUG: Sports fetch done
+[2026-02-26 03:30:02] INFO: Processing 869 unique markets...
+[2026-02-26 03:30:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:30:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4673ms
+[2026-02-26 03:30:04] INFO: ✅ Scheduled sync done: 869 markets in 4673ms
+[2026-02-26 03:35:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:35:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:35:00] DEBUG: Trending fetch done
+[2026-02-26 03:35:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:35:01] DEBUG: Politics fetch done
+[2026-02-26 03:35:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:35:02] DEBUG: Crypto fetch done
+[2026-02-26 03:35:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:35:02] DEBUG: Sports fetch done
+[2026-02-26 03:35:02] INFO: Processing 869 unique markets...
+[2026-02-26 03:35:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:35:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4817ms
+[2026-02-26 03:35:04] INFO: ✅ Scheduled sync done: 869 markets in 4817ms
+[2026-02-26 03:40:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:40:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:40:00] DEBUG: Trending fetch done
+[2026-02-26 03:40:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:40:02] DEBUG: Politics fetch done
+[2026-02-26 03:40:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:40:02] DEBUG: Crypto fetch done
+[2026-02-26 03:40:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:40:03] DEBUG: Sports fetch done
+[2026-02-26 03:40:03] INFO: Processing 869 unique markets...
+[2026-02-26 03:40:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:40:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5106ms
+[2026-02-26 03:40:05] INFO: ✅ Scheduled sync done: 869 markets in 5106ms
+[2026-02-26 03:45:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:45:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:45:00] DEBUG: Trending fetch done
+[2026-02-26 03:45:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:45:01] DEBUG: Politics fetch done
+[2026-02-26 03:45:01] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:45:02] DEBUG: Crypto fetch done
+[2026-02-26 03:45:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:45:02] DEBUG: Sports fetch done
+[2026-02-26 03:45:02] INFO: Processing 869 unique markets...
+[2026-02-26 03:45:02] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:45:04] INFO: ✅ Sync done: 869 saved | 0 failed | 4323ms
+[2026-02-26 03:45:04] INFO: ✅ Scheduled sync done: 869 markets in 4323ms
+[2026-02-26 03:50:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:50:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:50:03] DEBUG: Trending fetch done
+[2026-02-26 03:50:03] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:50:05] DEBUG: Politics fetch done
+[2026-02-26 03:50:05] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:50:05] DEBUG: Crypto fetch done
+[2026-02-26 03:50:05] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:50:06] DEBUG: Sports fetch done
+[2026-02-26 03:50:06] INFO: Processing 869 unique markets...
+[2026-02-26 03:50:06] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:50:08] INFO: ✅ Sync done: 869 saved | 0 failed | 8546ms
+[2026-02-26 03:50:08] INFO: ✅ Scheduled sync done: 869 markets in 8546ms
+[2026-02-26 03:55:00] INFO: ⏳ Syncing markets to DB via /events endpoint...
+[2026-02-26 03:55:00] DEBUG: fetchGammaEvents params: {"limit":100,"closed":false}
+[2026-02-26 03:55:00] DEBUG: Trending fetch done
+[2026-02-26 03:55:00] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":2}
+[2026-02-26 03:55:02] DEBUG: Politics fetch done
+[2026-02-26 03:55:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":21}
+[2026-02-26 03:55:02] DEBUG: Crypto fetch done
+[2026-02-26 03:55:02] DEBUG: fetchGammaEvents params: {"limit":50,"closed":false,"tag_id":100639}
+[2026-02-26 03:55:03] DEBUG: Sports fetch done
+[2026-02-26 03:55:03] INFO: Processing 869 unique markets...
+[2026-02-26 03:55:03] DEBUG: Upserted 184 events to DB
+[2026-02-26 03:55:05] INFO: ✅ Sync done: 869 saved | 0 failed | 5552ms
+[2026-02-26 03:55:05] INFO: ✅ Scheduled sync done: 869 markets in 5552ms
