@@ -1,3 +1,24 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// src/services/market.service.ts
+// Aurora Backend — Market Business Logic
+//
+// Category mapping ke Polymarket Tag IDs:
+//   All          → no tag filter (semua)
+//   Politics     → tag_id: 2
+//   Crypto       → tag_id: 21
+//   Economy      → tag_id: 120  (Finance/Economy)
+//   Sports       → tag_id: 100639
+//   Technology   → tag_id: 1401
+//   Culture      → tag_id: 596
+//
+// Dynamic categories (tidak ada tag_id, dicompute dari data):
+//   Trending     → default sort API (sudah trending/volume)
+//   Breaking     → pergerakan harga terbesar 24 jam (competitive score / volume24h spike)
+//   EndingSoon   → endDate dalam 24–48 jam ke depan
+//   HighestVolume→ sort by volume total descending
+//   New          → event.new === true atau baru dibuat
+// ─────────────────────────────────────────────────────────────────────────────
+
 import prisma from "../utils/prisma";
 import { cache } from "../utils/cache";
 import { logger } from "../utils/logger";
@@ -7,6 +28,7 @@ import {
   fetchGammaMarketByConditionId,
   fetchGammaMarketBySlug,
   fetchGammaSearch,
+  fetchEndingSoonEvents,
   fetchTokenPricesViaWS,
   POLYMARKET_TAG_IDS,
   type GammaEvent,
@@ -20,11 +42,18 @@ const CACHE_TTL = parseInt(process.env.CACHE_MARKETS_TTL || "60");
 // CATEGORY → TAG_ID MAP
 // ─────────────────────────────────────────────────────────────────────────────
 const CATEGORY_TAG_MAP: Record<string, number | undefined> = {
+  All: undefined,
   Trending: undefined,
+  Breaking: undefined,
+  EndingSoon: undefined,
+  HighestVolume: undefined,
   New: undefined,
   Politics: POLYMARKET_TAG_IDS.Politics, // 2
   Crypto: POLYMARKET_TAG_IDS.Crypto, // 21
+  Economy: POLYMARKET_TAG_IDS.Economy, // 120
   Sports: POLYMARKET_TAG_IDS.Sports, // 100639
+  Technology: POLYMARKET_TAG_IDS.Technology, // 1401
+  Culture: POLYMARKET_TAG_IDS.Culture, // 596
 };
 
 const BLACKLIST_TAGS = ["Recurring", "Hide From New"];
@@ -32,7 +61,6 @@ const MIN_REMAINING_MS = 60 * 60 * 1000; // 1 jam
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helper: parseJsonArray
-// GammaEventMarket.outcomes / outcomePrices / clobTokenIds = JSON string
 // ─────────────────────────────────────────────────────────────────────────────
 function parseJsonArray<T>(raw: string | T[] | undefined | null): T[] {
   if (!raw) return [];
@@ -47,7 +75,6 @@ function parseJsonArray<T>(raw: string | T[] | undefined | null): T[] {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helper: safeFloat
-// Handle tipe campuran: event level = number, market level = string
 // ─────────────────────────────────────────────────────────────────────────────
 function safeFloat(val: string | number | undefined | null): number {
   if (val === undefined || val === null) return 0;
@@ -87,61 +114,8 @@ function buildTokens(
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Helper: transformEventMarket
-// ─────────────────────────────────────────────────────────────────────────────
-function transformEventMarket(
-  market: GammaEventMarket,
-  event: GammaEvent,
-): AuroraMarket {
-  const outcomePrices = buildOutcomePrices(
-    market.outcomes,
-    market.outcomePrices,
-  );
-  const tokens = buildTokens(market.clobTokenIds, market.outcomes);
-  const priceValues = Object.values(outcomePrices);
-  const spread =
-    priceValues.length >= 2
-      ? parseFloat(Math.abs(priceValues[0] - priceValues[1]).toFixed(6))
-      : null;
-
-  const eventTagLabels = (event.tags ?? []).map((t) => t.label ?? t.slug ?? "");
-  const marketTagLabels = (market.tags ?? []).map(
-    (t) => t.label ?? t.slug ?? "",
-  );
-  const allTagLabels = [...new Set([...eventTagLabels, ...marketTagLabels])];
-
-  return {
-    id: market.conditionId || market.id,
-    polymarketId: market.id,
-    slug: market.slug || market.id,
-    eventSlug: event.slug,
-    question: market.question || "Unknown Market",
-    description: market.description || null,
-    category: mapTagsToCategory(allTagLabels, event.category),
-    tags: allTagLabels,
-    outcomes: parseJsonArray<string>(market.outcomes),
-    outcomePrices,
-    tokens,
-    // Market level: string | number campuran → safeFloat, fallback ke event level
-    volume: safeFloat(market.volume) || safeFloat(event.volume),
-    volume24h: safeFloat(market.volume24hr) || safeFloat(event.volume24hr),
-    liquidity: safeFloat(market.liquidity) || safeFloat(event.liquidity),
-    spread,
-    active: market.active ?? true,
-    closed: market.closed ?? false,
-    featured: event.featured ?? false,
-    isNew: event.new ?? false,
-    imageUrl: market.image || event.image || null,
-    icon: market.icon || event.icon || null,
-    endDate: market.endDate ? new Date(market.endDate) : null,
-    startDate: market.startDate ? new Date(market.startDate) : null,
-    eventId: event.id,
-    lastSyncedAt: new Date(),
-  };
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
 // Helper: mapTagsToCategory
+// Mapping tag labels ke Aurora category
 // ─────────────────────────────────────────────────────────────────────────────
 function mapTagsToCategory(tags: string[], rawCategory?: string): string {
   const allText = [...tags, rawCategory ?? ""].join(" ").toLowerCase();
@@ -156,7 +130,10 @@ function mapTagsToCategory(tags: string[], rawCategory?: string): string {
     allText.includes("btc") ||
     allText.includes("eth") ||
     allText.includes("solana") ||
-    allText.includes("xrp")
+    allText.includes("xrp") ||
+    allText.includes("doge") ||
+    allText.includes("bnb") ||
+    allText.includes("altcoin")
   )
     return "Crypto";
 
@@ -176,7 +153,11 @@ function mapTagsToCategory(tags: string[], rawCategory?: string): string {
     allText.includes("tariff") ||
     allText.includes("sanction") ||
     allText.includes("military") ||
-    allText.includes("ceasefire")
+    allText.includes("ceasefire") ||
+    allText.includes("election") ||
+    allText.includes("vote") ||
+    allText.includes("democrat") ||
+    allText.includes("republican")
   )
     return "Politics";
 
@@ -200,22 +181,89 @@ function mapTagsToCategory(tags: string[], rawCategory?: string): string {
     allText.includes("premier league") ||
     allText.includes("champions league") ||
     allText.includes("ncaa") ||
-    allText.includes("cwbb") ||
-    allText.includes("cbb ") ||
     allText.includes("wnba") ||
     allText.includes("serie a") ||
     allText.includes("bundesliga") ||
     allText.includes("la liga") ||
     allText.includes("ligue 1") ||
-    allText.includes("ligue 2")
+    allText.includes("baseball") ||
+    allText.includes("basketball") ||
+    allText.includes("cricket") ||
+    allText.includes("rugby")
   )
     return "Sports";
+
+  if (
+    allText.includes("economy") ||
+    allText.includes("economic") ||
+    allText.includes("finance") ||
+    allText.includes("financial") ||
+    allText.includes("stock") ||
+    allText.includes("fed rate") ||
+    allText.includes("interest rate") ||
+    allText.includes("inflation") ||
+    allText.includes("gdp") ||
+    allText.includes("recession") ||
+    allText.includes("forex") ||
+    allText.includes("bond") ||
+    allText.includes("treasury") ||
+    allText.includes("ipo") ||
+    allText.includes("s&p") ||
+    allText.includes("nasdaq") ||
+    allText.includes("dow jones") ||
+    allText.includes("federal reserve") ||
+    allText.includes("unemployment") ||
+    allText.includes("trade war") ||
+    allText.includes("tariff")
+  )
+    return "Economy";
+
+  if (
+    allText.includes("technology") ||
+    allText.includes("tech") ||
+    allText.includes("ai ") ||
+    allText.includes("artificial intelligence") ||
+    allText.includes("openai") ||
+    allText.includes("chatgpt") ||
+    allText.includes("apple") ||
+    allText.includes("google") ||
+    allText.includes("microsoft") ||
+    allText.includes("meta ") ||
+    allText.includes("tesla") ||
+    allText.includes("nvidia") ||
+    allText.includes("startup") ||
+    allText.includes("software") ||
+    allText.includes("hardware") ||
+    allText.includes("chip") ||
+    allText.includes("semiconductor")
+  )
+    return "Technology";
+
+  if (
+    allText.includes("culture") ||
+    allText.includes("entertainment") ||
+    allText.includes("celebrity") ||
+    allText.includes("movie") ||
+    allText.includes("music") ||
+    allText.includes("award") ||
+    allText.includes("oscar") ||
+    allText.includes("grammy") ||
+    allText.includes("tv show") ||
+    allText.includes("netflix") ||
+    allText.includes("pop culture") ||
+    allText.includes("viral") ||
+    allText.includes("meme") ||
+    allText.includes("game show") ||
+    allText.includes("reality tv")
+  )
+    return "Culture";
 
   return "Trending";
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helper: isRecurringMarket
+// Hapus market yang berulang setiap 5 menit / 1 jam (noise)
 // ─────────────────────────────────────────────────────────────────────────────
 function isRecurringMarket(
   market: GammaEventMarket,
@@ -259,7 +307,7 @@ function shouldShowMarket(
       return false;
   }
 
-  if (category === "Trending") {
+  if (category === "Trending" || category === "All") {
     if (volume === 0 && volume24h === 0 && liquidity === 0) return false;
   }
 
@@ -267,7 +315,61 @@ function shouldShowMarket(
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Helper: transformEventMarket
+// ─────────────────────────────────────────────────────────────────────────────
+function transformEventMarket(
+  market: GammaEventMarket,
+  event: GammaEvent,
+): AuroraMarket {
+  const outcomePrices = buildOutcomePrices(
+    market.outcomes,
+    market.outcomePrices,
+  );
+  const tokens = buildTokens(market.clobTokenIds, market.outcomes);
+  const priceValues = Object.values(outcomePrices);
+  const spread =
+    priceValues.length >= 2
+      ? parseFloat(Math.abs(priceValues[0] - priceValues[1]).toFixed(6))
+      : null;
+
+  const eventTagLabels = (event.tags ?? []).map((t) => t.label ?? t.slug ?? "");
+  const marketTagLabels = (market.tags ?? []).map(
+    (t) => t.label ?? t.slug ?? "",
+  );
+  const allTagLabels = [...new Set([...eventTagLabels, ...marketTagLabels])];
+
+  return {
+    id: market.conditionId || market.id,
+    polymarketId: market.id,
+    slug: market.slug || market.id,
+    eventSlug: event.slug,
+    question: market.question || "Unknown Market",
+    description: market.description || null,
+    category: mapTagsToCategory(allTagLabels, event.category),
+    tags: allTagLabels,
+    outcomes: parseJsonArray<string>(market.outcomes),
+    outcomePrices,
+    tokens,
+    volume: safeFloat(market.volume) || safeFloat(event.volume),
+    volume24h: safeFloat(market.volume24hr) || safeFloat(event.volume24hr),
+    liquidity: safeFloat(market.liquidity) || safeFloat(event.liquidity),
+    spread,
+    active: market.active ?? true,
+    closed: market.closed ?? false,
+    featured: event.featured ?? false,
+    isNew: event.new ?? false,
+    imageUrl: market.image || event.image || null,
+    icon: market.icon || event.icon || null,
+    endDate: market.endDate ? new Date(market.endDate) : null,
+    startDate: market.startDate ? new Date(market.startDate) : null,
+    eventId: event.id,
+    lastSyncedAt: new Date(),
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Helper: enrichWithRealPrices
+// Enrich market prices via CLOB WebSocket untuk akurasi real-time
 // ─────────────────────────────────────────────────────────────────────────────
 async function enrichWithRealPrices(
   markets: AuroraMarket[],
@@ -325,26 +427,61 @@ async function enrichWithRealPrices(
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Shared: processEvents
+// Process array of GammaEvent → filter → transform → AuroraMarket[]
+// ─────────────────────────────────────────────────────────────────────────────
+function processEvents(
+  events: GammaEvent[],
+  category: string,
+  now: Date,
+  seenIds?: Set<string>,
+): AuroraMarket[] {
+  const markets: AuroraMarket[] = [];
+  const ids = seenIds ?? new Set<string>();
+
+  events.forEach((event) => {
+    if (!event.markets || event.markets.length === 0) return;
+    if (event.closed || event.archived) return;
+
+    event.markets.forEach((market) => {
+      if (!market.active || market.closed) return;
+
+      const eventTagLabels = (event.tags ?? []).map(
+        (t) => t.label ?? t.slug ?? "",
+      );
+      const marketTagLabels = (market.tags ?? []).map(
+        (t) => t.label ?? t.slug ?? "",
+      );
+      const tagLabels = [...new Set([...eventTagLabels, ...marketTagLabels])];
+
+      if (isRecurringMarket(market, tagLabels)) return;
+
+      // Sports: skip yang sudah expired
+      if (category === "Sports" && market.endDate) {
+        if (new Date(market.endDate) < now) return;
+      }
+
+      // Skip expired + zero volume
+      const endDate = market.endDate ? new Date(market.endDate) : null;
+      if (endDate && endDate < now && safeFloat(market.volume24hr) === 0)
+        return;
+
+      if (!shouldShowMarket(market, category, now)) return;
+
+      const transformed = transformEventMarket(market, event);
+      if (!ids.has(transformed.id)) {
+        ids.add(transformed.id);
+        markets.push(transformed);
+      }
+    });
+  });
+
+  return markets;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // getMarkets
-//
-// ✅ PERBAIKAN FINAL berdasarkan analisa semua error log + docs resmi:
-//
-// MASALAH 1 (code asli): active=true → 422 "field not valid"
-//   → "active" tidak ada di query params docs /events
-//   → SOLUSI: HAPUS active dari semua call
-//
-// MASALAH 2 (fix sebelumnya): order=volume_24hr → 422 "order fields are not valid"
-//   → "volume_24hr" bukan nama field response (nama asli camelCase: "volume24hr")
-//   → SOLUSI: HAPUS order untuk Trending/Politics/Crypto
-//             Default ordering Polymarket API sudah berdasarkan volume/trending
-//             Hanya Sports yang perlu order=startDate
-//
-// PARAMETER AMAN:
-//   - limit: ≤ 100 (docs: "Required range: x >= 0")
-//   - closed: false (valid per docs, pengganti active=true)
-//   - tag_id: integer (valid per docs)
-//   - order: hanya untuk Sports dengan "startDate" (nama field asli)
-//   - ascending: tidak dikirim (false adalah default, tidak perlu)
+// Main entry point untuk fetch market berdasarkan category
 // ─────────────────────────────────────────────────────────────────────────────
 export async function getMarkets(params?: {
   category?: string;
@@ -362,88 +499,136 @@ export async function getMarkets(params?: {
       const category = params?.category ?? "Trending";
 
       let events: GammaEvent[];
+      const now = new Date();
 
+      // ── Search ─────────────────────────────────────────────────────────────
       if (params?.search) {
-        // ── Search: gunakan fetchGammaSearch (title_contains) ──────────────
         events = await fetchGammaSearch(params.search, 50);
-      } else if (category === "New") {
-        // ── New: fetch tanpa order (default API = newest/trending)
-        // Filter di client side: event.new === true
+        const markets = processEvents(events, "All", now);
+        return enrichWithRealPrices(markets.slice(offset, offset + limit));
+      }
+
+      // ── Breaking ───────────────────────────────────────────────────────────
+      // Market yang mengalami pergerakan/aktivitas terbesar 24 jam terakhir
+      // Implementasi: sort by volume24h DESC + competitive score
+      if (category === "Breaking") {
+        events = await fetchGammaEvents({
+          limit: 100,
+          closed: false,
+          // Tidak ada order param — filter client-side by volume24h spike
+        });
+        const allMarkets = processEvents(events, "Breaking", now);
+        // Sort by volume24h DESC — pasar dengan aktivitas terbesar = "breaking"
+        const sorted = allMarkets
+          .filter((m) => m.volume24h > 0)
+          .sort((a, b) => b.volume24h - a.volume24h);
+        return enrichWithRealPrices(sorted.slice(offset, offset + limit));
+      }
+
+      // ── Ending Soon ────────────────────────────────────────────────────────
+      // Market yang berakhir dalam 48 jam ke depan, sort by endDate ASC
+      if (category === "EndingSoon") {
+        // Coba API-level filter dulu
+        let endingSoonEvents = await fetchEndingSoonEvents(48, 100);
+
+        // Fallback: fetch general dan filter client-side
+        if (endingSoonEvents.length < 5) {
+          const fallback = await fetchGammaEvents({
+            limit: 100,
+            closed: false,
+          });
+          endingSoonEvents = [...endingSoonEvents, ...fallback];
+        }
+
+        const allMarkets = processEvents(endingSoonEvents, "EndingSoon", now);
+        const deadline = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+
+        const filtered = allMarkets
+          .filter((m) => {
+            if (!m.endDate) return false;
+            return m.endDate > now && m.endDate <= deadline;
+          })
+          .sort((a, b) => {
+            if (!a.endDate || !b.endDate) return 0;
+            return a.endDate.getTime() - b.endDate.getTime(); // terkecil dulu
+          });
+
+        return enrichWithRealPrices(filtered.slice(offset, offset + limit));
+      }
+
+      // ── Highest Volume ─────────────────────────────────────────────────────
+      // Market dengan total trading volume terbesar sepanjang waktu
+      if (category === "HighestVolume") {
+        events = await fetchGammaEvents({
+          limit: 100,
+          closed: false,
+          // Default API tidak ada order yang eksak untuk volume
+          // sort client-side lebih reliable
+        });
+        const allMarkets = processEvents(events, "HighestVolume", now);
+        const sorted = allMarkets.sort((a, b) => b.volume - a.volume);
+        return enrichWithRealPrices(sorted.slice(offset, offset + limit));
+      }
+
+      // ── New ────────────────────────────────────────────────────────────────
+      if (category === "New") {
         events = await fetchGammaEvents({
           limit: Math.min(limit + offset + 40, 100),
           closed: false,
-          // TIDAK ada order — biarkan API default
         });
         const newEvents = events.filter((e) => e.new === true);
-        events = newEvents.length >= limit ? newEvents : events;
-      } else if (category === "Sports") {
-        // ── Sports: order=startDate (nama field asli) untuk upcoming games
-        // "startDate" adalah field valid di response GammaEvent
-        // ascending tidak dikirim (false = terbaru dulu, tidak ada ascending conflict)
+        const sourceEvents = newEvents.length >= limit ? newEvents : events;
+        const allMarkets = processEvents(sourceEvents, "New", now);
+        const filtered = allMarkets.filter((m) => m.isNew);
+        const final = filtered.length >= limit ? filtered : allMarkets;
+        return enrichWithRealPrices(final.slice(offset, offset + limit));
+      }
+
+      // ── Sports ─────────────────────────────────────────────────────────────
+      if (category === "Sports") {
         events = await fetchGammaEvents({
           limit: Math.min(limit + offset + 60, 100),
           closed: false,
-          tag_id: POLYMARKET_TAG_IDS.Sports,
-          order: "startDate", // field asli dari response, bukan "start_date"
-          // ascending TIDAK dikirim — default false = descending = terbaru dulu
+          tag_id: CATEGORY_TAG_MAP.Sports,
+          order: "startDate",
+          // ascending tidak dikirim (false = descending = terbaru dulu)
         });
-      } else if (category === "Trending") {
-        // ── Trending: TANPA order — default Polymarket sudah trending/volume
-        events = await fetchGammaEvents({
-          limit: Math.min((limit + offset) * 2, 100),
-          closed: false,
-          // TIDAK ada order — API default sudah sort by volume/trending
-        });
-      } else {
-        // ── Politics, Crypto: filter by tag_id, tanpa order
-        events = await fetchGammaEvents({
-          limit: Math.min((limit + offset) * 2, 100),
-          closed: false,
-          tag_id: CATEGORY_TAG_MAP[category],
-          // TIDAK ada order — biarkan API default
-        });
+        const allMarkets = processEvents(events, "Sports", now);
+        return enrichWithRealPrices(allMarkets.slice(offset, offset + limit));
       }
 
-      const now = new Date();
-      const allMarkets: AuroraMarket[] = [];
-
-      events.forEach((event) => {
-        if (!event.markets || event.markets.length === 0) return;
-        if (event.closed || event.archived) return;
-
-        event.markets.forEach((market) => {
-          if (!market.active || market.closed) return;
-
-          const eventTagLabels = (event.tags ?? []).map(
-            (t) => t.label ?? t.slug ?? "",
-          );
-          const marketTagLabels = (market.tags ?? []).map(
-            (t) => t.label ?? t.slug ?? "",
-          );
-          const tagLabels = [
-            ...new Set([...eventTagLabels, ...marketTagLabels]),
-          ];
-
-          if (isRecurringMarket(market, tagLabels)) return;
-
-          // Sports: skip market yang sudah expired
-          if (category === "Sports" && market.endDate) {
-            if (new Date(market.endDate) < now) return;
-          }
-
-          // Skip market expired + zero volume24h (sudah tidak aktif)
-          const endDate = market.endDate ? new Date(market.endDate) : null;
-          if (endDate && endDate < now && safeFloat(market.volume24hr) === 0)
-            return;
-
-          if (!shouldShowMarket(market, category, now)) return;
-
-          allMarkets.push(transformEventMarket(market, event));
+      // ── Trending ───────────────────────────────────────────────────────────
+      if (category === "Trending") {
+        events = await fetchGammaEvents({
+          limit: Math.min((limit + offset) * 2, 100),
+          closed: false,
+          // Default Polymarket API sudah sort by trending/volume
         });
-      });
+        const allMarkets = processEvents(events, "Trending", now);
+        return enrichWithRealPrices(allMarkets.slice(offset, offset + limit));
+      }
 
-      const sliced = allMarkets.slice(offset, offset + limit);
-      return enrichWithRealPrices(sliced);
+      // ── All ────────────────────────────────────────────────────────────────
+      if (category === "All") {
+        events = await fetchGammaEvents({
+          limit: Math.min((limit + offset) * 2, 100),
+          closed: false,
+        });
+        const allMarkets = processEvents(events, "All", now);
+        return enrichWithRealPrices(allMarkets.slice(offset, offset + limit));
+      }
+
+      // ── Static categories (Politics, Crypto, Economy, Technology, Culture) ─
+      const tagId = CATEGORY_TAG_MAP[category];
+      events = await fetchGammaEvents({
+        limit: Math.min((limit + offset) * 2, 100),
+        closed: false,
+        tag_id: tagId,
+        related_tags: true, // include related tags untuk coverage lebih luas
+        // Default sort API
+      });
+      const allMarkets = processEvents(events, category, now);
+      return enrichWithRealPrices(allMarkets.slice(offset, offset + limit));
     },
     CACHE_TTL,
   );
@@ -451,6 +636,8 @@ export async function getMarkets(params?: {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // getMarketDetail
+// Cari detail satu market — fallback chain:
+//   1. Event slug → 2. Condition ID → 3. Market slug → 4. DB
 // ─────────────────────────────────────────────────────────────────────────────
 export async function getMarketDetail(
   idOrSlug: string,
@@ -531,12 +718,7 @@ export async function getMarketDetail(
 
 // ─────────────────────────────────────────────────────────────────────────────
 // syncMarketsFromPolymarket
-//
-// ✅ PERBAIKAN:
-//   - Tidak ada active=true
-//   - Tidak ada order param untuk Trending (API default cukup)
-//   - Tidak ada order param untuk per-kategori (API default cukup)
-//   - closed=false untuk filter event terbuka
+// Sync semua category ke DB — dijalankan oleh cron job
 // ─────────────────────────────────────────────────────────────────────────────
 export async function syncMarketsFromPolymarket(): Promise<{
   count: number;
@@ -551,48 +733,24 @@ export async function syncMarketsFromPolymarket(): Promise<{
     const allMarkets: AuroraMarket[] = [];
     const seenIds = new Set<string>();
 
-    // ── Fetch Trending (tanpa order — default API sudah trending) ────────────
-    try {
-      const events = await fetchGammaEvents({
-        limit: 100,
-        closed: false,
-        // TIDAK ada order — default API
-      });
-      events.forEach((event) => {
-        if (event.closed || event.archived) return;
-        const tagLabels = (event.tags ?? []).map(
-          (t) => t.label ?? t.slug ?? "",
-        );
-        event.markets?.forEach((m) => {
-          if (!m.active || m.closed) return;
-          if (isRecurringMarket(m, tagLabels)) return;
-          const market = transformEventMarket(m, event);
-          if (!seenIds.has(market.id)) {
-            seenIds.add(market.id);
-            allMarkets.push(market);
-          }
-        });
-      });
-      logger.debug(`Trending fetch done`);
-    } catch (err) {
-      logger.warn(`Failed trending fetch: ${(err as Error).message}`);
-    }
-
-    // ── Fetch per kategori (tanpa order — default API cukup) ─────────────────
-    const categories = [
+    const syncCategoryConfig = [
+      { name: "Trending", tagId: undefined as number | undefined },
       { name: "Politics", tagId: POLYMARKET_TAG_IDS.Politics },
       { name: "Crypto", tagId: POLYMARKET_TAG_IDS.Crypto },
+      { name: "Economy", tagId: POLYMARKET_TAG_IDS.Economy },
       { name: "Sports", tagId: POLYMARKET_TAG_IDS.Sports },
+      { name: "Technology", tagId: POLYMARKET_TAG_IDS.Technology },
+      { name: "Culture", tagId: POLYMARKET_TAG_IDS.Culture },
     ];
 
-    for (const cat of categories) {
+    for (const cat of syncCategoryConfig) {
       try {
         const events = await fetchGammaEvents({
-          limit: 50,
+          limit: 100,
           closed: false,
-          tag_id: cat.tagId,
-          // TIDAK ada order — default API
+          ...(cat.tagId !== undefined && { tag_id: cat.tagId }),
         });
+
         events.forEach((event) => {
           if (event.closed || event.archived) return;
           const tagLabels = (event.tags ?? []).map(
@@ -608,7 +766,8 @@ export async function syncMarketsFromPolymarket(): Promise<{
             }
           });
         });
-        logger.debug(`${cat.name} fetch done`);
+
+        logger.debug(`${cat.name} sync: fetched events`);
       } catch (err) {
         logger.warn(`Failed ${cat.name} fetch: ${(err as Error).message}`);
       }
@@ -616,7 +775,7 @@ export async function syncMarketsFromPolymarket(): Promise<{
 
     logger.info(`Processing ${allMarkets.length} unique markets...`);
 
-    // ── Step 1: Upsert Events (FK constraint) ────────────────────────────────
+    // Step 1: Upsert Events (FK constraint)
     const uniqueEvents = new Map<string, AuroraMarket>();
     allMarkets.forEach((m) => {
       if (m.eventId && !uniqueEvents.has(m.eventId))
@@ -645,7 +804,7 @@ export async function syncMarketsFromPolymarket(): Promise<{
     );
     logger.debug(`Upserted ${uniqueEvents.size} events to DB`);
 
-    // ── Step 2: Upsert Markets ────────────────────────────────────────────────
+    // Step 2: Upsert Markets
     const results = await Promise.allSettled(
       allMarkets.map(async (d) => {
         const updateData = {
@@ -665,14 +824,12 @@ export async function syncMarketsFromPolymarket(): Promise<{
           lastSyncedAt: new Date(),
         };
 
-        // Update by polymarketId (lebih reliable)
         const updated = await prisma.market.updateMany({
           where: { polymarketId: d.polymarketId },
           data: updateData,
         });
 
         if (updated.count === 0) {
-          // Cek conflict sebelum create
           const [idExists, slugExists] = await Promise.all([
             prisma.market.findUnique({
               where: { id: d.id },
@@ -715,7 +872,6 @@ export async function syncMarketsFromPolymarket(): Promise<{
           });
           return "created";
         }
-
         return "updated";
       }),
     );

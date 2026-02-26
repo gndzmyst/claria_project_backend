@@ -1,3 +1,22 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// src/services/polymarket.service.ts
+// Aurora Backend — Polymarket API Integration
+//
+// API Endpoints:
+//   Gamma API  → https://gamma-api.polymarket.com  (market/event data)
+//   CLOB API   → https://clob.polymarket.com       (orderbook, price history)
+//   Data API   → https://data-api.polymarket.com   (user positions)
+//
+// Tag IDs resmi Polymarket (verified dari docs & safe-wallet-integration repo):
+//   Politics   = 2
+//   Crypto     = 21
+//   Economy    = 120    (Finance/Economy)
+//   Sports     = 100639
+//   Technology = 1401
+//   Culture    = 596
+//   Geopolitics = 100265
+// ─────────────────────────────────────────────────────────────────────────────
+
 import axios from "axios";
 import WebSocket from "ws";
 import { logger } from "../utils/logger";
@@ -29,7 +48,6 @@ export const dataClient = axios.create({
   client.interceptors.response.use(
     (res) => res,
     (err) => {
-      // Log URL lengkap + response body untuk diagnosa 422
       const params = err.config?.params ?? {};
       const qs = Object.entries(params)
         .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
@@ -46,22 +64,6 @@ export const dataClient = axios.create({
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPES
-//
-// Berdasarkan docs resmi GET /events:
-// https://docs.polymarket.com/developers/gamma-markets-api/get-events
-//
-// ⚠️ GammaEvent (level event):
-//   - volume: number
-//   - volume24hr: number
-//   - liquidity: number
-//
-// ⚠️ GammaEventMarket (level market, nested di event.markets[]):
-//   - volume: string    ← anomali Polymarket, market level pakai string
-//   - volume24hr: number
-//   - liquidity: string ← anomali Polymarket, market level pakai string
-//   - outcomes: string  ← selalu JSON string '["Yes","No"]'
-//   - outcomePrices: string ← selalu JSON string '["0.65","0.35"]'
-//   - clobTokenIds: string  ← selalu JSON string '["tokenA","tokenB"]'
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface GammaTag {
@@ -84,7 +86,7 @@ export interface GammaEventMarket {
   outcomes: string; // JSON string: '["Yes","No"]'
   outcomePrices: string; // JSON string: '["0.65","0.35"]'
   volume: string; // string di market level (anomali API)
-  volume24hr: number; // number di market level
+  volume24hr: number;
   liquidity: string; // string di market level (anomali API)
   active: boolean;
   closed: boolean;
@@ -120,9 +122,9 @@ export interface GammaEvent {
   featured: boolean;
   new: boolean;
   restricted?: boolean;
-  volume: number; // number di event level
-  volume24hr: number; // number di event level
-  liquidity: number; // number di event level
+  volume: number;
+  volume24hr: number;
+  liquidity: number;
   openInterest?: number;
   tags: GammaTag[];
   markets: GammaEventMarket[];
@@ -188,16 +190,40 @@ export interface PolymarketPosition {
   unrealized_pnl: number;
 }
 
+export interface TokenPriceSnapshot {
+  tokenId: string;
+  bestBid: number;
+  bestAsk: number;
+  lastPrice: number;
+  midpoint: number;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TAG IDs RESMI POLYMARKET
+// Source: https://github.com/Polymarket/safe-wallet-integration
+//         + verifikasi manual via /tags endpoint
+// ─────────────────────────────────────────────────────────────────────────────
 export const POLYMARKET_TAG_IDS = {
   Politics: 2,
   Crypto: 21,
+  Economy: 120, // Finance/Economy
   Sports: 100639,
-  Finance: 120,
-  Tech: 1401,
+  Technology: 1401,
   Culture: 596,
   Geopolitics: 100265,
 } as const;
 
+// ─────────────────────────────────────────────────────────────────────────────
+// fetchGammaEvents
+// Parameter valid berdasarkan docs resmi Polymarket:
+//   - closed: boolean (filter event terbuka/tertutup)
+//   - tag_id: number (filter per kategori)
+//   - related_tags: boolean (include related tags)
+//   - order: string (nama field camelCase dari response)
+//   - ascending: boolean (arah sort, default false)
+//   - limit: number (max 100)
+//   - offset: number
+// ─────────────────────────────────────────────────────────────────────────────
 export async function fetchGammaEvents(params?: {
   limit?: number;
   offset?: number;
@@ -215,33 +241,16 @@ export async function fetchGammaEvents(params?: {
   start_date_max?: string;
   end_date_min?: string;
   end_date_max?: string;
+  end_date_max_epoch?: number; // untuk Ending Soon filter
 }): Promise<GammaEvent[]> {
   const reqParams: Record<string, unknown> = {
     limit: Math.min(params?.limit ?? 20, 100),
   };
 
-  // Hanya kirim offset jika > 0 (menghindari param tidak perlu)
-  if (params?.offset && params.offset > 0) {
-    reqParams.offset = params.offset;
-  }
-
-  // closed=false → filter event yang masih terbuka
-  // Pengganti "active=true" yang TIDAK VALID
-  if (params?.closed !== undefined) {
-    reqParams.closed = params.closed;
-  }
-
-  // order: nama field PERSIS dari response object (camelCase)
-  // Hanya kirim jika diperlukan — default API sudah cukup baik
-  if (params?.order) {
-    reqParams.order = params.order;
-  }
-
-  // ascending: hanya kirim jika true (false adalah default, tidak perlu dikirim)
-  if (params?.ascending === true) {
-    reqParams.ascending = true;
-  }
-
+  if (params?.offset && params.offset > 0) reqParams.offset = params.offset;
+  if (params?.closed !== undefined) reqParams.closed = params.closed;
+  if (params?.order) reqParams.order = params.order;
+  if (params?.ascending === true) reqParams.ascending = true;
   if (params?.tag_id !== undefined) reqParams.tag_id = params.tag_id;
   if (params?.exclude_tag_id !== undefined)
     reqParams.exclude_tag_id = params.exclude_tag_id;
@@ -322,13 +331,38 @@ export async function fetchGammaSearch(
   }
 }
 
+// Fetch events yang berakhir dalam timeframe tertentu (untuk Ending Soon)
+export async function fetchEndingSoonEvents(
+  withinHours: number = 24,
+  limit: number = 50,
+): Promise<GammaEvent[]> {
+  const now = new Date();
+  const deadline = new Date(now.getTime() + withinHours * 60 * 60 * 1000);
+
+  try {
+    // Gunakan end_date_min & end_date_max untuk filter di API level
+    const { data } = await gammaClient.get<GammaEvent[]>("/events", {
+      params: {
+        limit,
+        closed: false,
+        end_date_min: now.toISOString(),
+        end_date_max: deadline.toISOString(),
+        order: "endDate",
+        ascending: true,
+      },
+    });
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    logger.warn(`Ending soon fetch failed: ${(err as Error).message}`);
+    return [];
+  }
+}
+
 export async function fetchClobPrice(tokenId: string): Promise<number | null> {
   try {
     const { data } = await clobClient.get<{ price: string }>(
       "/last-trade-price",
-      {
-        params: { token_id: tokenId },
-      },
+      { params: { token_id: tokenId } },
     );
     const price = parseFloat(data.price ?? "0");
     return isNaN(price) ? null : price;
@@ -351,16 +385,13 @@ export async function fetchClobMidpoint(
   }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// fetchTokenPricesViaWS
+// Real-time harga via Polymarket CLOB WebSocket
+// Timeout 8 detik — resolve dengan data yang sudah ada jika tidak semua token terpenuhi
+// ─────────────────────────────────────────────────────────────────────────────
 const WS_CLOB_URL = "wss://ws-subscriptions-clob.polymarket.com/ws/market";
 const WS_PING_INTERVAL_MS = 10_000;
-
-export interface TokenPriceSnapshot {
-  tokenId: string;
-  bestBid: number;
-  bestAsk: number;
-  lastPrice: number;
-  midpoint: number;
-}
 
 export function fetchTokenPricesViaWS(
   tokenIds: string[],
