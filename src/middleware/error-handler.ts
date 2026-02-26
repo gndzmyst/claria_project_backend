@@ -25,6 +25,8 @@ export function errorHandler(
     return;
   }
 
+  // sekarang kita ganti semuanaya
+
   // Error dengan status code custom (misal: 404, 403)
   const error = err as {
     message?: string;
